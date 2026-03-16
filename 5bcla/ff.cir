@@ -1,0 +1,48 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_N={20*LAMBDA}
+.param Wp={width_N*2}
+.global gnd vdd
+VDS vdd gnd 1.8
+Vind d gnd PULSE(0 1.8 4.1us 1ps 1ps 4us 8us)
+Vclk clk gnd PULSE(0 1.8 1us 1ps 1ps 1us 2us)
+
+.subckt notg o f 
+M1 o f gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 o f vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+.ends notg
+
+.subckt ff q d clk
+M1 n1 d vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M2 dn1 clk n1 n1 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M3 dn1 d gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M7 dn clk vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M8 dn dn1 n3 n3 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M9 n3 clk gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M4 q1 dn vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M5 q1 clk n2 n2 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M6 n2 dn gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+Xnot2 q q1 notg
+.ends ff
+
+Xff q d clk ff
+
+.tran 0.01us 32us
+.control
+run
+set curplottitle= Kavya-P-2024102001-flipflop
+meas tran Q_delay_fall TRIG v(clk) VAL=0.9 RISE=3 TARG v(Q) val=0.9 FALL=1
+meas tran Q_delay_rise TRIG v(clk) VAL=0.9 RISE=4 TARG v(Q) VAL=0.9 RISE=1
+let tp2q = (Q_delay_rise + Q_delay_fall)/2
+print tp2q;
+
+meas tran tsu_r TRIG v(D) VAL=0.9 RISE=4 TARG v(Xff1.A) VAL=0.9 FALL=3
+meas tran tsu_f TRIG v(D) VAL=0.9 FALL=3 TARG v(Xff1.A) VAL=0.9 RISE=2
+let tsu = (tsu_r + tsu_f)/2
+print tsu;
+plot d clk
+plot q
+.endc

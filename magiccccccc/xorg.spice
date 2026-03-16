@@ -1,0 +1,91 @@
+* SPICE3 file created from xorg.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 inverter_0/out A inverter_1/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=80 ps=72
+M1001 inverter_0/out A inverter_0/vdd inverter_0/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=40 ps=26
+M1002 inverter_1/out inverter_1/in inverter_1/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1003 inverter_1/out inverter_1/in inverter_1/vdd inverter_1/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=120 ps=78
+M1004 m1_0_n68# inverter_1/in m1_26_n95# Gnd nfet w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1005 m1_26_n95# A inverter_1/gnd Gnd nfet w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1006 m1_0_n68# inverter_1/out m1_102_n91# Gnd nfet w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1007 m1_102_n91# inverter_0/out inverter_1/gnd Gnd nfet w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1008 m1_25_n11# inverter_0/out inverter_1/vdd pmos_0/w_n8_n5# pfet w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1009 m1_0_n68# inverter_1/in m1_25_n11# pmos_1/w_n8_n5# pfet w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1010 m1_102_n17# A inverter_1/vdd pmos_2/w_n8_n5# pfet w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1011 m1_0_n68# inverter_1/out m1_102_n17# pmos_3/w_n8_n5# pfet w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 m1_26_n95# m1_0_n68# 0.08fF
+C1 A inverter_1/vdd 0.09fF
+C2 inverter_0/w_n8_n5# inverter_0/out 0.03fF
+C3 inverter_0/vdd inverter_0/out 0.12fF
+C4 m1_0_n68# pmos_1/w_n8_n5# 0.03fF
+C5 A m1_102_n17# 0.20fF
+C6 inverter_1/in m1_26_n95# 0.05fF
+C7 inverter_1/vdd m1_25_n11# 0.12fF
+C8 pmos_3/w_n8_n5# m1_102_n17# 0.08fF
+C9 inverter_1/gnd m1_102_n91# 0.08fF
+C10 inverter_1/in pmos_1/w_n8_n5# 0.07fF
+C11 m1_0_n68# m1_102_n91# 0.08fF
+C12 inverter_1/out m1_102_n91# 0.05fF
+C13 A inverter_0/out 0.25fF
+C14 A m1_25_n11# 0.14fF
+C15 m1_0_n68# inverter_1/gnd 0.30fF
+C16 A m1_26_n95# 0.05fF
+C17 inverter_1/gnd inverter_1/out 0.08fF
+C18 m1_0_n68# inverter_1/out 0.22fF
+C19 inverter_0/out m1_25_n11# 0.05fF
+C20 inverter_1/in inverter_1/gnd 0.05fF
+C21 inverter_1/vdd pmos_0/w_n8_n5# 0.08fF
+C22 inverter_1/in m1_0_n68# 0.19fF
+C23 inverter_1/in inverter_1/out 0.05fF
+C24 inverter_0/w_n8_n5# inverter_0/vdd 0.08fF
+C25 pmos_1/w_n8_n5# m1_25_n11# 0.08fF
+C26 inverter_1/vdd inverter_1/out 0.12fF
+C27 inverter_1/vdd pmos_2/w_n8_n5# 0.08fF
+C28 m1_0_n68# m1_102_n17# 0.12fF
+C29 pmos_2/w_n8_n5# m1_102_n17# 0.03fF
+C30 inverter_1/w_n8_n5# inverter_1/out 0.03fF
+C31 A inverter_1/gnd 0.11fF
+C32 inverter_0/out m1_102_n91# 0.05fF
+C33 m1_0_n68# pmos_3/w_n8_n5# 0.03fF
+C34 A pmos_2/w_n8_n5# 0.07fF
+C35 inverter_0/out pmos_0/w_n8_n5# 0.07fF
+C36 inverter_1/out pmos_3/w_n8_n5# 0.07fF
+C37 pmos_0/w_n8_n5# m1_25_n11# 0.03fF
+C38 inverter_1/w_n8_n5# inverter_1/in 0.07fF
+C39 inverter_0/w_n8_n5# A 0.07fF
+C40 inverter_1/vdd m1_102_n17# 0.12fF
+C41 inverter_0/out inverter_1/gnd 0.14fF
+C42 inverter_1/w_n8_n5# inverter_1/vdd 0.08fF
+C43 m1_26_n95# inverter_1/gnd 0.08fF
+C44 m1_0_n68# m1_25_n11# 0.12fF
+C45 m1_102_n17# Gnd 0.04fF
+C46 pmos_3/w_n8_n5# Gnd 0.58fF
+C47 pmos_2/w_n8_n5# Gnd 0.58fF
+C48 m1_25_n11# Gnd 0.13fF
+C49 pmos_1/w_n8_n5# Gnd 0.58fF
+C50 pmos_0/w_n8_n5# Gnd 0.58fF
+C51 m1_102_n91# Gnd 0.22fF
+C52 inverter_1/out Gnd 0.45fF
+C53 m1_0_n68# Gnd 0.82fF
+C54 m1_26_n95# Gnd 0.22fF
+C55 inverter_1/in Gnd 0.57fF
+C56 inverter_1/vdd Gnd 0.16fF
+C57 inverter_1/w_n8_n5# Gnd 0.55fF
+C58 inverter_1/gnd Gnd 0.80fF
+C59 inverter_0/out Gnd 1.68fF
+C60 inverter_0/vdd Gnd 0.03fF
+C61 A Gnd 1.58fF
+C62 inverter_0/w_n8_n5# Gnd 0.55fF

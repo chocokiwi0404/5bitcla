@@ -1,0 +1,12 @@
+magic
+tech scmos
+timestamp 1764781307
+use inverter  inverter_0
+timestamp 1764702656
+transform 1 0 8 0 1 23
+box -10 -25 20 18
+use inverter  inverter_1
+timestamp 1764702656
+transform 1 0 35 0 1 23
+box -10 -25 20 18
+<< end >>

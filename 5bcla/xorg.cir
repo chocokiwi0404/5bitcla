@@ -1,0 +1,37 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_N={20*LAMBDA}
+.param Wp={width_N*2}
+.global gnd vdd
+VDS vdd gnd 1.8
+Vina a gnd PULSE(0 1.8 1us 1ps 1ps 1us 2us)
+Vinb b gnd PULSE(0 1.8 2us 1ps 1ps 2us 4us)
+
+.subckt notg o f 
+M1 o f gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 o f vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+.ends notg
+
+.subckt xor o a b
+Xa an a notg
+Xb bn b notg
+M1p p1 a vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M2p o bn p1 p1 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M3p p2 an vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M4p o b p2 p2 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M1n o a n1 n1 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2n n1 b gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M3n o an n2 n2 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M4n n2 bn gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+.ends xor
+
+Xoxo o a b xor
+
+.tran 0.01us 4us
+.control
+run
+set curplottitle= Kavya-P-2024102001-xor
+plot a b
+plot o
+.endc

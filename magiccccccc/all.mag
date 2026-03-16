@@ -1,0 +1,172 @@
+magic
+tech scmos
+timestamp 1764763583
+<< metal1 >>
+rect 166 68 170 72
+rect -19 40 -4 46
+rect 167 -15 170 68
+rect 355 67 363 71
+rect 178 41 186 45
+rect 105 -19 170 -15
+rect 359 -59 363 67
+rect 199 -64 363 -59
+rect 279 -98 284 -94
+rect 331 -118 334 -64
+rect 323 -122 334 -118
+rect 301 -144 302 -140
+rect 280 -189 285 -185
+rect 187 -217 191 -214
+rect 242 -272 245 -269
+rect 247 -272 262 -268
+rect -56 -292 53 -285
+rect 176 -312 180 -308
+rect 242 -391 245 -389
+rect 448 -424 478 -419
+rect 237 -450 279 -445
+<< m2contact >>
+rect 39 69 45 75
+rect 228 68 234 74
+rect 87 51 93 57
+rect 1 31 7 37
+rect 37 13 43 19
+rect 100 -19 105 -14
+rect 276 50 282 56
+rect 190 30 196 36
+rect 226 14 232 20
+rect 100 -110 105 -105
+rect 248 -126 253 -121
+rect 302 -148 307 -143
+rect 332 -157 338 -151
+rect 364 -155 370 -150
+rect 23 -242 28 -237
+rect 58 -243 63 -238
+rect 158 -243 164 -237
+rect 199 -258 205 -252
+rect 244 -257 249 -252
+rect 168 -269 173 -264
+rect 229 -277 235 -271
+rect 53 -292 61 -285
+rect 104 -303 110 -297
+rect 104 -338 109 -333
+rect 324 -426 329 -421
+rect 372 -435 377 -430
+rect 144 -440 149 -435
+rect 288 -464 293 -459
+rect 322 -473 327 -468
+<< metal2 >>
+rect 39 55 43 69
+rect 3 51 87 55
+rect 228 54 232 68
+rect 93 51 276 54
+rect 3 37 7 51
+rect 2 -238 6 31
+rect 39 19 43 51
+rect 190 50 276 51
+rect 190 36 194 50
+rect 228 20 232 50
+rect 153 -195 156 -117
+rect 307 -148 329 -144
+rect 326 -151 329 -148
+rect 326 -155 332 -151
+rect 153 -198 248 -195
+rect -12 -242 23 -238
+rect 6 -354 9 -242
+rect 63 -242 158 -238
+rect 244 -252 248 -198
+rect 161 -253 180 -252
+rect 56 -254 199 -253
+rect 55 -255 199 -254
+rect 55 -258 164 -255
+rect 177 -258 199 -255
+rect 55 -259 132 -258
+rect 55 -285 60 -259
+rect 104 -273 108 -272
+rect 104 -276 229 -273
+rect 104 -297 108 -276
+rect 243 -273 247 -257
+rect 6 -357 231 -354
+rect 243 -390 246 -273
+rect 280 -357 329 -354
+rect 325 -421 329 -357
+rect 324 -431 327 -426
+rect 324 -435 372 -431
+rect 324 -460 327 -435
+rect 293 -464 327 -460
+rect 324 -468 327 -464
+<< m3contact >>
+rect 100 -24 105 -19
+rect 100 -105 105 -100
+rect 243 -126 248 -121
+rect 364 -160 370 -155
+rect 168 -264 173 -259
+rect 104 -343 109 -338
+rect 231 -358 236 -353
+rect 275 -358 280 -353
+rect 144 -435 149 -430
+<< metal3 >>
+rect 100 -72 104 -24
+rect 100 -76 230 -72
+rect 100 -100 104 -76
+rect 225 -122 230 -76
+rect 225 -126 243 -122
+rect 364 -248 369 -160
+rect 168 -251 369 -248
+rect 168 -259 173 -251
+rect 104 -346 148 -343
+rect 144 -430 148 -346
+rect 236 -357 275 -354
+use xorg  xorg_1 ~/Documents/magiccccccc
+timestamp 1764703245
+transform 1 0 110 0 1 -395
+box -62 -125 143 29
+use inverter  inverter_1 ~/Documents/magiccccccc
+timestamp 1764702656
+transform 0 1 114 -1 0 -313
+box -10 -25 20 18
+use ff  ff_2 ~/Documents/magiccccccc
+timestamp 1764703245
+transform 1 0 289 0 1 -421
+box -11 -71 160 28
+use manch  manch_0 ~/Documents/magiccccccc
+timestamp 1764705872
+transform 1 0 173 0 1 -243
+box -15 -69 76 29
+use xorg  xorg_0
+timestamp 1764703245
+transform 1 0 63 0 1 -65
+box -62 -125 143 29
+use inverter  inverter_2
+timestamp 1764702656
+transform 1 0 38 0 1 -233
+box -10 -25 20 18
+use inverter  inverter_0
+timestamp 1764702656
+transform 1 0 344 0 1 -145
+box -10 -25 20 18
+use nandg  nandg_0 ~/Documents/magiccccccc
+timestamp 1764703184
+transform 1 0 248 0 1 -123
+box 0 -66 75 29
+use ff  ff_1
+timestamp 1764703245
+transform 1 0 195 0 1 70
+box -11 -71 160 28
+use ff  ff_0
+timestamp 1764703245
+transform 1 0 6 0 1 71
+box -11 -71 160 28
+<< labels >>
+rlabel metal1 244 -448 244 -448 1 sum
+rlabel metal1 169 -15 169 -15 1 Bi
+rlabel metal1 361 -56 361 -56 1 Ai
+rlabel metal1 254 -270 254 -270 1 Cin
+rlabel metal1 -11 43 -11 43 1 Bin
+rlabel metal1 182 43 182 43 1 Ain
+rlabel metal2 167 -253 167 -253 1 Con
+rlabel metal1 463 -421 463 -421 1 sumo
+rlabel metal1 282 -96 282 -96 1 vdd!
+rlabel metal1 283 -187 283 -187 1 gnd!
+rlabel metal1 189 -215 189 -215 1 vdd!
+rlabel metal1 176 -312 180 -308 1 gnd!
+rlabel metal2 -5 -240 -5 -240 1 clk
+<< end >>

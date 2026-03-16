@@ -1,0 +1,75 @@
+magic
+tech scmos
+timestamp 1757759026
+<< error_s >>
+rect 27 24 28 47
+rect 57 24 58 47
+rect 87 24 88 47
+rect 117 24 118 47
+rect 147 24 148 47
+rect 177 24 178 47
+rect 207 24 208 47
+rect 237 24 238 47
+rect 267 24 268 47
+rect 297 24 298 47
+rect 327 24 328 47
+rect 357 24 358 47
+rect 387 24 388 47
+rect 417 24 418 47
+rect 447 24 448 47
+rect 477 24 478 47
+rect 507 24 508 47
+rect 537 24 538 47
+rect 567 24 568 47
+rect 597 24 598 47
+rect 627 24 628 47
+rect 657 24 658 47
+rect 687 24 688 47
+rect 717 24 718 47
+rect 747 24 748 47
+rect 777 24 778 47
+rect 807 24 808 47
+rect 837 24 838 47
+rect 867 24 868 47
+rect -6 8 -5 11
+rect -3 5 -2 8
+rect -3 4 22 5
+rect 27 4 52 5
+rect 57 4 82 5
+rect 87 4 112 5
+rect 117 4 142 5
+rect 147 4 172 5
+rect 177 4 202 5
+rect 207 4 232 5
+rect 237 4 262 5
+rect 267 4 292 5
+rect 297 4 322 5
+rect 327 4 352 5
+rect 357 4 382 5
+rect 387 4 412 5
+rect 417 4 442 5
+rect 447 4 472 5
+rect 477 4 502 5
+rect 507 4 532 5
+rect 537 4 562 5
+rect 567 4 592 5
+rect 597 4 622 5
+rect 627 4 652 5
+rect 657 4 682 5
+rect 687 4 712 5
+rect 717 4 742 5
+rect 747 4 772 5
+rect 777 4 802 5
+rect 807 4 832 5
+rect 837 4 862 5
+rect 867 4 892 5
+<< metal1 >>
+rect -9 2 -5 23
+rect 895 2 898 23
+rect -9 -3 898 2
+use inverter  inverter_0
+array 0 29 30 0 0 43
+timestamp 1612113721
+transform 1 0 5 0 1 29
+box -10 -25 20 18
+<< end >>

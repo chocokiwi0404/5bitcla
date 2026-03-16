@@ -1,0 +1,129 @@
+timestamp 1757484134
+version 8.3
+tech scmos
+style TSMC0.18um(tsmc18)from:t11b
+scale 1000 1 9
+resistclasses 6700 7500 929000 929000 1 7700 7700 80 80 80 70 70 40
+use inverter inverter_4[0:25:30][0:0:43] 1 0 140 0 1 26
+use inverter inverter_3 1 0 113 0 1 26
+use inverter inverter_2 1 0 82 0 1 26
+use inverter inverter_1 1 0 44 0 1 26
+use inverter inverter_0 1 0 10 0 1 25
+node "m1_99_1#" 16 2569.81 99 1 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3136 1576 0 0 0 0 0 0 0 0 0 0
+node "m1_61_1#" 0 50.4948 61 1 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 52 34 0 0 0 0 0 0 0 0 0 0
+node "m1_26_1#" 0 43.9596 26 1 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 44 30 0 0 0 0 0 0 0 0 0 0
+node "m1_101_16#" 0 34.1568 101 16 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 32 24 0 0 0 0 0 0 0 0 0 0
+node "m1_64_16#" 0 34.1568 64 16 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 32 24 0 0 0 0 0 0 0 0 0 0
+node "m1_29_16#" 0 27.6216 29 16 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 24 20 0 0 0 0 0 0 0 0 0 0
+node "m1_n7_n10#" 19 3196.33 -7 -10 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3933 1950 0 0 0 0 0 0 0 0 0 0
+node "m1_99_40#" 16 2569.81 99 40 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3136 1576 0 0 0 0 0 0 0 0 0 0
+node "m1_61_40#" 0 50.4948 61 40 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 52 34 0 0 0 0 0 0 0 0 0 0
+node "m1_25_40#" 0 60.189 25 40 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 70 38 0 0 0 0 0 0 0 0 0 0
+cap "m1_n7_n10#" "m1_99_1#" 4618.66
+cap "m1_26_1#" "m1_n7_n10#" 64.8026
+cap "m1_61_1#" "m1_n7_n10#" 76.5849
+subcap "m1_99_1#" -2214.9
+subcap "m1_101_16#" -4.008
+subcap "m1_99_40#" -2415.72
+cap "inverter_2/gnd" "inverter_2/in" 7.10543e-15
+cap "inverter_2/vdd" "inverter_0/w_n8_n5#" 1.42109e-14
+cap "inverter_2/gnd" "inverter_1/in" 7.10543e-15
+cap "inverter_2/gnd" "inverter_0/in" 501.729
+cap "inverter_0/w_n8_n5#" "inverter_0/in" -1.42109e-14
+subcap "m1_99_1#" -2227.2
+subcap "m1_99_40#" -2472.89
+cap "inverter_4[0]/gnd" "m1_n7_n10#" 35.3469
+cap "inverter_4[0]/out" "inverter_4[0]/gnd" 7.10543e-15
+cap "inverter_4[0]/in" "inverter_4[0]/gnd" 7.10543e-15
+cap "inverter_4[1]/vdd" "inverter_4[2]/w_n8_n5#" -8.016
+cap "inverter_4[5]/gnd" "inverter_4[5]/out" 7.10543e-15
+cap "inverter_4[5]/gnd" "inverter_4[6]/out" 7.10543e-15
+cap "inverter_4[8]/gnd" "inverter_4[9]/out" 7.10543e-15
+cap "inverter_4[13]/out" "inverter_4[11]/gnd" 7.10543e-15
+cap "inverter_4[12]/w_n8_n5#" "inverter_4[11]/vdd" -8.016
+cap "inverter_4[11]/gnd" "inverter_4[12]/out" 7.10543e-15
+cap "inverter_4[15]/gnd" "inverter_4[17]/out" 7.10543e-15
+cap "inverter_4[15]/gnd" "inverter_4[16]/out" 7.10543e-15
+cap "inverter_4[15]/gnd" "inverter_4[15]/out" 7.10543e-15
+cap "inverter_4[20]/out" "inverter_4[18]/gnd" 7.10543e-15
+cap "inverter_4[21]/gnd" "inverter_4[23]/out" 7.10543e-15
+cap "inverter_4[22]/out" "inverter_4[21]/gnd" 7.10543e-15
+cap "inverter_4[21]/gnd" "m1_n7_n10#" 58.9114
+cap "inverter_4[21]/vdd" "inverter_4[22]/w_n8_n5#" -8.016
+cap "inverter_4[25]/out" "inverter_4[25]/gnd" 137.46
+merge "inverter_4[25]/gnd" "inverter_4[24]/gnd" -2357.61 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2515 -1560 0 0 0 0 0 0 0 0 0 0
+merge "inverter_4[24]/gnd" "inverter_4[23]/gnd"
+merge "inverter_4[23]/gnd" "inverter_4[22]/gnd"
+merge "inverter_4[22]/gnd" "inverter_4[21]/gnd"
+merge "inverter_4[21]/gnd" "inverter_4[20]/gnd"
+merge "inverter_4[20]/gnd" "inverter_4[19]/gnd"
+merge "inverter_4[19]/gnd" "inverter_4[18]/gnd"
+merge "inverter_4[18]/gnd" "inverter_4[17]/gnd"
+merge "inverter_4[17]/gnd" "inverter_4[16]/gnd"
+merge "inverter_4[16]/gnd" "inverter_4[15]/gnd"
+merge "inverter_4[15]/gnd" "inverter_4[14]/gnd"
+merge "inverter_4[14]/gnd" "inverter_4[13]/gnd"
+merge "inverter_4[13]/gnd" "inverter_4[12]/gnd"
+merge "inverter_4[12]/gnd" "inverter_4[11]/gnd"
+merge "inverter_4[11]/gnd" "inverter_4[10]/gnd"
+merge "inverter_4[10]/gnd" "inverter_4[9]/gnd"
+merge "inverter_4[9]/gnd" "inverter_4[8]/gnd"
+merge "inverter_4[8]/gnd" "inverter_4[7]/gnd"
+merge "inverter_4[7]/gnd" "inverter_4[6]/gnd"
+merge "inverter_4[6]/gnd" "inverter_4[5]/gnd"
+merge "inverter_4[5]/gnd" "inverter_4[4]/gnd"
+merge "inverter_4[4]/gnd" "inverter_4[3]/gnd"
+merge "inverter_4[3]/gnd" "inverter_3/gnd"
+merge "inverter_3/gnd" "inverter_4[2]/gnd"
+merge "inverter_4[2]/gnd" "inverter_4[1]/gnd"
+merge "inverter_4[1]/gnd" "inverter_4[0]/gnd"
+merge "inverter_4[0]/gnd" "inverter_0/gnd"
+merge "inverter_0/gnd" "inverter_1/gnd"
+merge "inverter_1/gnd" "m1_26_1#"
+merge "m1_26_1#" "inverter_2/gnd"
+merge "inverter_2/gnd" "m1_61_1#"
+merge "m1_61_1#" "m1_99_1#"
+merge "inverter_4[25]/out" "inverter_0/in" -2124.67 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1600 -1616 0 0 0 0 0 0 0 0 0 0
+merge "inverter_0/in" "m1_n7_n10#"
+merge "inverter_4[25]/vdd" "inverter_4[24]/vdd" -2343.05 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2526 -1566 0 0 0 0 0 0 0 0 0 0
+merge "inverter_4[24]/vdd" "inverter_4[23]/vdd"
+merge "inverter_4[23]/vdd" "inverter_4[22]/vdd"
+merge "inverter_4[22]/vdd" "inverter_4[21]/vdd"
+merge "inverter_4[21]/vdd" "inverter_4[20]/vdd"
+merge "inverter_4[20]/vdd" "inverter_4[19]/vdd"
+merge "inverter_4[19]/vdd" "inverter_4[18]/vdd"
+merge "inverter_4[18]/vdd" "inverter_4[17]/vdd"
+merge "inverter_4[17]/vdd" "inverter_4[16]/vdd"
+merge "inverter_4[16]/vdd" "inverter_4[15]/vdd"
+merge "inverter_4[15]/vdd" "inverter_4[14]/vdd"
+merge "inverter_4[14]/vdd" "inverter_4[13]/vdd"
+merge "inverter_4[13]/vdd" "inverter_4[12]/vdd"
+merge "inverter_4[12]/vdd" "inverter_4[11]/vdd"
+merge "inverter_4[11]/vdd" "inverter_4[10]/vdd"
+merge "inverter_4[10]/vdd" "inverter_4[9]/vdd"
+merge "inverter_4[9]/vdd" "inverter_4[8]/vdd"
+merge "inverter_4[8]/vdd" "inverter_4[7]/vdd"
+merge "inverter_4[7]/vdd" "inverter_4[6]/vdd"
+merge "inverter_4[6]/vdd" "inverter_4[5]/vdd"
+merge "inverter_4[5]/vdd" "inverter_4[4]/vdd"
+merge "inverter_4[4]/vdd" "inverter_4[3]/vdd"
+merge "inverter_4[3]/vdd" "inverter_3/vdd"
+merge "inverter_3/vdd" "inverter_4[2]/vdd"
+merge "inverter_4[2]/vdd" "inverter_4[1]/vdd"
+merge "inverter_4[1]/vdd" "inverter_4[0]/vdd"
+merge "inverter_4[0]/vdd" "inverter_0/vdd"
+merge "inverter_0/vdd" "inverter_1/vdd"
+merge "inverter_1/vdd" "m1_25_40#"
+merge "m1_25_40#" "inverter_2/vdd"
+merge "inverter_2/vdd" "m1_61_40#"
+merge "m1_61_40#" "m1_99_40#"
+merge "inverter_3/in" "inverter_2/out" -28.7964 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 -30 0 0 0 0 0 0 0 0 0 0
+merge "inverter_2/out" "m1_101_16#"
+merge "inverter_0/out" "inverter_1/in" -20.2473 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7 -18 0 0 0 0 0 0 0 0 0 0
+merge "inverter_1/in" "m1_29_16#"
+merge "inverter_3/out" "inverter_4[0]/in" -17.8188 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -12 -14 0 0 0 0 0 0 0 0 0 0
+merge "inverter_1/out" "inverter_2/in" -16.032 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -16 0 0 0 0 0 0 0 0 0 0
+merge "inverter_2/in" "m1_64_16#"
+cap "inverter_4[0:24]/gnd" "inverter_4[1:25]/gnd" 32.9904
+cap "inverter_4[1:25]/vdd" "inverter_4[0:24]/vdd" 32.9904
+merge "inverter_4[1:25]/in" "inverter_4[0:24]/out" -8.016 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8 0 0 0 0 0 0 0 0 0 0

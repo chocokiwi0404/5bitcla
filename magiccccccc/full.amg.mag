@@ -1,0 +1,108 @@
+magic
+tech scmos
+timestamp 1764768624
+<< metal1 >>
+rect -2114 560 -2106 566
+rect -1916 561 -1911 565
+rect -1584 560 -1576 566
+rect -1385 561 -1380 565
+rect -1038 561 -1030 567
+rect -837 562 -833 566
+rect -503 560 -496 566
+rect -304 561 -299 565
+rect 32 560 37 565
+rect 231 561 234 565
+rect -1829 248 -1629 252
+rect -1299 248 -1111 252
+rect -751 249 -579 253
+rect -2395 232 -2382 236
+rect -1633 234 -1629 248
+rect -1116 236 -1111 248
+rect -2213 228 -2179 233
+rect -2151 229 -2146 232
+rect -1633 228 -1614 234
+rect -1116 229 -1068 236
+rect -583 235 -579 249
+rect -217 248 -99 252
+rect -103 235 -99 248
+rect 314 250 338 251
+rect 314 247 341 250
+rect -583 228 -534 235
+rect -103 231 15 235
+rect -1633 227 -1629 228
+rect 337 216 341 247
+rect 438 245 486 249
+rect 438 217 442 245
+rect 656 220 667 225
+rect 337 212 362 216
+rect 392 213 442 217
+rect -1621 96 -1613 101
+rect -1090 96 -1082 101
+rect -543 97 -538 102
+rect -10 96 -2 101
+rect 528 96 533 101
+<< m2contact >>
+rect 608 244 613 249
+rect 560 235 565 240
+rect 641 206 646 211
+rect 611 197 616 202
+<< metal2 >>
+rect -1766 162 -1552 166
+rect -1234 162 -1004 167
+rect -688 163 -470 167
+rect -154 162 64 166
+use ff  ff_1
+timestamp 1764703245
+transform -1 0 -2223 0 1 235
+box -11 -71 160 28
+use inverter  inverter_1
+timestamp 1764702656
+transform 1 0 -2170 0 1 239
+box -10 -25 20 18
+use 1bitaddie  1bitaddie_0
+timestamp 1764763583
+transform 1 0 56 0 1 520
+box -56 -520 478 99
+use 1bitaddie  1bitaddie_1
+timestamp 1764763583
+transform 1 0 -479 0 1 520
+box -56 -520 478 99
+use 1bitaddie  1bitaddie_2
+timestamp 1764763583
+transform 1 0 -1013 0 1 521
+box -56 -520 478 99
+use 1bitaddie  1bitaddie_3
+timestamp 1764763583
+transform 1 0 -1560 0 1 520
+box -56 -520 478 99
+use 1bitaddie  1bitaddie_4
+timestamp 1764763583
+transform 1 0 -2091 0 1 520
+box -56 -520 478 99
+use ff  ff_0
+timestamp 1764703245
+transform -1 0 646 0 1 249
+box -11 -71 160 28
+use inverter  inverter_0
+timestamp 1764702656
+transform 1 0 372 0 1 222
+box -10 -25 20 18
+<< labels >>
+rlabel metal1 661 222 661 222 1 C0
+rlabel metal1 530 99 530 99 1 s0
+rlabel metal1 34 562 34 562 1 B0
+rlabel metal1 233 563 233 563 1 A0
+rlabel metal1 -6 99 -6 99 1 s1
+rlabel metal1 -302 563 -302 563 1 A1
+rlabel metal1 -500 563 -500 563 1 B1
+rlabel metal1 -541 99 -541 99 1 s2
+rlabel metal1 -835 564 -835 564 1 A2
+rlabel metal1 -1034 564 -1034 564 1 B2
+rlabel metal1 -1086 99 -1086 99 1 s3
+rlabel metal1 -1382 563 -1382 563 1 A3
+rlabel metal1 -1580 563 -1580 563 1 B3
+rlabel metal1 -1617 99 -1617 99 1 s4
+rlabel metal1 -1914 563 -1914 563 1 A4
+rlabel metal1 -2110 563 -2110 563 1 B4
+rlabel metal1 -2389 234 -2389 234 1 Cout
+<< end >>

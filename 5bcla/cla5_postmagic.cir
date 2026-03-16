@@ -1,0 +1,2835 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_N={20*LAMBDA}
+.param Wp={width_N*2}
+.global gnd vdd
+* Parameters
+.param val_vdd=1.8
+.param tr=50p
+.param tf=50p
+
+* --- Power Supplies ---
+Vsup vdd 0 DC 'val_vdd'
+
+* --- Clock Signal ---
+* Period 20ns: 0-10ns Precharge (Low), 10-20ns Evaluate (High)
+Vclk 1bitaddie_4/clk 0 PULSE(0 1.8 2n 1p 1p 2n 4n)
+
+* --- Inputs ---
+* Note: Inputs transition at 5ns, 25ns, 45ns (mid-precharge)
+* to ensure stability before the Evaluation clock edge.
+
+* C0: High for Case 3 (Ripple) & Case 4 (Simple +1)
+* Cin = 0 in V1, 1 in V2, 0 in V3
+VCin C0 gnd 0
+
+* --- A Inputs ---
+
+* A0 = 1 in V1, 1 in V2, 1 in V3
+VA0 A0 0 1.8
+
+* A1 = 1 in V1, 1 in V2, 0 in V3
+VA1 A1 0 1.8
+
+* A2 = 1 in V2 only
+VA2 A2 0 1.8
+
+* A3 = 0 in V1/V2, 1 in V3 only
+VA3 A3 0 1.8
+
+* A4 always 0
+VA4 A4 0 1.8
+
+* --- B Inputs ---
+* B0 = 1 in V1, 0 in V2, 0 in V3
+VB0 B0 0 PULSE(0 1.8 1n 1p 1p 4n 8n)
+
+* B1 = 1 in V3 only
+VB1 B1 0 0
+
+* B2 = 0
+VB2 B2 0 DC 0
+
+* B3 = 1 in V1 & V3
+VB3 B3 0 0
+
+* B4 = 0
+VB4 B4 0 DC 0
+
+
+* SPICE3 file created from fulladd.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 1bitaddie_1/nandg_0/out 1bitaddie_1/Bi 1bitaddie_1/nandg_0/m1_24_n51# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1001 1bitaddie_1/nandg_0/m1_24_n51# 1bitaddie_1/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=2920 ps=2628
+M1002 1bitaddie_1/nandg_0/out 1bitaddie_1/Bi vdd 1bitaddie_1/nandg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=6040 ps=3926
+M1003 1bitaddie_1/nandg_0/out 1bitaddie_1/Ai vdd 1bitaddie_1/nandg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1004 1bitaddie_1/inverter_0/out 1bitaddie_1/nandg_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1005 1bitaddie_1/inverter_0/out 1bitaddie_1/nandg_0/out vdd 1bitaddie_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1006 1bitaddie_1/inverter_1/out 1bitaddie_1/Cin gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1007 1bitaddie_1/inverter_1/out 1bitaddie_1/Cin vdd 1bitaddie_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1008 1bitaddie_1/manch_0/clk 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1009 1bitaddie_1/manch_0/clk 1bitaddie_4/clk vdd 1bitaddie_1/inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1010 1bitaddie_2/Cin 1bitaddie_1/inverter_0/out 1bitaddie_1/manch_0/m1_25_n53# gnd CMOSN w=4 l=2
++  ad=60 pd=54 as=40 ps=36
+M1011 1bitaddie_1/manch_0/m1_25_n53# 1bitaddie_1/manch_0/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1012 1bitaddie_2/Cin 1bitaddie_1/xorg_1/A 1bitaddie_1/Cin gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=60 ps=54
+M1013 1bitaddie_2/Cin 1bitaddie_1/manch_0/clk vdd 1bitaddie_1/manch_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1014 1bitaddie_1/xorg_0/inverter_0/out 1bitaddie_1/Ai gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1015 1bitaddie_1/xorg_0/inverter_0/out 1bitaddie_1/Ai vdd 1bitaddie_1/xorg_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1016 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/Bi gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1017 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/Bi vdd 1bitaddie_1/xorg_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1018 1bitaddie_1/xorg_1/A 1bitaddie_1/Bi 1bitaddie_1/xorg_0/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1019 1bitaddie_1/xorg_0/m1_26_n95# 1bitaddie_1/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1020 1bitaddie_1/xorg_1/A 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_0/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1021 1bitaddie_1/xorg_0/m1_102_n91# 1bitaddie_1/xorg_0/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1022 1bitaddie_1/xorg_0/m1_25_n11# 1bitaddie_1/xorg_0/inverter_0/out vdd 1bitaddie_1/xorg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1023 1bitaddie_1/xorg_1/A 1bitaddie_1/Bi 1bitaddie_1/xorg_0/m1_25_n11# 1bitaddie_1/xorg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1024 1bitaddie_1/xorg_0/m1_102_n17# 1bitaddie_1/Ai vdd 1bitaddie_1/xorg_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1025 1bitaddie_1/xorg_1/A 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_0/m1_102_n17# 1bitaddie_1/xorg_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1026 1bitaddie_1/xorg_1/inverter_0/out 1bitaddie_1/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1027 1bitaddie_1/xorg_1/inverter_0/out 1bitaddie_1/xorg_1/A vdd 1bitaddie_1/xorg_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1028 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/inverter_1/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1029 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/inverter_1/out vdd 1bitaddie_1/xorg_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1030 1bitaddie_1/sum 1bitaddie_1/inverter_1/out 1bitaddie_1/xorg_1/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1031 1bitaddie_1/xorg_1/m1_26_n95# 1bitaddie_1/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1032 1bitaddie_1/sum 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/xorg_1/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1033 1bitaddie_1/xorg_1/m1_102_n91# 1bitaddie_1/xorg_1/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1034 1bitaddie_1/xorg_1/m1_25_n11# 1bitaddie_1/xorg_1/inverter_0/out vdd 1bitaddie_1/xorg_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1035 1bitaddie_1/sum 1bitaddie_1/inverter_1/out 1bitaddie_1/xorg_1/m1_25_n11# 1bitaddie_1/xorg_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1036 1bitaddie_1/xorg_1/m1_102_n17# 1bitaddie_1/xorg_1/A vdd 1bitaddie_1/xorg_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1037 1bitaddie_1/sum 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/xorg_1/m1_102_n17# 1bitaddie_1/xorg_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1038 1bitaddie_1/doubleinv_0/inverter_1/in 1bitaddie_1/doubleinv_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1039 1bitaddie_1/doubleinv_0/inverter_1/in 1bitaddie_1/doubleinv_0/inverter_0/in vdd 1bitaddie_1/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1040 1bitaddie_1/doubleinv_0/inverter_1/out 1bitaddie_1/doubleinv_0/inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1041 1bitaddie_1/doubleinv_0/inverter_1/out 1bitaddie_1/doubleinv_0/inverter_1/in vdd 1bitaddie_1/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1042 1bitaddie_1/Bi 1bitaddie_1/ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1043 1bitaddie_1/Bi 1bitaddie_1/ff_0/inverter_0/in vdd 1bitaddie_1/ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1044 1bitaddie_1/ff_0/m1_22_n55# B1 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1045 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/m1_22_n55# 1bitaddie_1/ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1046 1bitaddie_1/ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1047 1bitaddie_1/ff_0/inverter_0/in 1bitaddie_4/clk 1bitaddie_1/ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1048 1bitaddie_1/ff_0/m1_100_n33# 1bitaddie_1/ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1049 1bitaddie_1/ff_0/m1_18_n10# B1 vdd 1bitaddie_1/ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1050 1bitaddie_1/ff_0/m1_22_n55# 1bitaddie_4/clk 1bitaddie_1/ff_0/m1_18_n10# 1bitaddie_1/ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1051 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_1/ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1052 1bitaddie_1/ff_0/inverter_0/in 1bitaddie_1/ff_0/m1_60_n19# vdd 1bitaddie_1/ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1053 1bitaddie_1/Ai 1bitaddie_1/ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1054 1bitaddie_1/Ai 1bitaddie_1/ff_1/inverter_0/in vdd 1bitaddie_1/ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1055 1bitaddie_1/ff_1/m1_22_n55# A1 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1056 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/m1_22_n55# 1bitaddie_1/ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1057 1bitaddie_1/ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1058 1bitaddie_1/ff_1/inverter_0/in 1bitaddie_4/clk 1bitaddie_1/ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1059 1bitaddie_1/ff_1/m1_100_n33# 1bitaddie_1/ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1060 1bitaddie_1/ff_1/m1_18_n10# A1 vdd 1bitaddie_1/ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1061 1bitaddie_1/ff_1/m1_22_n55# 1bitaddie_4/clk 1bitaddie_1/ff_1/m1_18_n10# 1bitaddie_1/ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1062 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_1/ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1063 1bitaddie_1/ff_1/inverter_0/in 1bitaddie_1/ff_1/m1_60_n19# vdd 1bitaddie_1/ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1064 s1 1bitaddie_1/ff_2/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1065 s1 1bitaddie_1/ff_2/inverter_0/in vdd 1bitaddie_1/ff_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1066 1bitaddie_1/ff_2/m1_22_n55# 1bitaddie_1/sum gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1067 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/m1_22_n55# 1bitaddie_1/ff_2/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1068 1bitaddie_1/ff_2/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1069 1bitaddie_1/ff_2/inverter_0/in 1bitaddie_4/clk 1bitaddie_1/ff_2/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1070 1bitaddie_1/ff_2/m1_100_n33# 1bitaddie_1/ff_2/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1071 1bitaddie_1/ff_2/m1_18_n10# 1bitaddie_1/sum vdd 1bitaddie_1/ff_2/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1072 1bitaddie_1/ff_2/m1_22_n55# 1bitaddie_4/clk 1bitaddie_1/ff_2/m1_18_n10# 1bitaddie_1/ff_2/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1073 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_1/ff_2/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1074 1bitaddie_1/ff_2/inverter_0/in 1bitaddie_1/ff_2/m1_60_n19# vdd 1bitaddie_1/ff_2/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1075 1bitaddie_2/nandg_0/out 1bitaddie_2/Bi 1bitaddie_2/nandg_0/m1_24_n51# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1076 1bitaddie_2/nandg_0/m1_24_n51# 1bitaddie_2/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1077 1bitaddie_2/nandg_0/out 1bitaddie_2/Bi vdd 1bitaddie_2/nandg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1078 1bitaddie_2/nandg_0/out 1bitaddie_2/Ai vdd 1bitaddie_2/nandg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1079 1bitaddie_2/inverter_0/out 1bitaddie_2/nandg_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1080 1bitaddie_2/inverter_0/out 1bitaddie_2/nandg_0/out vdd 1bitaddie_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1081 1bitaddie_2/inverter_1/out 1bitaddie_2/Cin gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1082 1bitaddie_2/inverter_1/out 1bitaddie_2/Cin vdd 1bitaddie_2/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1083 1bitaddie_2/manch_0/clk 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1084 1bitaddie_2/manch_0/clk 1bitaddie_4/clk vdd 1bitaddie_2/inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1085 1bitaddie_3/Cin 1bitaddie_2/inverter_0/out 1bitaddie_2/manch_0/m1_25_n53# gnd CMOSN w=4 l=2
++  ad=60 pd=54 as=40 ps=36
+M1086 1bitaddie_2/manch_0/m1_25_n53# 1bitaddie_2/manch_0/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1087 1bitaddie_3/Cin 1bitaddie_2/xorg_1/A 1bitaddie_2/Cin gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1088 1bitaddie_3/Cin 1bitaddie_2/manch_0/clk vdd 1bitaddie_2/manch_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1089 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/Ai gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1090 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/Ai vdd 1bitaddie_2/xorg_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1091 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/Bi gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1092 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/Bi vdd 1bitaddie_2/xorg_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1093 1bitaddie_2/xorg_1/A 1bitaddie_2/Bi 1bitaddie_2/xorg_0/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1094 1bitaddie_2/xorg_0/m1_26_n95# 1bitaddie_2/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1095 1bitaddie_2/xorg_1/A 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/xorg_0/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1096 1bitaddie_2/xorg_0/m1_102_n91# 1bitaddie_2/xorg_0/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1097 1bitaddie_2/xorg_0/m1_25_n11# 1bitaddie_2/xorg_0/inverter_0/out vdd 1bitaddie_2/xorg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1098 1bitaddie_2/xorg_1/A 1bitaddie_2/Bi 1bitaddie_2/xorg_0/m1_25_n11# 1bitaddie_2/xorg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1099 1bitaddie_2/xorg_0/m1_102_n17# 1bitaddie_2/Ai vdd 1bitaddie_2/xorg_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1100 1bitaddie_2/xorg_1/A 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/xorg_0/m1_102_n17# 1bitaddie_2/xorg_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1101 1bitaddie_2/xorg_1/inverter_0/out 1bitaddie_2/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1102 1bitaddie_2/xorg_1/inverter_0/out 1bitaddie_2/xorg_1/A vdd 1bitaddie_2/xorg_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1103 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/inverter_1/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1104 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/inverter_1/out vdd 1bitaddie_2/xorg_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1105 1bitaddie_2/sum 1bitaddie_2/inverter_1/out 1bitaddie_2/xorg_1/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1106 1bitaddie_2/xorg_1/m1_26_n95# 1bitaddie_2/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1107 1bitaddie_2/sum 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/xorg_1/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1108 1bitaddie_2/xorg_1/m1_102_n91# 1bitaddie_2/xorg_1/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1109 1bitaddie_2/xorg_1/m1_25_n11# 1bitaddie_2/xorg_1/inverter_0/out vdd 1bitaddie_2/xorg_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1110 1bitaddie_2/sum 1bitaddie_2/inverter_1/out 1bitaddie_2/xorg_1/m1_25_n11# 1bitaddie_2/xorg_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1111 1bitaddie_2/xorg_1/m1_102_n17# 1bitaddie_2/xorg_1/A vdd 1bitaddie_2/xorg_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1112 1bitaddie_2/sum 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/xorg_1/m1_102_n17# 1bitaddie_2/xorg_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1113 1bitaddie_2/doubleinv_0/inverter_1/in 1bitaddie_2/doubleinv_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1114 1bitaddie_2/doubleinv_0/inverter_1/in 1bitaddie_2/doubleinv_0/inverter_0/in vdd 1bitaddie_2/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1115 1bitaddie_2/doubleinv_0/inverter_1/out 1bitaddie_2/doubleinv_0/inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1116 1bitaddie_2/doubleinv_0/inverter_1/out 1bitaddie_2/doubleinv_0/inverter_1/in vdd 1bitaddie_2/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1117 1bitaddie_2/Bi 1bitaddie_2/ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1118 1bitaddie_2/Bi 1bitaddie_2/ff_0/inverter_0/in vdd 1bitaddie_2/ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1119 1bitaddie_2/ff_0/m1_22_n55# B2 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1120 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/m1_22_n55# 1bitaddie_2/ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1121 1bitaddie_2/ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1122 1bitaddie_2/ff_0/inverter_0/in 1bitaddie_4/clk 1bitaddie_2/ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1123 1bitaddie_2/ff_0/m1_100_n33# 1bitaddie_2/ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1124 1bitaddie_2/ff_0/m1_18_n10# B2 vdd 1bitaddie_2/ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1125 1bitaddie_2/ff_0/m1_22_n55# 1bitaddie_4/clk 1bitaddie_2/ff_0/m1_18_n10# 1bitaddie_2/ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1126 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_2/ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1127 1bitaddie_2/ff_0/inverter_0/in 1bitaddie_2/ff_0/m1_60_n19# vdd 1bitaddie_2/ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1128 1bitaddie_2/Ai 1bitaddie_2/ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1129 1bitaddie_2/Ai 1bitaddie_2/ff_1/inverter_0/in vdd 1bitaddie_2/ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1130 1bitaddie_2/ff_1/m1_22_n55# A2 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1131 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/m1_22_n55# 1bitaddie_2/ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1132 1bitaddie_2/ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1133 1bitaddie_2/ff_1/inverter_0/in 1bitaddie_4/clk 1bitaddie_2/ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1134 1bitaddie_2/ff_1/m1_100_n33# 1bitaddie_2/ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1135 1bitaddie_2/ff_1/m1_18_n10# A2 vdd 1bitaddie_2/ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1136 1bitaddie_2/ff_1/m1_22_n55# 1bitaddie_4/clk 1bitaddie_2/ff_1/m1_18_n10# 1bitaddie_2/ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1137 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_2/ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1138 1bitaddie_2/ff_1/inverter_0/in 1bitaddie_2/ff_1/m1_60_n19# vdd 1bitaddie_2/ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1139 s2 1bitaddie_2/ff_2/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1140 s2 1bitaddie_2/ff_2/inverter_0/in vdd 1bitaddie_2/ff_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1141 1bitaddie_2/ff_2/m1_22_n55# 1bitaddie_2/sum gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1142 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/m1_22_n55# 1bitaddie_2/ff_2/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1143 1bitaddie_2/ff_2/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1144 1bitaddie_2/ff_2/inverter_0/in 1bitaddie_4/clk 1bitaddie_2/ff_2/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1145 1bitaddie_2/ff_2/m1_100_n33# 1bitaddie_2/ff_2/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1146 1bitaddie_2/ff_2/m1_18_n10# 1bitaddie_2/sum vdd 1bitaddie_2/ff_2/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1147 1bitaddie_2/ff_2/m1_22_n55# 1bitaddie_4/clk 1bitaddie_2/ff_2/m1_18_n10# 1bitaddie_2/ff_2/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1148 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_2/ff_2/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1149 1bitaddie_2/ff_2/inverter_0/in 1bitaddie_2/ff_2/m1_60_n19# vdd 1bitaddie_2/ff_2/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1150 inverter_0/out inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=0 ps=0
+M1151 inverter_0/out inverter_0/in vdd inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1152 1bitaddie_3/nandg_0/out 1bitaddie_3/Bi 1bitaddie_3/nandg_0/m1_24_n51# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1153 1bitaddie_3/nandg_0/m1_24_n51# 1bitaddie_3/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1154 1bitaddie_3/nandg_0/out 1bitaddie_3/Bi vdd 1bitaddie_3/nandg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1155 1bitaddie_3/nandg_0/out 1bitaddie_3/Ai vdd 1bitaddie_3/nandg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1156 1bitaddie_3/inverter_0/out 1bitaddie_3/nandg_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1157 1bitaddie_3/inverter_0/out 1bitaddie_3/nandg_0/out vdd 1bitaddie_3/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1158 1bitaddie_3/inverter_1/out 1bitaddie_3/Cin gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1159 1bitaddie_3/inverter_1/out 1bitaddie_3/Cin vdd 1bitaddie_3/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1160 1bitaddie_3/manch_0/clk 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1161 1bitaddie_3/manch_0/clk 1bitaddie_4/clk vdd 1bitaddie_3/inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1162 1bitaddie_4/Cin 1bitaddie_3/inverter_0/out 1bitaddie_3/manch_0/m1_25_n53# gnd CMOSN w=4 l=2
++  ad=60 pd=54 as=40 ps=36
+M1163 1bitaddie_3/manch_0/m1_25_n53# 1bitaddie_3/manch_0/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1164 1bitaddie_4/Cin 1bitaddie_3/xorg_1/A 1bitaddie_3/Cin gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1165 1bitaddie_4/Cin 1bitaddie_3/manch_0/clk vdd 1bitaddie_3/manch_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1166 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/Ai gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1167 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/Ai vdd 1bitaddie_3/xorg_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1168 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/Bi gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1169 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/Bi vdd 1bitaddie_3/xorg_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1170 1bitaddie_3/xorg_1/A 1bitaddie_3/Bi 1bitaddie_3/xorg_0/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1171 1bitaddie_3/xorg_0/m1_26_n95# 1bitaddie_3/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1172 1bitaddie_3/xorg_1/A 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/xorg_0/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1173 1bitaddie_3/xorg_0/m1_102_n91# 1bitaddie_3/xorg_0/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1174 1bitaddie_3/xorg_0/m1_25_n11# 1bitaddie_3/xorg_0/inverter_0/out vdd 1bitaddie_3/xorg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1175 1bitaddie_3/xorg_1/A 1bitaddie_3/Bi 1bitaddie_3/xorg_0/m1_25_n11# 1bitaddie_3/xorg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1176 1bitaddie_3/xorg_0/m1_102_n17# 1bitaddie_3/Ai vdd 1bitaddie_3/xorg_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1177 1bitaddie_3/xorg_1/A 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/xorg_0/m1_102_n17# 1bitaddie_3/xorg_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1178 1bitaddie_3/xorg_1/inverter_0/out 1bitaddie_3/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1179 1bitaddie_3/xorg_1/inverter_0/out 1bitaddie_3/xorg_1/A vdd 1bitaddie_3/xorg_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1180 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/inverter_1/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1181 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/inverter_1/out vdd 1bitaddie_3/xorg_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1182 1bitaddie_3/sum 1bitaddie_3/inverter_1/out 1bitaddie_3/xorg_1/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1183 1bitaddie_3/xorg_1/m1_26_n95# 1bitaddie_3/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1184 1bitaddie_3/sum 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/xorg_1/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1185 1bitaddie_3/xorg_1/m1_102_n91# 1bitaddie_3/xorg_1/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1186 1bitaddie_3/xorg_1/m1_25_n11# 1bitaddie_3/xorg_1/inverter_0/out vdd 1bitaddie_3/xorg_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1187 1bitaddie_3/sum 1bitaddie_3/inverter_1/out 1bitaddie_3/xorg_1/m1_25_n11# 1bitaddie_3/xorg_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1188 1bitaddie_3/xorg_1/m1_102_n17# 1bitaddie_3/xorg_1/A vdd 1bitaddie_3/xorg_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1189 1bitaddie_3/sum 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/xorg_1/m1_102_n17# 1bitaddie_3/xorg_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1190 1bitaddie_3/doubleinv_0/inverter_1/in 1bitaddie_3/doubleinv_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1191 1bitaddie_3/doubleinv_0/inverter_1/in 1bitaddie_3/doubleinv_0/inverter_0/in vdd 1bitaddie_3/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1192 1bitaddie_3/doubleinv_0/inverter_1/out 1bitaddie_3/doubleinv_0/inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1193 1bitaddie_3/doubleinv_0/inverter_1/out 1bitaddie_3/doubleinv_0/inverter_1/in vdd 1bitaddie_3/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1194 1bitaddie_3/Bi 1bitaddie_3/ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1195 1bitaddie_3/Bi 1bitaddie_3/ff_0/inverter_0/in vdd 1bitaddie_3/ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1196 1bitaddie_3/ff_0/m1_22_n55# B3 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1197 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/m1_22_n55# 1bitaddie_3/ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1198 1bitaddie_3/ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1199 1bitaddie_3/ff_0/inverter_0/in 1bitaddie_4/clk 1bitaddie_3/ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1200 1bitaddie_3/ff_0/m1_100_n33# 1bitaddie_3/ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1201 1bitaddie_3/ff_0/m1_18_n10# B3 vdd 1bitaddie_3/ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1202 1bitaddie_3/ff_0/m1_22_n55# 1bitaddie_4/clk 1bitaddie_3/ff_0/m1_18_n10# 1bitaddie_3/ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1203 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_3/ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1204 1bitaddie_3/ff_0/inverter_0/in 1bitaddie_3/ff_0/m1_60_n19# vdd 1bitaddie_3/ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1205 1bitaddie_3/Ai 1bitaddie_3/ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1206 1bitaddie_3/Ai 1bitaddie_3/ff_1/inverter_0/in vdd 1bitaddie_3/ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1207 1bitaddie_3/ff_1/m1_22_n55# A3 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1208 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/m1_22_n55# 1bitaddie_3/ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1209 1bitaddie_3/ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1210 1bitaddie_3/ff_1/inverter_0/in 1bitaddie_4/clk 1bitaddie_3/ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1211 1bitaddie_3/ff_1/m1_100_n33# 1bitaddie_3/ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1212 1bitaddie_3/ff_1/m1_18_n10# A3 vdd 1bitaddie_3/ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1213 1bitaddie_3/ff_1/m1_22_n55# 1bitaddie_4/clk 1bitaddie_3/ff_1/m1_18_n10# 1bitaddie_3/ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1214 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_3/ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1215 1bitaddie_3/ff_1/inverter_0/in 1bitaddie_3/ff_1/m1_60_n19# vdd 1bitaddie_3/ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1216 s3 1bitaddie_3/ff_2/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1217 s3 1bitaddie_3/ff_2/inverter_0/in vdd 1bitaddie_3/ff_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1218 1bitaddie_3/ff_2/m1_22_n55# 1bitaddie_3/sum gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1219 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/m1_22_n55# 1bitaddie_3/ff_2/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1220 1bitaddie_3/ff_2/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1221 1bitaddie_3/ff_2/inverter_0/in 1bitaddie_4/clk 1bitaddie_3/ff_2/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1222 1bitaddie_3/ff_2/m1_100_n33# 1bitaddie_3/ff_2/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1223 1bitaddie_3/ff_2/m1_18_n10# 1bitaddie_3/sum vdd 1bitaddie_3/ff_2/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1224 1bitaddie_3/ff_2/m1_22_n55# 1bitaddie_4/clk 1bitaddie_3/ff_2/m1_18_n10# 1bitaddie_3/ff_2/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1225 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_3/ff_2/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1226 1bitaddie_3/ff_2/inverter_0/in 1bitaddie_3/ff_2/m1_60_n19# vdd 1bitaddie_3/ff_2/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1227 1bitaddie_4/nandg_0/out 1bitaddie_4/Bi 1bitaddie_4/nandg_0/m1_24_n51# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1228 1bitaddie_4/nandg_0/m1_24_n51# 1bitaddie_4/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1229 1bitaddie_4/nandg_0/out 1bitaddie_4/Bi vdd 1bitaddie_4/nandg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1230 1bitaddie_4/nandg_0/out 1bitaddie_4/Ai vdd 1bitaddie_4/nandg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1231 1bitaddie_4/inverter_0/out 1bitaddie_4/nandg_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1232 1bitaddie_4/inverter_0/out 1bitaddie_4/nandg_0/out vdd 1bitaddie_4/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1233 1bitaddie_4/inverter_1/out 1bitaddie_4/Cin gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1234 1bitaddie_4/inverter_1/out 1bitaddie_4/Cin vdd 1bitaddie_4/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1235 1bitaddie_4/manch_0/clk 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1236 1bitaddie_4/manch_0/clk 1bitaddie_4/clk vdd 1bitaddie_4/inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1237 inverter_2/in 1bitaddie_4/inverter_0/out 1bitaddie_4/manch_0/m1_25_n53# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1238 1bitaddie_4/manch_0/m1_25_n53# 1bitaddie_4/manch_0/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1239 inverter_2/in 1bitaddie_4/xorg_1/A 1bitaddie_4/Cin gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1240 inverter_2/in 1bitaddie_4/manch_0/clk vdd 1bitaddie_4/manch_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1241 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/Ai gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1242 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/Ai vdd 1bitaddie_4/xorg_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1243 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/Bi gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1244 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/Bi vdd 1bitaddie_4/xorg_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1245 1bitaddie_4/xorg_1/A 1bitaddie_4/Bi 1bitaddie_4/xorg_0/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1246 1bitaddie_4/xorg_0/m1_26_n95# 1bitaddie_4/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1247 1bitaddie_4/xorg_1/A 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/xorg_0/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1248 1bitaddie_4/xorg_0/m1_102_n91# 1bitaddie_4/xorg_0/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1249 1bitaddie_4/xorg_0/m1_25_n11# 1bitaddie_4/xorg_0/inverter_0/out vdd 1bitaddie_4/xorg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1250 1bitaddie_4/xorg_1/A 1bitaddie_4/Bi 1bitaddie_4/xorg_0/m1_25_n11# 1bitaddie_4/xorg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1251 1bitaddie_4/xorg_0/m1_102_n17# 1bitaddie_4/Ai vdd 1bitaddie_4/xorg_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1252 1bitaddie_4/xorg_1/A 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/xorg_0/m1_102_n17# 1bitaddie_4/xorg_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1253 1bitaddie_4/xorg_1/inverter_0/out 1bitaddie_4/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1254 1bitaddie_4/xorg_1/inverter_0/out 1bitaddie_4/xorg_1/A vdd 1bitaddie_4/xorg_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1255 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/inverter_1/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1256 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/inverter_1/out vdd 1bitaddie_4/xorg_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1257 1bitaddie_4/sum 1bitaddie_4/inverter_1/out 1bitaddie_4/xorg_1/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1258 1bitaddie_4/xorg_1/m1_26_n95# 1bitaddie_4/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1259 1bitaddie_4/sum 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/xorg_1/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1260 1bitaddie_4/xorg_1/m1_102_n91# 1bitaddie_4/xorg_1/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1261 1bitaddie_4/xorg_1/m1_25_n11# 1bitaddie_4/xorg_1/inverter_0/out vdd 1bitaddie_4/xorg_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1262 1bitaddie_4/sum 1bitaddie_4/inverter_1/out 1bitaddie_4/xorg_1/m1_25_n11# 1bitaddie_4/xorg_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1263 1bitaddie_4/xorg_1/m1_102_n17# 1bitaddie_4/xorg_1/A vdd 1bitaddie_4/xorg_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1264 1bitaddie_4/sum 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/xorg_1/m1_102_n17# 1bitaddie_4/xorg_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1265 1bitaddie_4/doubleinv_0/inverter_1/in 1bitaddie_4/doubleinv_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1266 1bitaddie_4/doubleinv_0/inverter_1/in 1bitaddie_4/doubleinv_0/inverter_0/in vdd inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1267 inverter_1/out 1bitaddie_4/doubleinv_0/inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=0 ps=0
+M1268 inverter_1/out 1bitaddie_4/doubleinv_0/inverter_1/in vdd inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1269 1bitaddie_4/Bi 1bitaddie_4/ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1270 1bitaddie_4/Bi 1bitaddie_4/ff_0/inverter_0/in vdd 1bitaddie_4/ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1271 1bitaddie_4/ff_0/m1_22_n55# B4 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1272 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/m1_22_n55# 1bitaddie_4/ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1273 1bitaddie_4/ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1274 1bitaddie_4/ff_0/inverter_0/in 1bitaddie_4/clk 1bitaddie_4/ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1275 1bitaddie_4/ff_0/m1_100_n33# 1bitaddie_4/ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1276 1bitaddie_4/ff_0/m1_18_n10# B4 vdd 1bitaddie_4/ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1277 1bitaddie_4/ff_0/m1_22_n55# 1bitaddie_4/clk 1bitaddie_4/ff_0/m1_18_n10# 1bitaddie_4/ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1278 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_4/ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1279 1bitaddie_4/ff_0/inverter_0/in 1bitaddie_4/ff_0/m1_60_n19# vdd 1bitaddie_4/ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1280 1bitaddie_4/Ai 1bitaddie_4/ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1281 1bitaddie_4/Ai 1bitaddie_4/ff_1/inverter_0/in vdd 1bitaddie_4/ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1282 1bitaddie_4/ff_1/m1_22_n55# A4 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1283 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/m1_22_n55# 1bitaddie_4/ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1284 1bitaddie_4/ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1285 1bitaddie_4/ff_1/inverter_0/in 1bitaddie_4/clk 1bitaddie_4/ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1286 1bitaddie_4/ff_1/m1_100_n33# 1bitaddie_4/ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1287 1bitaddie_4/ff_1/m1_18_n10# A4 vdd 1bitaddie_4/ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1288 1bitaddie_4/ff_1/m1_22_n55# 1bitaddie_4/clk 1bitaddie_4/ff_1/m1_18_n10# 1bitaddie_4/ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1289 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_4/ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1290 1bitaddie_4/ff_1/inverter_0/in 1bitaddie_4/ff_1/m1_60_n19# vdd 1bitaddie_4/ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1291 s4 1bitaddie_4/ff_2/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1292 s4 1bitaddie_4/ff_2/inverter_0/in vdd 1bitaddie_4/ff_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1293 1bitaddie_4/ff_2/m1_22_n55# 1bitaddie_4/sum gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1294 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/m1_22_n55# 1bitaddie_4/ff_2/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1295 1bitaddie_4/ff_2/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1296 1bitaddie_4/ff_2/inverter_0/in 1bitaddie_4/clk 1bitaddie_4/ff_2/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1297 1bitaddie_4/ff_2/m1_100_n33# 1bitaddie_4/ff_2/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1298 1bitaddie_4/ff_2/m1_18_n10# 1bitaddie_4/sum vdd 1bitaddie_4/ff_2/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1299 1bitaddie_4/ff_2/m1_22_n55# 1bitaddie_4/clk 1bitaddie_4/ff_2/m1_18_n10# 1bitaddie_4/ff_2/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1300 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_4/ff_2/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1301 1bitaddie_4/ff_2/inverter_0/in 1bitaddie_4/ff_2/m1_60_n19# vdd 1bitaddie_4/ff_2/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1302 inverter_1/out inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1303 inverter_1/out inverter_1/in vdd inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1304 inverter_2/out inverter_2/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1305 inverter_2/out inverter_2/in vdd inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1306 inverter_0/in ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1307 inverter_0/in ff_0/inverter_0/in vdd ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1308 ff_0/m1_22_n55# C0 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1309 ff_0/m1_60_n19# ff_0/m1_22_n55# ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1310 ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1311 ff_0/inverter_0/in 1bitaddie_4/clk ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1312 ff_0/m1_100_n33# ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1313 ff_0/m1_18_n10# C0 vdd ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1314 ff_0/m1_22_n55# 1bitaddie_4/clk ff_0/m1_18_n10# ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1315 ff_0/m1_60_n19# 1bitaddie_4/clk vdd ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1316 ff_0/inverter_0/in ff_0/m1_60_n19# vdd ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1317 Cout ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1318 Cout ff_1/inverter_0/in vdd ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1319 ff_1/m1_22_n55# inverter_2/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1320 ff_1/m1_60_n19# ff_1/m1_22_n55# ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1321 ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1322 ff_1/inverter_0/in 1bitaddie_4/clk ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1323 ff_1/m1_100_n33# ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1324 ff_1/m1_18_n10# inverter_2/out vdd ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1325 ff_1/m1_22_n55# 1bitaddie_4/clk ff_1/m1_18_n10# ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1326 ff_1/m1_60_n19# 1bitaddie_4/clk vdd ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1327 ff_1/inverter_0/in ff_1/m1_60_n19# vdd ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1328 1bitaddie_0/nandg_0/out 1bitaddie_0/Bi 1bitaddie_0/nandg_0/m1_24_n51# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1329 1bitaddie_0/nandg_0/m1_24_n51# 1bitaddie_0/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1330 1bitaddie_0/nandg_0/out 1bitaddie_0/Bi vdd 1bitaddie_0/nandg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1331 1bitaddie_0/nandg_0/out 1bitaddie_0/Ai vdd 1bitaddie_0/nandg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1332 1bitaddie_0/inverter_0/out 1bitaddie_0/nandg_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1333 1bitaddie_0/inverter_0/out 1bitaddie_0/nandg_0/out vdd 1bitaddie_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1334 1bitaddie_0/inverter_1/out inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1335 1bitaddie_0/inverter_1/out inverter_0/out vdd 1bitaddie_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1336 1bitaddie_0/manch_0/clk 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1337 1bitaddie_0/manch_0/clk 1bitaddie_4/clk vdd 1bitaddie_0/inverter_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1338 1bitaddie_1/Cin 1bitaddie_0/inverter_0/out 1bitaddie_0/manch_0/m1_25_n53# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1339 1bitaddie_0/manch_0/m1_25_n53# 1bitaddie_0/manch_0/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1340 1bitaddie_1/Cin 1bitaddie_0/xorg_1/A inverter_0/out gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1341 1bitaddie_1/Cin 1bitaddie_0/manch_0/clk vdd 1bitaddie_0/manch_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1342 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/Ai gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1343 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/Ai vdd 1bitaddie_0/xorg_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1344 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/Bi gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1345 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/Bi vdd 1bitaddie_0/xorg_0/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1346 1bitaddie_0/xorg_1/A 1bitaddie_0/Bi 1bitaddie_0/xorg_0/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1347 1bitaddie_0/xorg_0/m1_26_n95# 1bitaddie_0/Ai gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1348 1bitaddie_0/xorg_1/A 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/xorg_0/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1349 1bitaddie_0/xorg_0/m1_102_n91# 1bitaddie_0/xorg_0/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1350 1bitaddie_0/xorg_0/m1_25_n11# 1bitaddie_0/xorg_0/inverter_0/out vdd 1bitaddie_0/xorg_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1351 1bitaddie_0/xorg_1/A 1bitaddie_0/Bi 1bitaddie_0/xorg_0/m1_25_n11# 1bitaddie_0/xorg_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1352 1bitaddie_0/xorg_0/m1_102_n17# 1bitaddie_0/Ai vdd 1bitaddie_0/xorg_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1353 1bitaddie_0/xorg_1/A 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/xorg_0/m1_102_n17# 1bitaddie_0/xorg_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1354 1bitaddie_0/xorg_1/inverter_0/out 1bitaddie_0/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1355 1bitaddie_0/xorg_1/inverter_0/out 1bitaddie_0/xorg_1/A vdd 1bitaddie_0/xorg_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1356 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/inverter_1/out gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1357 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/inverter_1/out vdd 1bitaddie_0/xorg_1/inverter_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1358 1bitaddie_0/sum 1bitaddie_0/inverter_1/out 1bitaddie_0/xorg_1/m1_26_n95# gnd CMOSN w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1359 1bitaddie_0/xorg_1/m1_26_n95# 1bitaddie_0/xorg_1/A gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1360 1bitaddie_0/sum 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/xorg_1/m1_102_n91# gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=40 ps=36
+M1361 1bitaddie_0/xorg_1/m1_102_n91# 1bitaddie_0/xorg_1/inverter_0/out gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1362 1bitaddie_0/xorg_1/m1_25_n11# 1bitaddie_0/xorg_1/inverter_0/out vdd 1bitaddie_0/xorg_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1363 1bitaddie_0/sum 1bitaddie_0/inverter_1/out 1bitaddie_0/xorg_1/m1_25_n11# 1bitaddie_0/xorg_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1364 1bitaddie_0/xorg_1/m1_102_n17# 1bitaddie_0/xorg_1/A vdd 1bitaddie_0/xorg_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1365 1bitaddie_0/sum 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/xorg_1/m1_102_n17# 1bitaddie_0/xorg_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=0 pd=0 as=0 ps=0
+M1366 1bitaddie_0/doubleinv_0/inverter_1/in 1bitaddie_0/doubleinv_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1367 1bitaddie_0/doubleinv_0/inverter_1/in 1bitaddie_0/doubleinv_0/inverter_0/in vdd 1bitaddie_0/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1368 1bitaddie_0/doubleinv_0/inverter_1/out 1bitaddie_0/doubleinv_0/inverter_1/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1369 1bitaddie_0/doubleinv_0/inverter_1/out 1bitaddie_0/doubleinv_0/inverter_1/in vdd 1bitaddie_0/w_n41_n285# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1370 1bitaddie_0/Bi 1bitaddie_0/ff_0/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1371 1bitaddie_0/Bi 1bitaddie_0/ff_0/inverter_0/in vdd 1bitaddie_0/ff_0/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1372 1bitaddie_0/ff_0/m1_22_n55# B0 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1373 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/m1_22_n55# 1bitaddie_0/ff_0/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1374 1bitaddie_0/ff_0/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1375 1bitaddie_0/ff_0/inverter_0/in 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1376 1bitaddie_0/ff_0/m1_100_n33# 1bitaddie_0/ff_0/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1377 1bitaddie_0/ff_0/m1_18_n10# B0 vdd 1bitaddie_0/ff_0/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1378 1bitaddie_0/ff_0/m1_22_n55# 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_18_n10# 1bitaddie_0/ff_0/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1379 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_0/ff_0/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1380 1bitaddie_0/ff_0/inverter_0/in 1bitaddie_0/ff_0/m1_60_n19# vdd 1bitaddie_0/ff_0/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1381 1bitaddie_0/Ai 1bitaddie_0/ff_1/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1382 1bitaddie_0/Ai 1bitaddie_0/ff_1/inverter_0/in vdd 1bitaddie_0/ff_1/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1383 1bitaddie_0/ff_1/m1_22_n55# A0 gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1384 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/m1_22_n55# 1bitaddie_0/ff_1/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1385 1bitaddie_0/ff_1/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1386 1bitaddie_0/ff_1/inverter_0/in 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1387 1bitaddie_0/ff_1/m1_100_n33# 1bitaddie_0/ff_1/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1388 1bitaddie_0/ff_1/m1_18_n10# A0 vdd 1bitaddie_0/ff_1/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1389 1bitaddie_0/ff_1/m1_22_n55# 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_18_n10# 1bitaddie_0/ff_1/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1390 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_0/ff_1/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1391 1bitaddie_0/ff_1/inverter_0/in 1bitaddie_0/ff_1/m1_60_n19# vdd 1bitaddie_0/ff_1/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1392 s0 1bitaddie_0/ff_2/inverter_0/in gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1393 s0 1bitaddie_0/ff_2/inverter_0/in vdd 1bitaddie_0/ff_2/inverter_0/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1394 1bitaddie_0/ff_2/m1_22_n55# 1bitaddie_0/sum gnd gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1395 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/m1_22_n55# 1bitaddie_0/ff_2/m1_51_n34# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1396 1bitaddie_0/ff_2/m1_51_n34# 1bitaddie_4/clk gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1397 1bitaddie_0/ff_2/inverter_0/in 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_100_n33# gnd CMOSN w=4 l=2
++  ad=20 pd=18 as=40 ps=36
+M1398 1bitaddie_0/ff_2/m1_100_n33# 1bitaddie_0/ff_2/m1_60_n19# gnd gnd CMOSN w=4 l=2
++  ad=0 pd=0 as=0 ps=0
+M1399 1bitaddie_0/ff_2/m1_18_n10# 1bitaddie_0/sum vdd 1bitaddie_0/ff_2/pmos_0/w_n8_n5# CMOSP w=8 l=2
++  ad=80 pd=52 as=0 ps=0
+M1400 1bitaddie_0/ff_2/m1_22_n55# 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_18_n10# 1bitaddie_0/ff_2/pmos_1/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1401 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_4/clk vdd 1bitaddie_0/ff_2/pmos_2/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1402 1bitaddie_0/ff_2/inverter_0/in 1bitaddie_0/ff_2/m1_60_n19# vdd 1bitaddie_0/ff_2/pmos_3/w_n8_n5# CMOSP w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+C0 1bitaddie_0/doubleinv_0/inverter_1/in gnd 0.14fF
+C1 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/xorg_1/inverter_1/w_n8_n5# 0.03fF
+C2 1bitaddie_3/ff_1/m1_51_n34# gnd 0.08fF
+C3 1bitaddie_3/ff_2/m1_51_n34# 1bitaddie_3/ff_2/m1_22_n55# 0.08fF
+C4 1bitaddie_2/xorg_1/A 1bitaddie_2/xorg_1/m1_102_n17# 0.20fF
+C5 1bitaddie_3/inverter_2/w_n8_n5# vdd 0.08fF
+C6 1bitaddie_0/ff_1/inverter_0/in gnd 0.05fF
+C7 1bitaddie_0/xorg_1/inverter_1/w_n8_n5# vdd 0.08fF
+C8 1bitaddie_0/xorg_0/pmos_1/w_n8_n5# 1bitaddie_0/xorg_0/m1_25_n11# 0.08fF
+C9 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_0/inverter_1/w_n8_n5# 0.03fF
+C10 1bitaddie_4/clk gnd 2.93fF
+C11 1bitaddie_1/xorg_1/pmos_2/w_n8_n5# 1bitaddie_1/xorg_1/m1_102_n17# 0.03fF
+C12 1bitaddie_0/xorg_0/inverter_1/w_n8_n5# 1bitaddie_0/xorg_0/inverter_1/out 0.03fF
+C13 1bitaddie_4/clk 1bitaddie_0/inverter_2/w_n8_n5# 0.07fF
+C14 1bitaddie_2/xorg_1/m1_26_n95# 1bitaddie_2/xorg_1/A 0.05fF
+C15 1bitaddie_3/manch_0/m1_25_n53# 1bitaddie_4/Cin 0.08fF
+C16 1bitaddie_1/ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C17 1bitaddie_1/inverter_1/out 1bitaddie_1/inverter_1/w_n8_n5# 0.03fF
+C18 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/inverter_0/in 0.05fF
+C19 A0 1bitaddie_0/ff_1/m1_18_n10# 0.05fF
+C20 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/xorg_0/m1_102_n91# 0.05fF
+C21 1bitaddie_3/doubleinv_0/inverter_1/out vdd 0.12fF
+C22 1bitaddie_4/xorg_1/A gnd 0.48fF
+C23 1bitaddie_2/ff_0/inverter_0/in 1bitaddie_4/clk 0.12fF
+C24 1bitaddie_4/clk 1bitaddie_0/Bi 0.06fF
+C25 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_60_n19# 0.36fF
+C26 vdd 1bitaddie_1/inverter_0/out 0.12fF
+C27 1bitaddie_0/xorg_1/A 1bitaddie_0/xorg_1/m1_25_n11# 0.14fF
+C28 1bitaddie_4/ff_1/m1_22_n55# gnd 0.08fF
+C29 1bitaddie_4/xorg_0/m1_102_n17# vdd 0.12fF
+C30 1bitaddie_4/xorg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C31 1bitaddie_3/ff_2/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C32 1bitaddie_1/ff_0/pmos_1/w_n8_n5# 1bitaddie_1/ff_0/m1_22_n55# 0.03fF
+C33 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/m1_22_n55# 0.05fF
+C34 B1 1bitaddie_1/ff_0/pmos_0/w_n8_n5# 0.07fF
+C35 inverter_0/w_n8_n5# inverter_0/in 0.07fF
+C36 vdd 1bitaddie_1/manch_0/clk 0.12fF
+C37 1bitaddie_2/ff_2/m1_100_n33# gnd 0.08fF
+C38 1bitaddie_1/Cin 1bitaddie_1/inverter_1/w_n8_n5# 0.07fF
+C39 vdd 1bitaddie_0/ff_2/pmos_0/w_n8_n5# 0.08fF
+C40 1bitaddie_3/ff_2/inverter_0/w_n8_n5# vdd 0.08fF
+C41 1bitaddie_3/Ai gnd 0.27fF
+C42 1bitaddie_4/ff_2/m1_51_n34# 1bitaddie_4/clk 0.11fF
+C43 1bitaddie_2/inverter_0/w_n8_n5# 1bitaddie_2/inverter_0/out 0.03fF
+C44 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/inverter_0/in 0.05fF
+C45 ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C46 1bitaddie_3/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C47 gnd 1bitaddie_1/xorg_0/inverter_1/out 0.08fF
+C48 1bitaddie_2/inverter_0/out gnd 0.08fF
+C49 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/pmos_2/w_n8_n5# 0.03fF
+C50 1bitaddie_2/ff_1/m1_100_n33# 1bitaddie_2/ff_1/inverter_0/in 0.08fF
+C51 1bitaddie_4/inverter_0/w_n8_n5# 1bitaddie_4/nandg_0/out 0.07fF
+C52 1bitaddie_3/xorg_0/inverter_1/out gnd 0.08fF
+C53 1bitaddie_2/ff_1/m1_18_n10# vdd 0.12fF
+C54 1bitaddie_4/ff_0/m1_100_n33# gnd 0.08fF
+C55 1bitaddie_4/manch_0/clk inverter_2/in 0.19fF
+C56 1bitaddie_4/xorg_1/inverter_0/w_n8_n5# 1bitaddie_4/xorg_1/A 0.07fF
+C57 gnd 1bitaddie_1/xorg_1/inverter_1/out 0.08fF
+C58 A4 1bitaddie_4/clk 0.11fF
+C59 1bitaddie_4/ff_1/inverter_0/in 1bitaddie_4/ff_1/pmos_3/w_n8_n5# 0.03fF
+C60 1bitaddie_4/clk ff_0/m1_22_n55# 0.32fF
+C61 1bitaddie_2/manch_0/clk 1bitaddie_4/clk 0.05fF
+C62 1bitaddie_2/xorg_1/inverter_0/out gnd 0.14fF
+C63 1bitaddie_3/xorg_1/inverter_1/out gnd 0.08fF
+C64 1bitaddie_0/sum 1bitaddie_0/ff_2/m1_22_n55# 0.05fF
+C65 1bitaddie_0/xorg_0/m1_102_n91# 1bitaddie_0/xorg_1/A 0.08fF
+C66 1bitaddie_3/ff_0/m1_60_n19# vdd 0.12fF
+C67 1bitaddie_1/xorg_1/m1_25_n11# 1bitaddie_1/xorg_1/A 0.14fF
+C68 1bitaddie_1/xorg_0/inverter_0/out 1bitaddie_1/xorg_0/inverter_0/w_n8_n5# 0.03fF
+C69 1bitaddie_0/manch_0/m1_25_n53# gnd 0.08fF
+C70 1bitaddie_4/clk 1bitaddie_0/ff_1/pmos_2/w_n8_n5# 0.07fF
+C71 1bitaddie_4/xorg_1/pmos_2/w_n8_n5# vdd 0.08fF
+C72 1bitaddie_4/clk 1bitaddie_0/xorg_0/inverter_0/out 1.49fF
+C73 ff_1/m1_60_n19# ff_1/pmos_3/w_n8_n5# 0.07fF
+C74 1bitaddie_0/xorg_1/m1_102_n91# gnd 0.08fF
+C75 1bitaddie_4/Cin 1bitaddie_3/manch_0/pmos_0/w_n8_n5# 0.03fF
+C76 1bitaddie_3/sum 1bitaddie_3/xorg_1/m1_102_n17# 0.12fF
+C77 1bitaddie_0/xorg_1/pmos_3/w_n8_n5# 1bitaddie_0/xorg_1/m1_102_n17# 0.08fF
+C78 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/m1_22_n55# 0.05fF
+C79 vdd inverter_0/out 0.27fF
+C80 A4 1bitaddie_4/ff_1/m1_22_n55# 0.05fF
+C81 1bitaddie_4/Cin 1bitaddie_4/inverter_1/w_n8_n5# 0.07fF
+C82 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/m1_51_n34# 0.08fF
+C83 1bitaddie_0/ff_2/pmos_1/w_n8_n5# 1bitaddie_0/ff_2/m1_22_n55# 0.03fF
+C84 1bitaddie_3/sum 1bitaddie_3/xorg_1/m1_26_n95# 0.08fF
+C85 1bitaddie_3/w_n41_n285# 1bitaddie_3/doubleinv_0/inverter_0/in 0.07fF
+C86 1bitaddie_4/ff_2/m1_60_n19# vdd 0.12fF
+C87 gnd 1bitaddie_1/xorg_1/A 0.48fF
+C88 1bitaddie_3/inverter_0/w_n8_n5# 1bitaddie_3/inverter_0/out 0.03fF
+C89 1bitaddie_3/nandg_0/out 1bitaddie_3/inverter_0/w_n8_n5# 0.07fF
+C90 1bitaddie_3/xorg_1/A gnd 0.48fF
+C91 1bitaddie_2/inverter_0/out 1bitaddie_2/manch_0/clk 0.03fF
+C92 1bitaddie_1/ff_0/inverter_0/in 1bitaddie_4/clk 0.12fF
+C93 1bitaddie_1/xorg_1/pmos_1/w_n8_n5# 1bitaddie_1/sum 0.03fF
+C94 1bitaddie_4/inverter_1/out vdd 0.18fF
+C95 ff_1/inverter_0/in vdd 0.12fF
+C96 1bitaddie_1/ff_0/inverter_0/in 1bitaddie_1/ff_0/pmos_3/w_n8_n5# 0.03fF
+C97 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/pmos_2/w_n8_n5# 0.03fF
+C98 vdd 1bitaddie_1/xorg_0/m1_102_n17# 0.12fF
+C99 vdd 1bitaddie_1/nandg_0/pmos_0/w_n8_n5# 0.08fF
+C100 vdd 1bitaddie_1/xorg_0/pmos_0/w_n8_n5# 0.08fF
+C101 1bitaddie_3/ff_1/m1_22_n55# gnd 0.08fF
+C102 1bitaddie_1/doubleinv_0/inverter_1/out 1bitaddie_1/doubleinv_0/inverter_1/in 0.05fF
+C103 1bitaddie_3/xorg_0/m1_102_n17# vdd 0.12fF
+C104 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/xorg_0/m1_25_n11# 0.05fF
+C105 1bitaddie_0/inverter_1/out 1bitaddie_0/xorg_1/pmos_1/w_n8_n5# 0.07fF
+C106 1bitaddie_4/ff_1/m1_60_n19# gnd 0.05fF
+C107 1bitaddie_4/Bi gnd 0.18fF
+C108 1bitaddie_3/xorg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C109 1bitaddie_4/sum 1bitaddie_4/xorg_1/pmos_3/w_n8_n5# 0.03fF
+C110 1bitaddie_1/ff_2/m1_100_n33# gnd 0.08fF
+C111 s2 gnd 0.08fF
+C112 1bitaddie_2/inverter_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C113 1bitaddie_2/xorg_0/pmos_2/w_n8_n5# vdd 0.08fF
+C114 1bitaddie_3/ff_2/m1_51_n34# 1bitaddie_4/clk 0.11fF
+C115 1bitaddie_4/clk 1bitaddie_0/ff_2/inverter_0/in 0.05fF
+C116 1bitaddie_4/manch_0/clk 1bitaddie_4/manch_0/m1_25_n53# 0.05fF
+C117 B3 1bitaddie_3/ff_0/m1_22_n55# 0.05fF
+C118 1bitaddie_2/ff_2/m1_51_n34# gnd 0.08fF
+C119 ff_1/m1_18_n10# ff_1/m1_22_n55# 0.12fF
+C120 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C121 1bitaddie_4/Ai 1bitaddie_4/xorg_0/m1_102_n17# 0.20fF
+C122 1bitaddie_3/w_n41_n285# 1bitaddie_3/doubleinv_0/inverter_1/in 0.11fF
+C123 1bitaddie_2/w_n41_n285# 1bitaddie_2/doubleinv_0/inverter_1/out 0.03fF
+C124 1bitaddie_1/ff_1/m1_18_n10# vdd 0.12fF
+C125 1bitaddie_3/ff_0/m1_100_n33# gnd 0.08fF
+C126 1bitaddie_2/ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C127 1bitaddie_1/xorg_1/inverter_0/out 1bitaddie_1/xorg_1/A 0.25fF
+C128 1bitaddie_0/ff_0/m1_51_n34# 1bitaddie_0/ff_0/m1_22_n55# 0.08fF
+C129 1bitaddie_0/ff_0/inverter_0/w_n8_n5# 1bitaddie_0/ff_0/inverter_0/in 0.07fF
+C130 1bitaddie_4/Cin 1bitaddie_4/manch_0/clk 0.10fF
+C131 1bitaddie_1/Bi 1bitaddie_1/nandg_0/m1_24_n51# 0.05fF
+C132 1bitaddie_4/ff_2/pmos_2/w_n8_n5# vdd 0.08fF
+C133 A3 1bitaddie_4/clk 0.11fF
+C134 1bitaddie_4/Ai 1bitaddie_4/xorg_0/m1_26_n95# 0.05fF
+C135 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/pmos_3/w_n8_n5# 0.07fF
+C136 A2 gnd 0.05fF
+C137 1bitaddie_2/ff_0/pmos_0/w_n8_n5# 1bitaddie_2/ff_0/m1_18_n10# 0.03fF
+C138 1bitaddie_0/xorg_0/m1_102_n91# gnd 0.08fF
+C139 1bitaddie_3/sum 1bitaddie_3/ff_2/pmos_0/w_n8_n5# 0.07fF
+C140 1bitaddie_3/xorg_1/inverter_0/out 1bitaddie_3/xorg_1/A 0.25fF
+C141 1bitaddie_2/sum 1bitaddie_4/clk 0.02fF
+C142 1bitaddie_1/xorg_0/inverter_0/out 1bitaddie_1/Ai 0.25fF
+C143 1bitaddie_0/ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C144 1bitaddie_3/ff_1/pmos_1/w_n8_n5# 1bitaddie_3/ff_1/m1_22_n55# 0.03fF
+C145 1bitaddie_3/xorg_1/pmos_2/w_n8_n5# vdd 0.08fF
+C146 1bitaddie_3/inverter_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C147 1bitaddie_1/xorg_1/pmos_1/w_n8_n5# 1bitaddie_1/inverter_1/out 0.07fF
+C148 1bitaddie_1/Bi 1bitaddie_1/xorg_0/inverter_1/w_n8_n5# 0.07fF
+C149 1bitaddie_0/xorg_0/inverter_1/w_n8_n5# 1bitaddie_0/Bi 0.07fF
+C150 B2 1bitaddie_4/clk 0.12fF
+C151 A1 1bitaddie_1/ff_1/pmos_0/w_n8_n5# 0.07fF
+C152 1bitaddie_4/clk 1bitaddie_4/ff_2/m1_22_n55# 0.25fF
+C153 1bitaddie_0/sum 1bitaddie_0/inverter_1/out 0.20fF
+C154 1bitaddie_4/nandg_0/pmos_1/w_n8_n5# vdd 0.08fF
+C155 1bitaddie_1/Cin 1bitaddie_1/inverter_0/out 0.02fF
+C156 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_22_n55# 0.39fF
+C157 1bitaddie_4/Bi A4 0.03fF
+C158 ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C159 1bitaddie_4/xorg_0/inverter_0/out gnd 0.14fF
+C160 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/pmos_2/w_n8_n5# 0.03fF
+C161 1bitaddie_4/ff_2/m1_100_n33# 1bitaddie_4/ff_2/inverter_0/in 0.08fF
+C162 1bitaddie_4/Ai vdd 0.21fF
+C163 ff_0/pmos_1/w_n8_n5# ff_0/m1_18_n10# 0.08fF
+C164 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/xorg_1/pmos_3/w_n8_n5# 0.07fF
+C165 1bitaddie_2/xorg_0/pmos_1/w_n8_n5# 1bitaddie_2/xorg_1/A 0.03fF
+C166 1bitaddie_1/nandg_0/out 1bitaddie_1/Ai 0.13fF
+C167 1bitaddie_2/doubleinv_0/inverter_1/out gnd 0.08fF
+C168 1bitaddie_2/nandg_0/m1_24_n51# 1bitaddie_2/Ai 0.12fF
+C169 ff_0/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C170 inverter_0/in vdd 0.12fF
+C171 1bitaddie_4/nandg_0/pmos_0/w_n8_n5# 1bitaddie_4/nandg_0/out 0.03fF
+C172 1bitaddie_3/ff_2/m1_60_n19# vdd 0.12fF
+C173 1bitaddie_1/Cin 1bitaddie_1/manch_0/clk 0.10fF
+C174 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/pmos_3/w_n8_n5# 0.07fF
+C175 1bitaddie_2/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C176 1bitaddie_4/xorg_0/inverter_1/out vdd 0.12fF
+C177 1bitaddie_1/ff_0/m1_22_n55# 1bitaddie_1/ff_0/m1_51_n34# 0.08fF
+C178 1bitaddie_0/inverter_0/w_n8_n5# 1bitaddie_0/inverter_0/out 0.03fF
+C179 1bitaddie_4/ff_1/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C180 1bitaddie_4/xorg_1/inverter_0/out 1bitaddie_4/xorg_1/pmos_0/w_n8_n5# 0.07fF
+C181 vdd 1bitaddie_1/inverter_1/out 0.18fF
+C182 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/m1_100_n33# 0.08fF
+C183 1bitaddie_4/clk 1bitaddie_1/manch_0/clk 0.05fF
+C184 1bitaddie_1/inverter_0/w_n8_n5# 1bitaddie_1/inverter_0/out 0.03fF
+C185 1bitaddie_3/inverter_1/out vdd 0.18fF
+C186 1bitaddie_2/Ai 1bitaddie_2/ff_1/inverter_0/in 0.05fF
+C187 1bitaddie_0/ff_0/m1_100_n33# 1bitaddie_0/ff_0/inverter_0/in 0.08fF
+C188 inverter_0/in inverter_0/out 0.05fF
+C189 1bitaddie_4/xorg_1/inverter_1/out vdd 0.12fF
+C190 1bitaddie_4/ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C191 1bitaddie_4/xorg_0/m1_102_n17# 1bitaddie_4/xorg_1/A 0.12fF
+C192 1bitaddie_4/manch_0/clk 1bitaddie_4/manch_0/pmos_0/w_n8_n5# 0.07fF
+C193 gnd 1bitaddie_1/Bi 0.18fF
+C194 1bitaddie_0/ff_2/inverter_0/in 1bitaddie_0/ff_2/pmos_3/w_n8_n5# 0.03fF
+C195 1bitaddie_4/clk ff_0/pmos_2/w_n8_n5# 0.07fF
+C196 1bitaddie_4/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C197 1bitaddie_3/ff_1/m1_60_n19# gnd 0.05fF
+C198 1bitaddie_3/Bi gnd 0.18fF
+C199 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/m1_22_n55# 0.05fF
+C200 1bitaddie_2/ff_1/m1_18_n10# 1bitaddie_4/clk 0.09fF
+C201 1bitaddie_4/xorg_0/pmos_3/w_n8_n5# 1bitaddie_4/xorg_0/m1_102_n17# 0.08fF
+C202 1bitaddie_3/inverter_1/w_n8_n5# vdd 0.08fF
+C203 1bitaddie_1/Cin vdd 0.12fF
+C204 1bitaddie_4/xorg_0/m1_26_n95# 1bitaddie_4/xorg_1/A 0.08fF
+C205 1bitaddie_0/doubleinv_0/inverter_1/in vdd 0.12fF
+C206 1bitaddie_2/ff_2/m1_18_n10# 1bitaddie_2/ff_2/m1_22_n55# 0.12fF
+C207 s1 gnd 0.08fF
+C208 1bitaddie_2/ff_1/inverter_0/w_n8_n5# 1bitaddie_2/ff_1/inverter_0/in 0.07fF
+C209 1bitaddie_0/xorg_0/pmos_2/w_n8_n5# 1bitaddie_0/xorg_0/m1_102_n17# 0.03fF
+C210 1bitaddie_1/xorg_1/inverter_0/w_n8_n5# 1bitaddie_1/xorg_1/A 0.07fF
+C211 1bitaddie_0/ff_1/inverter_0/in vdd 0.12fF
+C212 1bitaddie_1/ff_2/m1_51_n34# gnd 0.08fF
+C213 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/xorg_0/m1_102_n91# 0.05fF
+C214 1bitaddie_4/ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C215 1bitaddie_4/clk vdd 0.57fF
+C216 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/pmos_2/w_n8_n5# 0.03fF
+C217 1bitaddie_1/ff_1/m1_100_n33# 1bitaddie_1/ff_1/inverter_0/in 0.08fF
+C218 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C219 vdd 1bitaddie_1/nandg_0/pmos_1/w_n8_n5# 0.08fF
+C220 1bitaddie_1/Cin inverter_0/out 0.14fF
+C221 1bitaddie_4/xorg_1/pmos_1/w_n8_n5# 1bitaddie_4/xorg_1/m1_25_n11# 0.08fF
+C222 1bitaddie_1/ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C223 1bitaddie_3/manch_0/clk 1bitaddie_4/Cin 0.19fF
+C224 1bitaddie_2/ff_0/m1_60_n19# gnd 0.05fF
+C225 1bitaddie_0/xorg_1/inverter_0/w_n8_n5# 1bitaddie_0/xorg_1/inverter_0/out 0.03fF
+C226 1bitaddie_0/nandg_0/out 1bitaddie_0/inverter_0/w_n8_n5# 0.07fF
+C227 1bitaddie_3/xorg_1/inverter_0/w_n8_n5# 1bitaddie_3/xorg_1/A 0.07fF
+C228 B2 1bitaddie_2/ff_0/m1_18_n10# 0.05fF
+C229 1bitaddie_3/ff_1/inverter_0/in 1bitaddie_3/ff_1/pmos_3/w_n8_n5# 0.03fF
+C230 1bitaddie_2/nandg_0/pmos_1/w_n8_n5# 1bitaddie_2/nandg_0/out 0.03fF
+C231 1bitaddie_0/xorg_1/pmos_0/w_n8_n5# 1bitaddie_0/xorg_1/m1_25_n11# 0.03fF
+C232 1bitaddie_4/ff_2/inverter_0/in gnd 0.05fF
+C233 1bitaddie_4/xorg_1/m1_26_n95# gnd 0.08fF
+C234 1bitaddie_3/ff_2/pmos_2/w_n8_n5# vdd 0.08fF
+C235 vdd 1bitaddie_1/inverter_0/w_n8_n5# 0.08fF
+C236 1bitaddie_4/xorg_1/A vdd 0.09fF
+C237 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/inverter_1/out 0.05fF
+C238 1bitaddie_4/sum 1bitaddie_4/xorg_1/m1_102_n91# 0.08fF
+C239 1bitaddie_4/xorg_1/A 1bitaddie_4/xorg_1/pmos_2/w_n8_n5# 0.07fF
+C240 A1 gnd 0.05fF
+C241 1bitaddie_2/nandg_0/out 1bitaddie_2/Ai 0.13fF
+C242 1bitaddie_3/nandg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C243 1bitaddie_0/ff_0/inverter_0/in gnd 0.05fF
+C244 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/inverter_0/in 0.05fF
+C245 1bitaddie_3/Cin 1bitaddie_2/xorg_1/A 0.05fF
+C246 B1 1bitaddie_4/clk 0.12fF
+C247 1bitaddie_3/ff_2/m1_22_n55# 1bitaddie_4/clk 0.25fF
+C248 1bitaddie_2/inverter_1/out 1bitaddie_2/Cin 0.05fF
+C249 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/clk 0.31fF
+C250 1bitaddie_4/ff_0/m1_18_n10# 1bitaddie_4/ff_0/m1_22_n55# 0.12fF
+C251 1bitaddie_0/nandg_0/m1_24_n51# 1bitaddie_0/Ai 0.12fF
+C252 1bitaddie_1/inverter_1/out 1bitaddie_1/sum 0.20fF
+C253 1bitaddie_2/ff_2/m1_22_n55# gnd 0.08fF
+C254 1bitaddie_2/ff_1/pmos_1/w_n8_n5# 1bitaddie_2/ff_1/m1_18_n10# 0.08fF
+C255 1bitaddie_0/sum 1bitaddie_0/xorg_1/inverter_1/out 0.22fF
+C256 1bitaddie_0/Bi 1bitaddie_0/ff_0/inverter_0/in 0.05fF
+C257 A3 1bitaddie_3/ff_1/m1_22_n55# 0.05fF
+C258 1bitaddie_3/xorg_0/inverter_0/out gnd 0.14fF
+C259 1bitaddie_0/nandg_0/out 1bitaddie_0/Ai 0.13fF
+C260 1bitaddie_3/Ai vdd 0.21fF
+C261 1bitaddie_4/inverter_1/out 1bitaddie_4/clk 0.06fF
+C262 1bitaddie_3/xorg_0/inverter_0/w_n8_n5# vdd 0.08fF
+C263 1bitaddie_4/clk ff_1/inverter_0/in 0.05fF
+C264 s4 1bitaddie_4/ff_2/inverter_0/in 0.05fF
+C265 1bitaddie_1/doubleinv_0/inverter_1/out gnd 0.08fF
+C266 vdd 1bitaddie_1/xorg_0/inverter_1/out 0.12fF
+C267 1bitaddie_2/inverter_0/out vdd 0.12fF
+C268 1bitaddie_1/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C269 1bitaddie_4/ff_0/m1_22_n55# gnd 0.08fF
+C270 1bitaddie_3/xorg_0/inverter_1/out vdd 0.12fF
+C271 1bitaddie_1/xorg_1/A 1bitaddie_1/inverter_0/out 0.06fF
+C272 1bitaddie_4/inverter_1/out 1bitaddie_4/xorg_1/A 0.06fF
+C273 1bitaddie_4/nandg_0/pmos_1/w_n8_n5# 1bitaddie_4/Ai 0.07fF
+C274 1bitaddie_3/ff_1/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C275 1bitaddie_0/inverter_0/out 1bitaddie_0/xorg_1/A 0.06fF
+C276 1bitaddie_4/sum 1bitaddie_4/xorg_1/m1_25_n11# 0.12fF
+C277 vdd 1bitaddie_1/xorg_1/inverter_1/out 0.12fF
+C278 1bitaddie_4/ff_1/pmos_0/w_n8_n5# 1bitaddie_4/ff_1/m1_18_n10# 0.03fF
+C279 1bitaddie_2/Bi 1bitaddie_2/xorg_0/pmos_1/w_n8_n5# 0.07fF
+C280 1bitaddie_2/ff_1/m1_100_n33# gnd 0.08fF
+C281 1bitaddie_2/xorg_1/inverter_0/out vdd 0.12fF
+C282 1bitaddie_3/xorg_1/inverter_1/out vdd 0.12fF
+C283 1bitaddie_0/ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C284 1bitaddie_3/ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C285 1bitaddie_0/manch_0/clk gnd 0.14fF
+C286 1bitaddie_4/ff_1/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C287 1bitaddie_3/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C288 1bitaddie_4/clk 1bitaddie_1/sum 0.02fF
+C289 vdd 1bitaddie_0/ff_2/pmos_3/w_n8_n5# 0.06fF
+C290 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/xorg_1/m1_102_n91# 0.05fF
+C291 1bitaddie_2/xorg_0/m1_26_n95# gnd 0.08fF
+C292 1bitaddie_0/inverter_2/w_n8_n5# 1bitaddie_0/manch_0/clk 0.03fF
+C293 1bitaddie_2/ff_0/m1_18_n10# vdd 0.12fF
+C294 1bitaddie_1/ff_1/m1_18_n10# 1bitaddie_4/clk 0.09fF
+C295 1bitaddie_3/sum 1bitaddie_3/xorg_1/pmos_3/w_n8_n5# 0.03fF
+C296 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/pmos_3/w_n8_n5# 0.07fF
+C297 1bitaddie_0/nandg_0/pmos_0/w_n8_n5# 1bitaddie_0/nandg_0/out 0.03fF
+C298 1bitaddie_1/ff_0/inverter_0/in 1bitaddie_1/Bi 0.05fF
+C299 1bitaddie_4/Bi 1bitaddie_4/xorg_0/m1_102_n17# 0.05fF
+C300 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/m1_100_n33# 0.08fF
+C301 1bitaddie_0/manch_0/m1_25_n53# inverter_0/out 0.07fF
+C302 1bitaddie_4/clk 1bitaddie_4/ff_2/pmos_2/w_n8_n5# 0.28fF
+C303 1bitaddie_4/Ai 1bitaddie_4/ff_1/inverter_0/w_n8_n5# 0.03fF
+C304 1bitaddie_3/manch_0/clk 1bitaddie_3/manch_0/m1_25_n53# 0.05fF
+C305 1bitaddie_3/inverter_0/out 1bitaddie_4/Cin 0.18fF
+C306 1bitaddie_1/xorg_0/m1_102_n91# 1bitaddie_1/xorg_0/inverter_0/out 0.05fF
+C307 1bitaddie_4/ff_1/m1_51_n34# 1bitaddie_4/ff_1/m1_22_n55# 0.08fF
+C308 1bitaddie_3/ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C309 1bitaddie_3/Ai 1bitaddie_3/xorg_0/m1_102_n17# 0.20fF
+C310 1bitaddie_4/clk 1bitaddie_0/ff_0/pmos_2/w_n8_n5# 0.07fF
+C311 1bitaddie_4/Bi 1bitaddie_4/xorg_0/m1_26_n95# 0.05fF
+C312 1bitaddie_1/w_n41_n285# 1bitaddie_1/doubleinv_0/inverter_1/out 0.03fF
+C313 gnd 1bitaddie_1/xorg_1/m1_26_n95# 0.08fF
+C314 1bitaddie_3/Cin 1bitaddie_4/Cin 0.14fF
+C315 vdd 1bitaddie_1/xorg_1/A 0.09fF
+C316 1bitaddie_0/doubleinv_0/inverter_1/in 1bitaddie_0/doubleinv_0/inverter_0/in 0.05fF
+C317 1bitaddie_1/ff_0/m1_60_n19# gnd 0.05fF
+C318 1bitaddie_3/ff_2/inverter_0/in gnd 0.05fF
+C319 1bitaddie_3/xorg_1/m1_26_n95# gnd 0.08fF
+C320 1bitaddie_3/xorg_1/A vdd 0.09fF
+C321 1bitaddie_3/nandg_0/m1_24_n51# 1bitaddie_3/Ai 0.12fF
+C322 C0 ff_0/m1_18_n10# 0.05fF
+C323 1bitaddie_3/Ai 1bitaddie_3/xorg_0/m1_26_n95# 0.05fF
+C324 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/pmos_3/w_n8_n5# 0.07fF
+C325 1bitaddie_1/ff_0/pmos_0/w_n8_n5# 1bitaddie_1/ff_0/m1_18_n10# 0.03fF
+C326 1bitaddie_1/Cin 1bitaddie_1/inverter_1/out 0.05fF
+C327 1bitaddie_0/xorg_1/m1_25_n11# vdd 0.12fF
+C328 1bitaddie_3/inverter_1/w_n8_n5# 1bitaddie_3/inverter_1/out 0.03fF
+C329 1bitaddie_4/ff_1/m1_60_n19# vdd 0.12fF
+C330 1bitaddie_4/Bi vdd 0.24fF
+C331 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_4/clk 0.31fF
+C332 1bitaddie_1/ff_2/m1_22_n55# gnd 0.08fF
+C333 1bitaddie_4/ff_2/inverter_0/w_n8_n5# 1bitaddie_4/ff_2/inverter_0/in 0.07fF
+C334 1bitaddie_2/nandg_0/m1_24_n51# 1bitaddie_2/Bi 0.05fF
+C335 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/sum 0.22fF
+C336 1bitaddie_2/ff_2/m1_60_n19# gnd 0.05fF
+C337 1bitaddie_2/xorg_0/pmos_1/w_n8_n5# 1bitaddie_2/xorg_0/m1_25_n11# 0.08fF
+C338 1bitaddie_4/clk 1bitaddie_1/inverter_1/out 0.06fF
+C339 s2 vdd 0.12fF
+C340 1bitaddie_3/Bi A3 0.03fF
+C341 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/pmos_2/w_n8_n5# 0.03fF
+C342 1bitaddie_3/ff_2/m1_100_n33# 1bitaddie_3/ff_2/inverter_0/in 0.08fF
+C343 1bitaddie_2/xorg_0/inverter_1/w_n8_n5# 1bitaddie_2/xorg_0/inverter_1/out 0.03fF
+C344 1bitaddie_3/inverter_1/out 1bitaddie_4/clk 0.06fF
+C345 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_51_n34# 0.12fF
+C346 1bitaddie_4/sum 1bitaddie_4/ff_2/m1_18_n10# 0.05fF
+C347 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/xorg_1/A 0.22fF
+C348 1bitaddie_0/manch_0/pmos_0/w_n8_n5# vdd 0.08fF
+C349 1bitaddie_2/inverter_1/w_n8_n5# 1bitaddie_2/inverter_1/out 0.03fF
+C350 ff_1/pmos_1/w_n8_n5# ff_1/m1_22_n55# 0.03fF
+C351 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/xorg_0/m1_102_n91# 0.05fF
+C352 1bitaddie_2/inverter_1/out gnd 0.14fF
+C353 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/xorg_0/pmos_0/w_n8_n5# 0.07fF
+C354 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/inverter_0/in 0.05fF
+C355 A2 1bitaddie_2/ff_1/m1_18_n10# 0.05fF
+C356 1bitaddie_3/ff_0/m1_22_n55# gnd 0.08fF
+C357 1bitaddie_2/xorg_1/inverter_0/w_n8_n5# vdd 0.08fF
+C358 1bitaddie_1/xorg_0/m1_102_n17# 1bitaddie_1/xorg_1/A 0.12fF
+C359 1bitaddie_0/ff_1/m1_18_n10# 1bitaddie_0/ff_1/m1_22_n55# 0.12fF
+C360 1bitaddie_3/xorg_1/inverter_0/out 1bitaddie_3/xorg_1/pmos_0/w_n8_n5# 0.07fF
+C361 1bitaddie_0/ff_2/inverter_0/w_n8_n5# s0 0.03fF
+C362 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/m1_100_n33# 0.08fF
+C363 1bitaddie_0/Ai 1bitaddie_0/xorg_0/pmos_2/w_n8_n5# 0.07fF
+C364 1bitaddie_0/inverter_0/out gnd 0.08fF
+C365 1bitaddie_0/xorg_0/inverter_1/w_n8_n5# vdd 0.08fF
+C366 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/xorg_0/pmos_3/w_n8_n5# 0.07fF
+C367 1bitaddie_4/xorg_0/pmos_0/w_n8_n5# 1bitaddie_4/xorg_0/m1_25_n11# 0.03fF
+C368 1bitaddie_1/ff_1/m1_100_n33# gnd 0.08fF
+C369 1bitaddie_4/clk 1bitaddie_1/Cin 0.37fF
+C370 1bitaddie_2/xorg_1/A 1bitaddie_2/xorg_1/m1_25_n11# 0.14fF
+C371 1bitaddie_3/xorg_0/m1_102_n17# 1bitaddie_3/xorg_1/A 0.12fF
+C372 1bitaddie_3/manch_0/clk 1bitaddie_3/manch_0/pmos_0/w_n8_n5# 0.07fF
+C373 1bitaddie_1/xorg_0/pmos_3/w_n8_n5# 1bitaddie_1/xorg_0/m1_102_n17# 0.08fF
+C374 1bitaddie_3/ff_1/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C375 1bitaddie_1/xorg_0/m1_26_n95# 1bitaddie_1/xorg_1/A 0.08fF
+C376 1bitaddie_4/clk 1bitaddie_0/ff_1/inverter_0/in 0.05fF
+C377 1bitaddie_2/xorg_1/A 1bitaddie_2/Cin 0.14fF
+C378 1bitaddie_4/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/ff_2/m1_18_n10# 0.08fF
+C379 1bitaddie_2/ff_1/m1_51_n34# gnd 0.08fF
+C380 1bitaddie_3/inverter_0/out 1bitaddie_3/manch_0/m1_25_n53# 0.05fF
+C381 1bitaddie_1/ff_0/m1_18_n10# vdd 0.12fF
+C382 1bitaddie_0/sum gnd 0.35fF
+C383 1bitaddie_3/xorg_0/pmos_3/w_n8_n5# 1bitaddie_3/xorg_0/m1_102_n17# 0.08fF
+C384 1bitaddie_3/xorg_0/m1_26_n95# 1bitaddie_3/xorg_1/A 0.08fF
+C385 1bitaddie_0/ff_2/pmos_0/w_n8_n5# 1bitaddie_0/ff_2/m1_18_n10# 0.03fF
+C386 B0 gnd 0.05fF
+C387 1bitaddie_1/ff_2/m1_18_n10# 1bitaddie_1/ff_2/m1_22_n55# 0.12fF
+C388 ff_1/pmos_3/w_n8_n5# vdd 0.06fF
+C389 1bitaddie_4/ff_1/pmos_2/w_n8_n5# vdd 0.08fF
+C390 1bitaddie_3/ff_2/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.28fF
+C391 1bitaddie_1/ff_1/inverter_0/w_n8_n5# 1bitaddie_1/ff_1/inverter_0/in 0.07fF
+C392 ff_0/m1_60_n19# gnd 0.05fF
+C393 1bitaddie_4/xorg_1/A 1bitaddie_4/clk 0.06fF
+C394 1bitaddie_4/xorg_0/inverter_0/out vdd 0.12fF
+C395 1bitaddie_3/Cin 1bitaddie_3/manch_0/m1_25_n53# 0.07fF
+C396 1bitaddie_2/xorg_0/inverter_0/w_n8_n5# 1bitaddie_2/Ai 0.07fF
+C397 1bitaddie_2/doubleinv_0/inverter_1/out vdd 0.12fF
+C398 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/inverter_1/out 0.05fF
+C399 1bitaddie_0/ff_0/pmos_1/w_n8_n5# 1bitaddie_0/ff_0/m1_18_n10# 0.08fF
+C400 1bitaddie_0/nandg_0/m1_24_n51# gnd 0.08fF
+C401 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/m1_51_n34# 0.08fF
+C402 1bitaddie_3/xorg_1/pmos_1/w_n8_n5# 1bitaddie_3/xorg_1/m1_25_n11# 0.08fF
+C403 1bitaddie_4/xorg_0/m1_25_n11# vdd 0.12fF
+C404 1bitaddie_2/nandg_0/out 1bitaddie_2/Bi 0.11fF
+C405 ff_0/inverter_0/in ff_0/inverter_0/w_n8_n5# 0.07fF
+C406 1bitaddie_4/ff_1/m1_22_n55# 1bitaddie_4/clk 0.40fF
+C407 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/m1_22_n55# 0.05fF
+C408 B1 1bitaddie_1/ff_0/m1_18_n10# 0.05fF
+C409 1bitaddie_2/sum 1bitaddie_2/ff_2/m1_22_n55# 0.05fF
+C410 1bitaddie_2/xorg_0/m1_102_n91# 1bitaddie_2/xorg_1/A 0.08fF
+C411 1bitaddie_0/nandg_0/out gnd 0.05fF
+C412 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/inverter_1/out 0.05fF
+C413 1bitaddie_3/sum 1bitaddie_3/xorg_1/m1_102_n91# 0.08fF
+C414 vdd 1bitaddie_0/ff_2/m1_18_n10# 0.12fF
+C415 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/m1_100_n33# 0.08fF
+C416 1bitaddie_0/w_n41_n285# vdd 0.16fF
+C417 1bitaddie_3/xorg_1/A 1bitaddie_3/xorg_1/pmos_2/w_n8_n5# 0.07fF
+C418 1bitaddie_2/ff_2/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C419 1bitaddie_1/ff_1/inverter_0/in 1bitaddie_1/Ai 0.05fF
+C420 1bitaddie_0/nandg_0/m1_24_n51# 1bitaddie_0/Bi 0.05fF
+C421 1bitaddie_4/xorg_0/pmos_3/w_n8_n5# 1bitaddie_4/xorg_1/A 0.03fF
+C422 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/inverter_0/in 0.05fF
+C423 ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C424 1bitaddie_4/inverter_2/w_n8_n5# 1bitaddie_4/manch_0/clk 0.03fF
+C425 vdd 1bitaddie_1/Bi 0.24fF
+C426 1bitaddie_4/inverter_0/out inverter_2/in 0.18fF
+C427 1bitaddie_0/ff_2/m1_51_n34# 1bitaddie_0/ff_2/m1_22_n55# 0.08fF
+C428 1bitaddie_2/xorg_1/pmos_3/w_n8_n5# 1bitaddie_2/xorg_1/m1_102_n17# 0.08fF
+C429 1bitaddie_0/nandg_0/out 1bitaddie_0/Bi 0.11fF
+C430 1bitaddie_2/ff_2/inverter_0/w_n8_n5# vdd 0.08fF
+C431 1bitaddie_2/Ai gnd 0.27fF
+C432 1bitaddie_3/ff_1/m1_60_n19# vdd 0.12fF
+C433 1bitaddie_3/ff_0/m1_18_n10# 1bitaddie_3/ff_0/m1_22_n55# 0.12fF
+C434 1bitaddie_3/Bi vdd 0.24fF
+C435 1bitaddie_4/doubleinv_0/inverter_0/in gnd 0.05fF
+C436 1bitaddie_2/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C437 1bitaddie_1/ff_1/pmos_1/w_n8_n5# 1bitaddie_1/ff_1/m1_18_n10# 0.08fF
+C438 1bitaddie_4/ff_0/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C439 1bitaddie_1/ff_2/m1_60_n19# gnd 0.05fF
+C440 ff_1/inverter_0/in ff_1/pmos_3/w_n8_n5# 0.03fF
+C441 1bitaddie_0/manch_0/m1_25_n53# 1bitaddie_1/Cin 0.08fF
+C442 1bitaddie_2/ff_2/pmos_1/w_n8_n5# 1bitaddie_2/ff_2/m1_22_n55# 0.03fF
+C443 1bitaddie_2/xorg_0/inverter_1/out gnd 0.08fF
+C444 s1 vdd 0.12fF
+C445 1bitaddie_1/inverter_1/out 1bitaddie_1/xorg_1/A 0.06fF
+C446 s3 1bitaddie_3/ff_2/inverter_0/in 0.05fF
+C447 1bitaddie_4/xorg_1/m1_102_n17# vdd 0.12fF
+C448 1bitaddie_4/xorg_1/pmos_0/w_n8_n5# vdd 0.08fF
+C449 1bitaddie_4/xorg_1/pmos_2/w_n8_n5# 1bitaddie_4/xorg_1/m1_102_n17# 0.03fF
+C450 1bitaddie_2/xorg_1/inverter_1/out gnd 0.08fF
+C451 1bitaddie_4/Ai 1bitaddie_4/Bi 0.06fF
+C452 ff_0/m1_60_n19# ff_0/m1_22_n55# 0.05fF
+C453 1bitaddie_3/inverter_1/out 1bitaddie_3/xorg_1/A 0.06fF
+C454 1bitaddie_1/xorg_0/pmos_2/w_n8_n5# 1bitaddie_1/Ai 0.07fF
+C455 1bitaddie_3/sum 1bitaddie_3/xorg_1/m1_25_n11# 0.12fF
+C456 1bitaddie_2/ff_0/m1_60_n19# vdd 0.12fF
+C457 1bitaddie_4/ff_0/m1_51_n34# gnd 0.08fF
+C458 1bitaddie_3/ff_1/pmos_0/w_n8_n5# 1bitaddie_3/ff_1/m1_18_n10# 0.03fF
+C459 1bitaddie_4/ff_2/inverter_0/in vdd 0.12fF
+C460 1bitaddie_4/Bi 1bitaddie_4/xorg_0/inverter_1/out 0.05fF
+C461 inverter_2/out ff_1/m1_22_n55# 0.05fF
+C462 1bitaddie_3/xorg_0/inverter_0/w_n8_n5# 1bitaddie_3/Ai 0.07fF
+C463 1bitaddie_2/inverter_1/out 1bitaddie_2/xorg_1/pmos_1/w_n8_n5# 0.07fF
+C464 1bitaddie_1/Bi 1bitaddie_1/xorg_0/m1_102_n17# 0.05fF
+C465 1bitaddie_1/Cin 1bitaddie_1/xorg_1/A 0.14fF
+C466 1bitaddie_1/Bi 1bitaddie_1/nandg_0/pmos_0/w_n8_n5# 0.07fF
+C467 1bitaddie_4/nandg_0/m1_24_n51# gnd 0.08fF
+C468 1bitaddie_0/ff_0/inverter_0/in vdd 0.12fF
+C469 1bitaddie_1/ff_1/m1_51_n34# gnd 0.08fF
+C470 inverter_2/in gnd 0.24fF
+C471 1bitaddie_4/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/ff_0/m1_22_n55# 0.03fF
+C472 B4 1bitaddie_4/ff_0/pmos_0/w_n8_n5# 0.07fF
+C473 1bitaddie_4/doubleinv_0/inverter_1/in gnd 0.14fF
+C474 1bitaddie_4/clk 1bitaddie_1/xorg_1/A 0.06fF
+C475 1bitaddie_4/inverter_0/out 1bitaddie_4/nandg_0/out 0.05fF
+C476 1bitaddie_3/Bi 1bitaddie_3/xorg_0/m1_102_n17# 0.05fF
+C477 1bitaddie_1/Bi 1bitaddie_1/xorg_0/m1_26_n95# 0.05fF
+C478 1bitaddie_4/ff_1/inverter_0/in gnd 0.05fF
+C479 1bitaddie_3/ff_1/pmos_2/w_n8_n5# vdd 0.08fF
+C480 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/m1_100_n33# 0.08fF
+C481 1bitaddie_4/xorg_1/inverter_1/w_n8_n5# vdd 0.08fF
+C482 1bitaddie_0/nandg_0/pmos_1/w_n8_n5# 1bitaddie_0/Ai 0.07fF
+C483 ff_0/inverter_0/in gnd 0.05fF
+C484 1bitaddie_3/xorg_1/A 1bitaddie_4/clk 0.06fF
+C485 1bitaddie_3/Ai 1bitaddie_3/ff_1/inverter_0/w_n8_n5# 0.03fF
+C486 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/inverter_0/in 0.05fF
+C487 1bitaddie_3/xorg_0/inverter_0/out vdd 0.12fF
+C488 vdd 1bitaddie_1/xorg_0/m1_25_n11# 0.12fF
+C489 1bitaddie_2/xorg_1/A gnd 0.48fF
+C490 1bitaddie_1/doubleinv_0/inverter_1/out vdd 0.12fF
+C491 1bitaddie_3/ff_1/m1_51_n34# 1bitaddie_3/ff_1/m1_22_n55# 0.08fF
+C492 1bitaddie_2/ff_0/m1_51_n34# 1bitaddie_2/ff_0/m1_22_n55# 0.08fF
+C493 1bitaddie_2/ff_0/inverter_0/w_n8_n5# 1bitaddie_2/ff_0/inverter_0/in 0.07fF
+C494 1bitaddie_3/Bi 1bitaddie_3/xorg_0/m1_26_n95# 0.05fF
+C495 1bitaddie_3/nandg_0/m1_24_n51# 1bitaddie_3/Bi 0.05fF
+C496 1bitaddie_3/xorg_0/m1_25_n11# vdd 0.12fF
+C497 1bitaddie_3/ff_1/m1_22_n55# 1bitaddie_4/clk 0.40fF
+C498 1bitaddie_4/inverter_1/out 1bitaddie_4/xorg_1/m1_26_n95# 0.05fF
+C499 1bitaddie_4/Bi 1bitaddie_4/clk 0.06fF
+C500 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C501 1bitaddie_4/Bi 1bitaddie_4/ff_0/inverter_0/w_n8_n5# 0.03fF
+C502 1bitaddie_4/sum 1bitaddie_4/xorg_1/pmos_1/w_n8_n5# 0.03fF
+C503 1bitaddie_4/inverter_0/out 1bitaddie_4/manch_0/m1_25_n53# 0.05fF
+C504 1bitaddie_2/ff_1/m1_22_n55# gnd 0.08fF
+C505 1bitaddie_1/Cin 1bitaddie_0/manch_0/pmos_0/w_n8_n5# 0.03fF
+C506 1bitaddie_2/xorg_0/m1_102_n17# vdd 0.12fF
+C507 1bitaddie_0/sum 1bitaddie_0/xorg_1/m1_102_n17# 0.12fF
+C508 1bitaddie_2/xorg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C509 1bitaddie_2/xorg_0/inverter_1/w_n8_n5# 1bitaddie_2/Bi 0.07fF
+C510 1bitaddie_1/ff_2/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C511 vdd 1bitaddie_0/ff_1/pmos_3/w_n8_n5# 0.06fF
+C512 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/Ai 0.25fF
+C513 1bitaddie_1/nandg_0/m1_24_n51# 1bitaddie_1/Ai 0.12fF
+C514 1bitaddie_0/manch_0/clk vdd 0.12fF
+C515 1bitaddie_4/Cin 1bitaddie_4/inverter_0/out 0.02fF
+C516 1bitaddie_4/Bi 1bitaddie_4/xorg_1/A 0.20fF
+C517 1bitaddie_2/sum 1bitaddie_2/inverter_1/out 0.20fF
+C518 1bitaddie_4/Ai 1bitaddie_4/xorg_0/m1_25_n11# 0.14fF
+C519 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/m1_51_n34# 0.08fF
+C520 1bitaddie_2/ff_2/inverter_0/in 1bitaddie_2/ff_2/pmos_3/w_n8_n5# 0.03fF
+C521 1bitaddie_1/ff_2/inverter_0/w_n8_n5# vdd 0.08fF
+C522 1bitaddie_2/ff_2/m1_51_n34# 1bitaddie_4/clk 0.11fF
+C523 1bitaddie_0/sum 1bitaddie_0/xorg_1/m1_26_n95# 0.08fF
+C524 1bitaddie_3/doubleinv_0/inverter_0/in gnd 0.05fF
+C525 1bitaddie_1/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C526 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_1/A 0.22fF
+C527 1bitaddie_0/w_n41_n285# 1bitaddie_0/doubleinv_0/inverter_0/in 0.07fF
+C528 1bitaddie_3/ff_2/inverter_0/w_n8_n5# 1bitaddie_3/ff_2/inverter_0/in 0.07fF
+C529 1bitaddie_4/xorg_1/inverter_1/w_n8_n5# 1bitaddie_4/inverter_1/out 0.07fF
+C530 1bitaddie_4/ff_2/pmos_0/w_n8_n5# vdd 0.08fF
+C531 1bitaddie_4/xorg_1/m1_102_n91# 1bitaddie_4/xorg_1/inverter_0/out 0.05fF
+C532 1bitaddie_3/ff_0/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C533 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/m1_22_n55# 0.05fF
+C534 1bitaddie_0/manch_0/clk inverter_0/out 0.10fF
+C535 1bitaddie_2/ff_0/m1_100_n33# gnd 0.08fF
+C536 1bitaddie_4/nandg_0/out gnd 0.05fF
+C537 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/pmos_3/w_n8_n5# 0.07fF
+C538 1bitaddie_3/sum 1bitaddie_3/ff_2/m1_18_n10# 0.05fF
+C539 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/xorg_1/A 0.22fF
+C540 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_0/pmos_3/w_n8_n5# 0.07fF
+C541 1bitaddie_1/xorg_0/pmos_0/w_n8_n5# 1bitaddie_1/xorg_0/m1_25_n11# 0.03fF
+C542 1bitaddie_3/xorg_1/m1_102_n17# vdd 0.12fF
+C543 A2 1bitaddie_4/clk 0.11fF
+C544 1bitaddie_0/ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C545 1bitaddie_3/xorg_1/pmos_0/w_n8_n5# vdd 0.08fF
+C546 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/xorg_0/pmos_0/w_n8_n5# 0.07fF
+C547 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/inverter_0/in 0.05fF
+C548 A1 1bitaddie_1/ff_1/m1_18_n10# 0.05fF
+C549 inverter_1/w_n8_n5# inverter_1/in 0.07fF
+C550 gnd 1bitaddie_1/ff_0/m1_51_n34# 0.08fF
+C551 1bitaddie_2/ff_0/m1_100_n33# 1bitaddie_2/ff_0/inverter_0/in 0.08fF
+C552 1bitaddie_1/ff_0/m1_60_n19# vdd 0.12fF
+C553 1bitaddie_3/ff_2/inverter_0/in vdd 0.12fF
+C554 1bitaddie_3/ff_0/m1_51_n34# gnd 0.08fF
+C555 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/xorg_0/pmos_3/w_n8_n5# 0.07fF
+C556 1bitaddie_3/xorg_0/pmos_0/w_n8_n5# 1bitaddie_3/xorg_0/m1_25_n11# 0.03fF
+C557 1bitaddie_2/xorg_1/pmos_2/w_n8_n5# vdd 0.08fF
+C558 ff_1/m1_18_n10# vdd 0.12fF
+C559 1bitaddie_4/ff_1/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C560 1bitaddie_4/ff_0/inverter_0/in 1bitaddie_4/ff_0/pmos_3/w_n8_n5# 0.03fF
+C561 1bitaddie_4/manch_0/m1_25_n53# gnd 0.08fF
+C562 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/pmos_2/w_n8_n5# 0.03fF
+C563 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/clk 1.49fF
+C564 inverter_1/out 1bitaddie_4/doubleinv_0/inverter_1/in 0.05fF
+C565 1bitaddie_4/xorg_1/m1_102_n91# gnd 0.08fF
+C566 1bitaddie_3/ff_2/pmos_1/w_n8_n5# 1bitaddie_3/ff_2/m1_18_n10# 0.08fF
+C567 B0 1bitaddie_0/ff_0/m1_22_n55# 0.05fF
+C568 1bitaddie_4/Cin gnd 0.10fF
+C569 gnd 1bitaddie_1/Ai 0.27fF
+C570 1bitaddie_4/xorg_1/inverter_0/out 1bitaddie_4/xorg_1/m1_25_n11# 0.05fF
+C571 1bitaddie_3/doubleinv_0/inverter_1/in gnd 0.14fF
+C572 1bitaddie_2/xorg_0/pmos_2/w_n8_n5# 1bitaddie_2/xorg_0/m1_102_n17# 0.03fF
+C573 vdd 1bitaddie_1/xorg_1/inverter_1/w_n8_n5# 0.08fF
+C574 1bitaddie_0/w_n41_n285# 1bitaddie_0/doubleinv_0/inverter_1/in 0.11fF
+C575 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/xorg_1/A 0.06fF
+C576 1bitaddie_3/ff_1/inverter_0/in gnd 0.05fF
+C577 1bitaddie_2/ff_2/m1_60_n19# vdd 0.12fF
+C578 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/xorg_0/m1_102_n91# 0.05fF
+C579 1bitaddie_3/xorg_1/inverter_1/w_n8_n5# vdd 0.08fF
+C580 ff_0/m1_100_n33# ff_0/m1_60_n19# 0.08fF
+C581 1bitaddie_3/inverter_0/w_n8_n5# vdd 0.08fF
+C582 1bitaddie_4/xorg_0/m1_25_n11# 1bitaddie_4/xorg_1/A 0.12fF
+C583 1bitaddie_2/xorg_1/inverter_0/w_n8_n5# 1bitaddie_2/xorg_1/inverter_0/out 0.03fF
+C584 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/m1_51_n34# 0.08fF
+C585 1bitaddie_2/inverter_1/out vdd 0.18fF
+C586 1bitaddie_4/clk 1bitaddie_1/Bi 0.06fF
+C587 1bitaddie_2/xorg_1/pmos_0/w_n8_n5# 1bitaddie_2/xorg_1/m1_25_n11# 0.03fF
+C588 1bitaddie_0/xorg_1/inverter_0/out 1bitaddie_0/xorg_1/A 0.25fF
+C589 1bitaddie_1/xorg_0/pmos_3/w_n8_n5# 1bitaddie_1/xorg_1/A 0.03fF
+C590 1bitaddie_0/sum 1bitaddie_0/ff_2/pmos_0/w_n8_n5# 0.07fF
+C591 1bitaddie_0/ff_1/pmos_1/w_n8_n5# 1bitaddie_0/ff_1/m1_22_n55# 0.03fF
+C592 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/m1_22_n55# 0.05fF
+C593 1bitaddie_3/Bi 1bitaddie_4/clk 0.06fF
+C594 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C595 1bitaddie_0/inverter_0/out vdd 0.12fF
+C596 1bitaddie_1/ff_1/m1_22_n55# gnd 0.08fF
+C597 1bitaddie_4/ff_0/m1_51_n34# 1bitaddie_4/ff_0/m1_60_n19# 0.08fF
+C598 1bitaddie_2/ff_1/m1_60_n19# gnd 0.05fF
+C599 1bitaddie_2/Bi gnd 0.18fF
+C600 ff_0/m1_60_n19# ff_0/pmos_2/w_n8_n5# 0.03fF
+C601 1bitaddie_3/xorg_0/pmos_3/w_n8_n5# 1bitaddie_3/xorg_1/A 0.03fF
+C602 1bitaddie_1/xorg_1/pmos_3/w_n8_n5# 1bitaddie_1/xorg_1/m1_102_n17# 0.08fF
+C603 inverter_2/w_n8_n5# vdd 0.08fF
+C604 A4 1bitaddie_4/ff_1/pmos_0/w_n8_n5# 0.07fF
+C605 1bitaddie_2/sum 1bitaddie_2/xorg_1/inverter_1/out 0.22fF
+C606 1bitaddie_0/inverter_0/out inverter_0/out 0.02fF
+C607 1bitaddie_2/Bi 1bitaddie_2/ff_0/inverter_0/in 0.05fF
+C608 1bitaddie_1/ff_2/m1_51_n34# 1bitaddie_4/clk 0.11fF
+C609 1bitaddie_3/nandg_0/pmos_0/w_n8_n5# 1bitaddie_3/Bi 0.07fF
+C610 1bitaddie_1/xorg_1/m1_26_n95# 1bitaddie_1/sum 0.08fF
+C611 1bitaddie_3/inverter_0/out 1bitaddie_3/manch_0/clk 0.03fF
+C612 1bitaddie_3/ff_2/pmos_0/w_n8_n5# vdd 0.08fF
+C613 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C614 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/xorg_1/inverter_1/w_n8_n5# 0.03fF
+C615 1bitaddie_1/ff_2/pmos_1/w_n8_n5# 1bitaddie_1/ff_2/m1_22_n55# 0.03fF
+C616 1bitaddie_4/ff_2/inverter_0/in 1bitaddie_4/clk 0.05fF
+C617 1bitaddie_4/xorg_1/A 1bitaddie_4/xorg_1/m1_102_n17# 0.20fF
+C618 1bitaddie_3/Cin 1bitaddie_3/manch_0/clk 0.10fF
+C619 1bitaddie_1/ff_0/m1_100_n33# gnd 0.08fF
+C620 ff_0/m1_60_n19# vdd 0.12fF
+C621 1bitaddie_3/nandg_0/out 1bitaddie_3/nandg_0/pmos_1/w_n8_n5# 0.03fF
+C622 1bitaddie_2/xorg_0/inverter_0/w_n8_n5# 1bitaddie_2/xorg_0/inverter_0/out 0.03fF
+C623 1bitaddie_2/ff_2/pmos_2/w_n8_n5# vdd 0.08fF
+C624 A1 1bitaddie_4/clk 0.11fF
+C625 1bitaddie_3/xorg_1/pmos_2/w_n8_n5# 1bitaddie_3/xorg_1/m1_102_n17# 0.03fF
+C626 1bitaddie_1/Bi 1bitaddie_1/xorg_0/inverter_1/out 0.05fF
+C627 ff_0/m1_51_n34# gnd 0.08fF
+C628 1bitaddie_4/clk 1bitaddie_0/ff_0/inverter_0/in 0.12fF
+C629 1bitaddie_3/Ai 1bitaddie_3/Bi 0.06fF
+C630 ff_0/m1_18_n10# ff_0/m1_22_n55# 0.12fF
+C631 1bitaddie_4/xorg_1/m1_26_n95# 1bitaddie_4/xorg_1/A 0.05fF
+C632 1bitaddie_1/ff_2/m1_22_n55# 1bitaddie_1/sum 0.05fF
+C633 1bitaddie_1/xorg_1/pmos_2/w_n8_n5# vdd 0.08fF
+C634 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/m1_22_n55# 0.05fF
+C635 1bitaddie_0/nandg_0/out vdd 0.25fF
+C636 1bitaddie_3/Bi 1bitaddie_3/xorg_0/inverter_1/out 0.05fF
+C637 1bitaddie_4/xorg_0/m1_102_n91# gnd 0.08fF
+C638 1bitaddie_2/ff_2/m1_22_n55# 1bitaddie_4/clk 0.25fF
+C639 1bitaddie_3/manch_0/m1_25_n53# gnd 0.08fF
+C640 ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C641 1bitaddie_4/ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C642 1bitaddie_3/ff_1/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C643 gnd 1bitaddie_1/xorg_1/m1_102_n91# 0.08fF
+C644 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_4/clk 1.49fF
+C645 1bitaddie_2/nandg_0/pmos_1/w_n8_n5# vdd 0.08fF
+C646 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/pmos_3/w_n8_n5# 0.07fF
+C647 1bitaddie_3/xorg_1/m1_102_n91# gnd 0.08fF
+C648 gnd 1bitaddie_0/ff_2/m1_100_n33# 0.08fF
+C649 1bitaddie_3/ff_0/pmos_1/w_n8_n5# 1bitaddie_3/ff_0/m1_22_n55# 0.03fF
+C650 1bitaddie_2/xorg_0/inverter_0/out gnd 0.14fF
+C651 inverter_2/out gnd 0.14fF
+C652 1bitaddie_2/Ai vdd 0.21fF
+C653 B3 1bitaddie_3/ff_0/pmos_0/w_n8_n5# 0.07fF
+C654 1bitaddie_4/ff_0/m1_22_n55# 1bitaddie_4/clk 0.39fF
+C655 ff_1/pmos_0/w_n8_n5# ff_1/m1_18_n10# 0.03fF
+C656 1bitaddie_1/ff_2/m1_60_n19# vdd 0.12fF
+C657 1bitaddie_0/manch_0/clk 1bitaddie_1/Cin 0.19fF
+C658 1bitaddie_2/xorg_0/inverter_1/out vdd 0.12fF
+C659 1bitaddie_0/xorg_1/inverter_0/w_n8_n5# 1bitaddie_0/xorg_1/A 0.07fF
+C660 ff_0/inverter_0/in ff_0/m1_100_n33# 0.08fF
+C661 1bitaddie_4/inverter_0/w_n8_n5# 1bitaddie_4/inverter_0/out 0.03fF
+C662 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/inverter_0/in 0.05fF
+C663 1bitaddie_1/inverter_1/out 1bitaddie_1/xorg_1/m1_26_n95# 0.05fF
+C664 1bitaddie_0/ff_1/inverter_0/in 1bitaddie_0/ff_1/pmos_3/w_n8_n5# 0.03fF
+C665 vdd 1bitaddie_0/ff_1/m1_18_n10# 0.12fF
+C666 1bitaddie_2/ff_1/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C667 1bitaddie_2/doubleinv_0/inverter_1/in 1bitaddie_2/doubleinv_0/inverter_0/in 0.05fF
+C668 1bitaddie_1/ff_0/inverter_0/w_n8_n5# 1bitaddie_1/ff_0/inverter_0/in 0.07fF
+C669 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/pmos_2/w_n8_n5# 0.03fF
+C670 1bitaddie_4/ff_1/m1_100_n33# 1bitaddie_4/ff_1/inverter_0/in 0.08fF
+C671 1bitaddie_4/clk 1bitaddie_0/manch_0/clk 0.05fF
+C672 1bitaddie_0/xorg_1/inverter_0/out gnd 0.14fF
+C673 1bitaddie_2/xorg_1/inverter_1/out vdd 0.12fF
+C674 1bitaddie_3/inverter_1/out 1bitaddie_3/xorg_1/m1_26_n95# 0.05fF
+C675 1bitaddie_2/ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C676 1bitaddie_3/Bi 1bitaddie_3/ff_0/inverter_0/w_n8_n5# 0.03fF
+C677 1bitaddie_3/sum 1bitaddie_3/xorg_1/pmos_1/w_n8_n5# 0.03fF
+C678 1bitaddie_1/Bi 1bitaddie_1/xorg_1/A 0.20fF
+C679 1bitaddie_2/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C680 ff_0/m1_51_n34# ff_0/m1_22_n55# 0.08fF
+C681 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/Ai 0.25fF
+C682 1bitaddie_1/ff_1/m1_60_n19# gnd 0.05fF
+C683 ff_1/m1_60_n19# ff_1/m1_100_n33# 0.08fF
+C684 1bitaddie_3/xorg_0/inverter_0/w_n8_n5# 1bitaddie_3/xorg_0/inverter_0/out 0.03fF
+C685 1bitaddie_1/xorg_1/inverter_1/w_n8_n5# 1bitaddie_1/inverter_1/out 0.07fF
+C686 A0 1bitaddie_0/ff_1/m1_22_n55# 0.05fF
+C687 1bitaddie_3/Bi 1bitaddie_3/xorg_1/A 0.20fF
+C688 1bitaddie_3/nandg_0/out 1bitaddie_3/inverter_0/out 0.05fF
+C689 1bitaddie_1/xorg_1/m1_102_n91# 1bitaddie_1/xorg_1/inverter_0/out 0.05fF
+C690 ff_1/m1_51_n34# ff_1/m1_22_n55# 0.08fF
+C691 1bitaddie_3/Ai 1bitaddie_3/xorg_0/m1_25_n11# 0.14fF
+C692 1bitaddie_1/ff_2/inverter_0/in 1bitaddie_1/ff_2/pmos_3/w_n8_n5# 0.03fF
+C693 inverter_2/in vdd 0.16fF
+C694 1bitaddie_3/Cin 1bitaddie_3/inverter_0/out 0.02fF
+C695 vdd 1bitaddie_1/xorg_0/inverter_0/w_n8_n5# 0.08fF
+C696 1bitaddie_4/doubleinv_0/inverter_1/in vdd 0.12fF
+C697 1bitaddie_3/xorg_1/inverter_1/w_n8_n5# 1bitaddie_3/inverter_1/out 0.07fF
+C698 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/m1_22_n55# 0.05fF
+C699 1bitaddie_3/xorg_1/m1_102_n91# 1bitaddie_3/xorg_1/inverter_0/out 0.05fF
+C700 1bitaddie_2/ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C701 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C702 1bitaddie_4/ff_1/inverter_0/in vdd 0.12fF
+C703 1bitaddie_3/ff_2/inverter_0/in 1bitaddie_4/clk 0.05fF
+C704 ff_0/inverter_0/in vdd 0.12fF
+C705 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/pmos_3/w_n8_n5# 0.07fF
+C706 1bitaddie_2/ff_1/m1_18_n10# 1bitaddie_2/ff_1/m1_22_n55# 0.12fF
+C707 1bitaddie_1/ff_2/pmos_2/w_n8_n5# vdd 0.08fF
+C708 1bitaddie_2/ff_2/inverter_0/w_n8_n5# s2 0.03fF
+C709 1bitaddie_2/ff_2/inverter_0/in gnd 0.05fF
+C710 1bitaddie_2/xorg_1/m1_26_n95# gnd 0.08fF
+C711 1bitaddie_2/xorg_1/A vdd 0.09fF
+C712 1bitaddie_2/Ai 1bitaddie_2/xorg_0/pmos_2/w_n8_n5# 0.07fF
+C713 1bitaddie_1/ff_0/m1_100_n33# 1bitaddie_1/ff_0/inverter_0/in 0.08fF
+C714 gnd 1bitaddie_1/xorg_0/m1_102_n91# 0.08fF
+C715 1bitaddie_2/nandg_0/pmos_0/w_n8_n5# 1bitaddie_2/Bi 0.07fF
+C716 1bitaddie_4/inverter_0/out 1bitaddie_4/manch_0/clk 0.03fF
+C717 1bitaddie_3/xorg_0/m1_102_n91# gnd 0.08fF
+C718 1bitaddie_1/ff_2/m1_22_n55# 1bitaddie_4/clk 0.25fF
+C719 1bitaddie_0/sum 1bitaddie_0/xorg_1/pmos_3/w_n8_n5# 0.03fF
+C720 1bitaddie_4/ff_0/inverter_0/in gnd 0.05fF
+C721 1bitaddie_3/ff_0/inverter_0/in 1bitaddie_3/ff_0/pmos_3/w_n8_n5# 0.03fF
+C722 1bitaddie_3/ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C723 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_4/clk 0.31fF
+C724 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/pmos_2/w_n8_n5# 0.03fF
+C725 1bitaddie_3/doubleinv_0/inverter_1/out 1bitaddie_3/doubleinv_0/inverter_1/in 0.05fF
+C726 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/xorg_0/m1_25_n11# 0.05fF
+C727 1bitaddie_0/manch_0/clk 1bitaddie_0/manch_0/m1_25_n53# 0.05fF
+C728 1bitaddie_0/inverter_0/out 1bitaddie_1/Cin 0.18fF
+C729 1bitaddie_2/ff_2/pmos_0/w_n8_n5# 1bitaddie_2/ff_2/m1_18_n10# 0.03fF
+C730 s0 gnd 0.08fF
+C731 1bitaddie_0/xorg_0/pmos_2/w_n8_n5# vdd 0.08fF
+C732 1bitaddie_3/xorg_1/inverter_0/out 1bitaddie_3/xorg_1/m1_25_n11# 0.05fF
+C733 1bitaddie_2/inverter_1/out 1bitaddie_4/clk 0.06fF
+C734 1bitaddie_1/xorg_0/m1_25_n11# 1bitaddie_1/xorg_1/A 0.12fF
+C735 1bitaddie_0/Ai 1bitaddie_0/xorg_0/m1_102_n17# 0.20fF
+C736 1bitaddie_4/ff_2/pmos_3/w_n8_n5# vdd 0.06fF
+C737 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/xorg_1/A 0.06fF
+C738 1bitaddie_3/ff_0/m1_22_n55# 1bitaddie_4/clk 0.39fF
+C739 gnd 1bitaddie_0/ff_2/m1_51_n34# 0.08fF
+C740 1bitaddie_4/clk 1bitaddie_0/inverter_0/out 0.08fF
+C741 1bitaddie_2/ff_0/pmos_1/w_n8_n5# 1bitaddie_2/ff_0/m1_18_n10# 0.08fF
+C742 1bitaddie_2/ff_0/m1_22_n55# gnd 0.08fF
+C743 1bitaddie_4/nandg_0/out vdd 0.25fF
+C744 1bitaddie_3/xorg_0/m1_25_n11# 1bitaddie_3/xorg_1/A 0.12fF
+C745 1bitaddie_1/ff_1/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C746 1bitaddie_1/nandg_0/m1_24_n51# 1bitaddie_1/nandg_0/out 0.08fF
+C747 1bitaddie_0/ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C748 1bitaddie_0/Ai 1bitaddie_0/xorg_0/m1_26_n95# 0.05fF
+C749 1bitaddie_2/nandg_0/m1_24_n51# 1bitaddie_2/nandg_0/out 0.08fF
+C750 inverter_1/w_n8_n5# inverter_1/out 0.08fF
+C751 1bitaddie_1/xorg_1/pmos_0/w_n8_n5# 1bitaddie_1/xorg_1/m1_25_n11# 0.03fF
+C752 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/m1_100_n33# 0.08fF
+C753 1bitaddie_1/ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C754 1bitaddie_2/ff_1/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C755 A0 gnd 0.05fF
+C756 ff_1/inverter_0/w_n8_n5# Cout 0.03fF
+C757 1bitaddie_1/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C758 1bitaddie_4/clk 1bitaddie_0/sum 0.02fF
+C759 1bitaddie_3/ff_0/m1_51_n34# 1bitaddie_3/ff_0/m1_60_n19# 0.08fF
+C760 1bitaddie_4/ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C761 1bitaddie_2/ff_2/m1_51_n34# 1bitaddie_2/ff_2/m1_22_n55# 0.08fF
+C762 1bitaddie_4/clk B0 0.12fF
+C763 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/pmos_3/w_n8_n5# 0.07fF
+C764 1bitaddie_4/ff_0/pmos_0/w_n8_n5# 1bitaddie_4/ff_0/m1_18_n10# 0.03fF
+C765 1bitaddie_4/manch_0/clk gnd 0.14fF
+C766 ff_0/m1_60_n19# 1bitaddie_4/clk 0.44fF
+C767 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/xorg_1/inverter_1/w_n8_n5# 0.03fF
+C768 1bitaddie_0/Bi A0 0.03fF
+C769 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/pmos_2/w_n8_n5# 0.03fF
+C770 1bitaddie_0/ff_2/m1_100_n33# 1bitaddie_0/ff_2/inverter_0/in 0.08fF
+C771 A3 1bitaddie_3/ff_1/pmos_0/w_n8_n5# 0.07fF
+C772 1bitaddie_2/ff_2/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.28fF
+C773 ff_1/m1_100_n33# gnd 0.08fF
+C774 ff_1/m1_60_n19# ff_1/m1_51_n34# 0.08fF
+C775 gnd 1bitaddie_1/xorg_0/inverter_0/out 0.14fF
+C776 1bitaddie_4/Cin vdd 0.12fF
+C777 1bitaddie_2/manch_0/m1_25_n53# 1bitaddie_3/Cin 0.08fF
+C778 vdd 1bitaddie_1/Ai 0.21fF
+C779 1bitaddie_3/doubleinv_0/inverter_1/in vdd 0.12fF
+C780 1bitaddie_1/ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C781 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/xorg_1/inverter_1/w_n8_n5# 0.03fF
+C782 1bitaddie_0/doubleinv_0/inverter_1/out gnd 0.08fF
+C783 1bitaddie_3/ff_1/inverter_0/in vdd 0.12fF
+C784 1bitaddie_3/xorg_1/A 1bitaddie_3/xorg_1/m1_102_n17# 0.20fF
+C785 1bitaddie_1/xorg_1/m1_26_n95# 1bitaddie_1/xorg_1/A 0.05fF
+C786 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/m1_100_n33# 0.08fF
+C787 1bitaddie_0/xorg_1/inverter_0/out 1bitaddie_0/xorg_1/pmos_0/w_n8_n5# 0.07fF
+C788 1bitaddie_4/clk 1bitaddie_0/ff_2/pmos_1/w_n8_n5# 0.07fF
+C789 ff_0/m1_18_n10# vdd 0.12fF
+C790 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/xorg_1/pmos_3/w_n8_n5# 0.07fF
+C791 1bitaddie_4/xorg_0/pmos_1/w_n8_n5# 1bitaddie_4/xorg_1/A 0.03fF
+C792 1bitaddie_4/ff_0/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C793 1bitaddie_4/nandg_0/m1_24_n51# 1bitaddie_4/Ai 0.12fF
+C794 1bitaddie_1/ff_2/inverter_0/in gnd 0.05fF
+C795 1bitaddie_0/xorg_0/m1_102_n17# 1bitaddie_0/xorg_1/A 0.12fF
+C796 1bitaddie_0/manch_0/clk 1bitaddie_0/manch_0/pmos_0/w_n8_n5# 0.07fF
+C797 1bitaddie_3/xorg_1/m1_26_n95# 1bitaddie_3/xorg_1/A 0.05fF
+C798 gnd 1bitaddie_1/nandg_0/out 0.05fF
+C799 1bitaddie_4/Ai 1bitaddie_4/ff_1/inverter_0/in 0.05fF
+C800 1bitaddie_0/inverter_0/out 1bitaddie_0/manch_0/m1_25_n53# 0.05fF
+C801 1bitaddie_2/Bi vdd 0.24fF
+C802 1bitaddie_0/xorg_0/pmos_3/w_n8_n5# 1bitaddie_0/xorg_0/m1_102_n17# 0.08fF
+C803 1bitaddie_0/xorg_0/m1_26_n95# 1bitaddie_0/xorg_1/A 0.08fF
+C804 1bitaddie_3/ff_0/inverter_0/in gnd 0.05fF
+C805 1bitaddie_2/ff_1/m1_60_n19# vdd 0.12fF
+C806 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_4/clk 0.31fF
+C807 A1 1bitaddie_1/Bi 0.03fF
+C808 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_18_n10# 0.09fF
+C809 inverter_0/in ff_0/inverter_0/in 0.05fF
+C810 1bitaddie_4/xorg_1/m1_25_n11# vdd 0.12fF
+C811 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/pmos_3/w_n8_n5# 0.07fF
+C812 1bitaddie_4/Cin 1bitaddie_4/inverter_1/out 0.05fF
+C813 1bitaddie_1/xorg_0/m1_102_n17# 1bitaddie_1/Ai 0.20fF
+C814 1bitaddie_3/ff_2/pmos_3/w_n8_n5# vdd 0.06fF
+C815 1bitaddie_0/xorg_1/pmos_1/w_n8_n5# 1bitaddie_0/xorg_1/m1_25_n11# 0.08fF
+C816 1bitaddie_1/xorg_1/pmos_0/w_n8_n5# 1bitaddie_1/xorg_1/inverter_0/out 0.07fF
+C817 1bitaddie_4/ff_2/m1_18_n10# 1bitaddie_4/ff_2/m1_22_n55# 0.12fF
+C818 1bitaddie_4/ff_1/inverter_0/w_n8_n5# 1bitaddie_4/ff_1/inverter_0/in 0.07fF
+C819 1bitaddie_1/ff_0/m1_22_n55# gnd 0.08fF
+C820 1bitaddie_4/ff_0/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C821 1bitaddie_4/manch_0/pmos_0/w_n8_n5# vdd 0.08fF
+C822 1bitaddie_3/Cin 1bitaddie_2/Cin 0.14fF
+C823 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/inverter_1/out 0.05fF
+C824 1bitaddie_0/sum 1bitaddie_0/xorg_1/m1_102_n91# 0.08fF
+C825 1bitaddie_1/doubleinv_0/inverter_1/in 1bitaddie_1/doubleinv_0/inverter_0/in 0.05fF
+C826 1bitaddie_1/xorg_0/m1_26_n95# 1bitaddie_1/Ai 0.05fF
+C827 1bitaddie_0/ff_0/m1_60_n19# gnd 0.05fF
+C828 1bitaddie_0/xorg_1/A 1bitaddie_0/xorg_1/pmos_2/w_n8_n5# 0.07fF
+C829 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/pmos_2/w_n8_n5# 0.03fF
+C830 1bitaddie_3/ff_1/m1_100_n33# 1bitaddie_3/ff_1/inverter_0/in 0.08fF
+C831 1bitaddie_3/Cin 1bitaddie_2/manch_0/pmos_0/w_n8_n5# 0.03fF
+C832 ff_0/pmos_1/w_n8_n5# ff_0/m1_22_n55# 0.03fF
+C833 B4 1bitaddie_4/ff_0/m1_18_n10# 0.05fF
+C834 1bitaddie_4/xorg_0/inverter_1/w_n8_n5# vdd 0.08fF
+C835 1bitaddie_2/sum 1bitaddie_2/xorg_1/m1_102_n17# 0.12fF
+C836 1bitaddie_1/ff_1/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C837 1bitaddie_4/nandg_0/pmos_1/w_n8_n5# 1bitaddie_4/nandg_0/out 0.03fF
+C838 inverter_2/in 1bitaddie_4/clk 0.37fF
+C839 1bitaddie_0/ff_0/m1_18_n10# 1bitaddie_0/ff_0/m1_22_n55# 0.12fF
+C840 1bitaddie_0/nandg_0/pmos_1/w_n8_n5# vdd 0.08fF
+C841 1bitaddie_3/ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C842 1bitaddie_3/manch_0/clk gnd 0.14fF
+C843 1bitaddie_4/nandg_0/out 1bitaddie_4/Ai 0.13fF
+C844 1bitaddie_4/ff_1/inverter_0/in 1bitaddie_4/clk 0.05fF
+C845 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/m1_51_n34# 0.08fF
+C846 ff_0/inverter_0/in 1bitaddie_4/clk 0.05fF
+C847 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/inverter_0/in 0.05fF
+C848 1bitaddie_2/sum 1bitaddie_2/xorg_1/m1_26_n95# 0.08fF
+C849 gnd 1bitaddie_0/ff_2/m1_22_n55# 0.08fF
+C850 inverter_2/in 1bitaddie_4/xorg_1/A 0.05fF
+C851 1bitaddie_2/w_n41_n285# 1bitaddie_2/doubleinv_0/inverter_0/in 0.07fF
+C852 1bitaddie_2/ff_1/pmos_2/w_n8_n5# vdd 0.08fF
+C853 1bitaddie_1/ff_2/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.28fF
+C854 s0 1bitaddie_0/ff_2/inverter_0/in 0.05fF
+C855 1bitaddie_4/sum gnd 0.35fF
+C856 1bitaddie_2/xorg_1/A 1bitaddie_4/clk 0.06fF
+C857 Cout gnd 0.08fF
+C858 1bitaddie_2/xorg_0/inverter_0/out vdd 0.12fF
+C859 inverter_2/out vdd 0.12fF
+C860 B4 gnd 0.05fF
+C861 1bitaddie_4/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/ff_1/m1_18_n10# 0.08fF
+C862 1bitaddie_2/xorg_0/m1_25_n11# vdd 0.12fF
+C863 1bitaddie_0/inverter_1/out 1bitaddie_0/xorg_1/A 0.06fF
+C864 ff_1/m1_51_n34# gnd 0.08fF
+C865 1bitaddie_0/sum 1bitaddie_0/xorg_1/m1_25_n11# 0.12fF
+C866 1bitaddie_0/ff_1/pmos_0/w_n8_n5# 1bitaddie_0/ff_1/m1_18_n10# 0.03fF
+C867 1bitaddie_2/ff_1/m1_22_n55# 1bitaddie_4/clk 0.40fF
+C868 1bitaddie_1/ff_1/m1_18_n10# 1bitaddie_1/ff_1/m1_22_n55# 0.12fF
+C869 1bitaddie_1/xorg_1/pmos_2/w_n8_n5# 1bitaddie_1/xorg_1/A 0.07fF
+C870 1bitaddie_3/ff_0/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C871 1bitaddie_1/ff_2/inverter_0/w_n8_n5# s1 0.03fF
+C872 1bitaddie_0/xorg_0/inverter_0/w_n8_n5# 1bitaddie_0/Ai 0.07fF
+C873 1bitaddie_0/ff_1/m1_100_n33# gnd 0.08fF
+C874 1bitaddie_0/xorg_1/inverter_0/out vdd 0.12fF
+C875 1bitaddie_4/ff_2/m1_18_n10# vdd 0.12fF
+C876 inverter_1/w_n8_n5# vdd 0.23fF
+C877 1bitaddie_4/Bi 1bitaddie_4/xorg_0/pmos_1/w_n8_n5# 0.07fF
+C878 ff_1/m1_60_n19# ff_1/m1_22_n55# 0.05fF
+C879 1bitaddie_1/ff_1/m1_60_n19# vdd 0.12fF
+C880 1bitaddie_0/xorg_0/m1_26_n95# gnd 0.08fF
+C881 1bitaddie_2/doubleinv_0/inverter_0/in gnd 0.05fF
+C882 1bitaddie_0/Bi 1bitaddie_0/xorg_0/m1_102_n17# 0.05fF
+C883 B2 1bitaddie_2/ff_0/m1_22_n55# 0.05fF
+C884 1bitaddie_4/xorg_0/inverter_0/w_n8_n5# vdd 0.08fF
+C885 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/m1_100_n33# 0.08fF
+C886 1bitaddie_0/ff_0/m1_18_n10# vdd 0.12fF
+C887 1bitaddie_3/xorg_1/m1_25_n11# vdd 0.12fF
+C888 1bitaddie_2/ff_0/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C889 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/xorg_0/m1_25_n11# 0.05fF
+C890 1bitaddie_2/w_n41_n285# 1bitaddie_2/doubleinv_0/inverter_1/in 0.11fF
+C891 1bitaddie_0/Ai 1bitaddie_0/ff_1/inverter_0/w_n8_n5# 0.03fF
+C892 1bitaddie_4/xorg_1/inverter_1/out 1bitaddie_4/xorg_1/m1_102_n91# 0.05fF
+C893 1bitaddie_1/ff_2/pmos_0/w_n8_n5# 1bitaddie_1/ff_2/m1_18_n10# 0.03fF
+C894 1bitaddie_2/inverter_0/out 1bitaddie_2/xorg_1/A 0.06fF
+C895 1bitaddie_0/ff_1/m1_51_n34# 1bitaddie_0/ff_1/m1_22_n55# 0.08fF
+C896 1bitaddie_2/manch_0/m1_25_n53# 1bitaddie_2/Cin 0.07fF
+C897 1bitaddie_2/xorg_1/m1_102_n17# vdd 0.12fF
+C898 1bitaddie_4/clk 1bitaddie_1/ff_0/m1_51_n34# 0.12fF
+C899 1bitaddie_0/Bi 1bitaddie_0/xorg_0/m1_26_n95# 0.05fF
+C900 1bitaddie_2/xorg_1/pmos_0/w_n8_n5# vdd 0.08fF
+C901 1bitaddie_3/ff_0/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C902 1bitaddie_1/ff_0/pmos_1/w_n8_n5# 1bitaddie_1/ff_0/m1_18_n10# 0.08fF
+C903 1bitaddie_3/manch_0/pmos_0/w_n8_n5# vdd 0.08fF
+C904 1bitaddie_4/clk ff_1/pmos_1/w_n8_n5# 0.07fF
+C905 1bitaddie_2/xorg_1/inverter_0/out 1bitaddie_2/xorg_1/A 0.25fF
+C906 1bitaddie_2/sum 1bitaddie_2/ff_2/pmos_0/w_n8_n5# 0.07fF
+C907 1bitaddie_2/ff_1/pmos_1/w_n8_n5# 1bitaddie_2/ff_1/m1_22_n55# 0.03fF
+C908 1bitaddie_1/xorg_1/m1_102_n91# 1bitaddie_1/sum 0.08fF
+C909 1bitaddie_2/ff_0/m1_51_n34# gnd 0.08fF
+C910 1bitaddie_2/ff_2/inverter_0/in vdd 0.12fF
+C911 1bitaddie_4/inverter_0/w_n8_n5# vdd 0.08fF
+C912 1bitaddie_3/w_n41_n285# 1bitaddie_3/doubleinv_0/inverter_1/out 0.03fF
+C913 1bitaddie_4/inverter_1/w_n8_n5# vdd 0.08fF
+C914 1bitaddie_3/inverter_0/out gnd 0.08fF
+C915 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/m1_100_n33# 0.08fF
+C916 1bitaddie_3/xorg_0/inverter_1/w_n8_n5# vdd 0.08fF
+C917 1bitaddie_3/nandg_0/out gnd 0.05fF
+C918 1bitaddie_4/Cin 1bitaddie_4/clk 0.37fF
+C919 1bitaddie_2/nandg_0/m1_24_n51# gnd 0.08fF
+C920 C0 gnd 0.05fF
+C921 1bitaddie_1/nandg_0/pmos_1/w_n8_n5# 1bitaddie_1/Ai 0.07fF
+C922 1bitaddie_1/ff_2/m1_51_n34# 1bitaddie_1/ff_2/m1_22_n55# 0.08fF
+C923 1bitaddie_0/ff_2/inverter_0/w_n8_n5# 1bitaddie_0/ff_2/inverter_0/in 0.07fF
+C924 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/pmos_3/w_n8_n5# 0.07fF
+C925 1bitaddie_3/ff_0/pmos_0/w_n8_n5# 1bitaddie_3/ff_0/m1_18_n10# 0.03fF
+C926 1bitaddie_3/Cin gnd 0.10fF
+C927 1bitaddie_4/ff_0/inverter_0/in vdd 0.12fF
+C928 1bitaddie_3/ff_1/inverter_0/in 1bitaddie_4/clk 0.05fF
+C929 1bitaddie_2/doubleinv_0/inverter_1/in gnd 0.14fF
+C930 1bitaddie_4/Cin 1bitaddie_4/xorg_1/A 0.14fF
+C931 1bitaddie_2/ff_1/inverter_0/in gnd 0.05fF
+C932 1bitaddie_1/ff_1/pmos_2/w_n8_n5# vdd 0.08fF
+C933 1bitaddie_3/sum gnd 0.35fF
+C934 1bitaddie_2/xorg_1/inverter_1/w_n8_n5# vdd 0.08fF
+C935 1bitaddie_0/sum 1bitaddie_0/ff_2/m1_18_n10# 0.05fF
+C936 1bitaddie_0/ff_2/m1_60_n19# gnd 0.05fF
+C937 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/xorg_1/A 0.22fF
+C938 B3 gnd 0.05fF
+C939 1bitaddie_1/xorg_0/pmos_1/w_n8_n5# 1bitaddie_1/xorg_1/A 0.03fF
+C940 s0 vdd 0.12fF
+C941 1bitaddie_4/nandg_0/m1_24_n51# 1bitaddie_4/Bi 0.05fF
+C942 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/xorg_0/pmos_0/w_n8_n5# 0.07fF
+C943 1bitaddie_4/xorg_0/pmos_1/w_n8_n5# 1bitaddie_4/xorg_0/m1_25_n11# 0.08fF
+C944 1bitaddie_0/inverter_1/out gnd 0.14fF
+C945 1bitaddie_4/xorg_0/inverter_1/w_n8_n5# 1bitaddie_4/xorg_0/inverter_1/out 0.03fF
+C946 1bitaddie_1/ff_1/m1_22_n55# 1bitaddie_4/clk 0.40fF
+C947 1bitaddie_0/xorg_1/inverter_0/w_n8_n5# vdd 0.08fF
+C948 1bitaddie_0/xorg_0/inverter_1/out 1bitaddie_0/xorg_0/pmos_3/w_n8_n5# 0.07fF
+C949 1bitaddie_0/xorg_0/pmos_0/w_n8_n5# 1bitaddie_0/xorg_0/m1_25_n11# 0.03fF
+C950 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/xorg_1/pmos_3/w_n8_n5# 0.07fF
+C951 1bitaddie_3/xorg_0/pmos_1/w_n8_n5# 1bitaddie_3/xorg_1/A 0.03fF
+C952 1bitaddie_2/Bi 1bitaddie_4/clk 0.06fF
+C953 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C954 1bitaddie_4/inverter_1/w_n8_n5# 1bitaddie_4/inverter_1/out 0.03fF
+C955 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/inverter_0/in 0.05fF
+C956 A4 1bitaddie_4/ff_1/m1_18_n10# 0.05fF
+C957 1bitaddie_4/xorg_0/inverter_1/out 1bitaddie_4/xorg_0/m1_102_n91# 0.05fF
+C958 inverter_2/out ff_1/pmos_0/w_n8_n5# 0.07fF
+C959 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/m1_22_n55# 0.05fF
+C960 1bitaddie_1/nandg_0/out 1bitaddie_1/inverter_0/out 0.05fF
+C961 1bitaddie_0/ff_2/pmos_1/w_n8_n5# 1bitaddie_0/ff_2/m1_18_n10# 0.08fF
+C962 1bitaddie_3/ff_2/m1_18_n10# vdd 0.12fF
+C963 1bitaddie_3/w_n41_n285# vdd 0.16fF
+C964 1bitaddie_4/ff_1/pmos_3/w_n8_n5# vdd 0.06fF
+C965 1bitaddie_3/Ai 1bitaddie_3/ff_1/inverter_0/in 0.05fF
+C966 1bitaddie_4/xorg_1/A 1bitaddie_4/xorg_1/m1_25_n11# 0.14fF
+C967 1bitaddie_0/ff_1/m1_51_n34# gnd 0.08fF
+C968 1bitaddie_4/manch_0/clk vdd 0.12fF
+C969 1bitaddie_1/doubleinv_0/inverter_0/in gnd 0.05fF
+C970 1bitaddie_1/ff_0/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C971 1bitaddie_2/ff_2/pmos_0/w_n8_n5# vdd 0.08fF
+C972 ff_1/m1_22_n55# gnd 0.08fF
+C973 1bitaddie_2/inverter_0/w_n8_n5# 1bitaddie_2/nandg_0/out 0.07fF
+C974 C0 ff_0/m1_22_n55# 0.05fF
+C975 1bitaddie_2/manch_0/clk 1bitaddie_3/Cin 0.19fF
+C976 1bitaddie_2/nandg_0/out gnd 0.05fF
+C977 ff_0/m1_51_n34# 1bitaddie_4/clk 0.03fF
+C978 1bitaddie_2/xorg_1/inverter_0/w_n8_n5# 1bitaddie_2/xorg_1/A 0.07fF
+C979 vdd 1bitaddie_1/xorg_0/inverter_0/out 0.12fF
+C980 1bitaddie_2/ff_1/inverter_0/in 1bitaddie_2/ff_1/pmos_3/w_n8_n5# 0.03fF
+C981 1bitaddie_1/xorg_1/m1_102_n17# vdd 0.12fF
+C982 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/m1_51_n34# 0.08fF
+C983 1bitaddie_1/xorg_1/pmos_0/w_n8_n5# vdd 0.08fF
+C984 1bitaddie_0/doubleinv_0/inverter_1/out vdd 0.12fF
+C985 1bitaddie_3/ff_2/m1_18_n10# 1bitaddie_3/ff_2/m1_22_n55# 0.12fF
+C986 1bitaddie_3/ff_1/inverter_0/w_n8_n5# 1bitaddie_3/ff_1/inverter_0/in 0.07fF
+C987 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/m1_22_n55# 0.05fF
+C988 1bitaddie_3/inverter_2/w_n8_n5# 1bitaddie_3/manch_0/clk 0.03fF
+C989 1bitaddie_4/ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C990 1bitaddie_4/xorg_0/inverter_0/w_n8_n5# 1bitaddie_4/Ai 0.07fF
+C991 1bitaddie_1/ff_2/inverter_0/in vdd 0.12fF
+C992 1bitaddie_0/xorg_0/pmos_3/w_n8_n5# 1bitaddie_0/xorg_1/A 0.03fF
+C993 1bitaddie_4/nandg_0/out 1bitaddie_4/Bi 0.11fF
+C994 1bitaddie_2/ff_1/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C995 1bitaddie_2/manch_0/m1_25_n53# gnd 0.08fF
+C996 B3 1bitaddie_3/ff_0/m1_18_n10# 0.05fF
+C997 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_100_n33# 0.05fF
+C998 1bitaddie_4/sum 1bitaddie_4/ff_2/m1_22_n55# 0.05fF
+C999 1bitaddie_4/xorg_0/m1_102_n91# 1bitaddie_4/xorg_1/A 0.08fF
+C1000 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_4/clk 1.49fF
+C1001 vdd 1bitaddie_1/nandg_0/out 0.25fF
+C1002 1bitaddie_4/clk inverter_2/out 0.05fF
+C1003 A2 1bitaddie_2/ff_1/m1_22_n55# 0.05fF
+C1004 1bitaddie_2/xorg_1/m1_102_n91# gnd 0.08fF
+C1005 1bitaddie_0/inverter_0/out 1bitaddie_0/manch_0/clk 0.03fF
+C1006 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/m1_51_n34# 0.08fF
+C1007 1bitaddie_0/ff_2/inverter_0/w_n8_n5# vdd 0.08fF
+C1008 1bitaddie_3/ff_0/inverter_0/in vdd 0.12fF
+C1009 1bitaddie_1/doubleinv_0/inverter_1/in gnd 0.14fF
+C1010 1bitaddie_0/Ai gnd 0.27fF
+C1011 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/inverter_0/in 0.05fF
+C1012 1bitaddie_4/clk 1bitaddie_0/ff_1/pmos_1/w_n8_n5# 0.26fF
+C1013 1bitaddie_4/Cin 1bitaddie_3/xorg_1/A 0.05fF
+C1014 1bitaddie_1/w_n41_n285# 1bitaddie_1/doubleinv_0/inverter_0/in 0.07fF
+C1015 1bitaddie_4/xorg_1/pmos_3/w_n8_n5# 1bitaddie_4/xorg_1/m1_102_n17# 0.08fF
+C1016 1bitaddie_1/ff_1/inverter_0/in gnd 0.05fF
+C1017 ff_1/m1_60_n19# ff_1/pmos_2/w_n8_n5# 0.03fF
+C1018 ff_1/m1_100_n33# ff_1/inverter_0/in 0.08fF
+C1019 1bitaddie_0/xorg_0/inverter_1/out gnd 0.08fF
+C1020 1bitaddie_1/xorg_0/pmos_0/w_n8_n5# 1bitaddie_1/xorg_0/inverter_0/out 0.07fF
+C1021 1bitaddie_0/xorg_1/pmos_2/w_n8_n5# 1bitaddie_0/xorg_1/m1_102_n17# 0.03fF
+C1022 inverter_1/in gnd 0.05fF
+C1023 1bitaddie_3/ff_1/pmos_1/w_n8_n5# 1bitaddie_3/ff_1/m1_18_n10# 0.08fF
+C1024 1bitaddie_1/manch_0/m1_25_n53# 1bitaddie_2/Cin 0.08fF
+C1025 1bitaddie_0/Ai 1bitaddie_0/Bi 0.06fF
+C1026 1bitaddie_4/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/ff_2/m1_22_n55# 0.03fF
+C1027 1bitaddie_0/xorg_1/inverter_1/out gnd 0.08fF
+C1028 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_4/clk 0.36fF
+C1029 1bitaddie_0/Bi 1bitaddie_0/xorg_0/inverter_1/out 0.05fF
+C1030 1bitaddie_4/inverter_2/w_n8_n5# vdd 0.08fF
+C1031 1bitaddie_4/nandg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1032 1bitaddie_1/Bi 1bitaddie_1/xorg_0/pmos_1/w_n8_n5# 0.07fF
+C1033 1bitaddie_0/ff_0/m1_60_n19# vdd 0.12fF
+C1034 1bitaddie_2/sum 1bitaddie_2/xorg_1/pmos_3/w_n8_n5# 0.03fF
+C1035 1bitaddie_1/nandg_0/pmos_0/w_n8_n5# 1bitaddie_1/nandg_0/out 0.03fF
+C1036 1bitaddie_1/xorg_1/m1_102_n17# 1bitaddie_1/sum 0.12fF
+C1037 1bitaddie_1/xorg_1/inverter_1/out 1bitaddie_1/xorg_1/m1_102_n91# 0.05fF
+C1038 1bitaddie_3/Bi 1bitaddie_3/xorg_0/pmos_1/w_n8_n5# 0.07fF
+C1039 1bitaddie_0/ff_0/pmos_1/w_n8_n5# 1bitaddie_0/ff_0/m1_22_n55# 0.03fF
+C1040 1bitaddie_0/inverter_1/w_n8_n5# 1bitaddie_0/inverter_1/out 0.03fF
+C1041 1bitaddie_3/ff_1/pmos_3/w_n8_n5# vdd 0.06fF
+C1042 1bitaddie_2/inverter_1/w_n8_n5# 1bitaddie_2/Cin 0.07fF
+C1043 B0 1bitaddie_0/ff_0/pmos_0/w_n8_n5# 0.07fF
+C1044 gnd 1bitaddie_2/Cin 0.10fF
+C1045 1bitaddie_4/inverter_1/out 1bitaddie_4/xorg_1/pmos_1/w_n8_n5# 0.07fF
+C1046 1bitaddie_3/manch_0/clk vdd 0.12fF
+C1047 1bitaddie_2/manch_0/clk 1bitaddie_2/manch_0/m1_25_n53# 0.05fF
+C1048 B1 1bitaddie_1/ff_0/m1_22_n55# 0.05fF
+C1049 1bitaddie_1/ff_2/pmos_0/w_n8_n5# vdd 0.08fF
+C1050 1bitaddie_3/xorg_1/inverter_1/out 1bitaddie_3/xorg_1/m1_102_n91# 0.05fF
+C1051 1bitaddie_2/Ai 1bitaddie_2/xorg_0/m1_102_n17# 0.20fF
+C1052 1bitaddie_1/w_n41_n285# 1bitaddie_1/doubleinv_0/inverter_1/in 0.11fF
+C1053 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/inverter_0/in 0.05fF
+C1054 1bitaddie_0/nandg_0/pmos_0/w_n8_n5# 1bitaddie_0/Bi 0.07fF
+C1055 1bitaddie_2/ff_2/inverter_0/in 1bitaddie_4/clk 0.05fF
+C1056 ff_1/m1_60_n19# gnd 0.05fF
+C1057 1bitaddie_3/nandg_0/pmos_1/w_n8_n5# vdd 0.08fF
+C1058 Cout vdd 0.12fF
+C1059 1bitaddie_0/inverter_1/out 1bitaddie_0/xorg_1/m1_26_n95# 0.05fF
+C1060 1bitaddie_0/xorg_1/A gnd 0.48fF
+C1061 1bitaddie_2/Ai 1bitaddie_2/xorg_0/m1_26_n95# 0.05fF
+C1062 1bitaddie_0/Bi 1bitaddie_0/ff_0/inverter_0/w_n8_n5# 0.03fF
+C1063 1bitaddie_0/sum 1bitaddie_0/xorg_1/pmos_1/w_n8_n5# 0.03fF
+C1064 1bitaddie_3/ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1065 1bitaddie_1/ff_1/pmos_1/w_n8_n5# 1bitaddie_1/ff_1/m1_22_n55# 0.03fF
+C1066 1bitaddie_4/ff_0/inverter_0/in 1bitaddie_4/clk 0.12fF
+C1067 1bitaddie_4/ff_0/m1_51_n34# 1bitaddie_4/ff_0/m1_22_n55# 0.08fF
+C1068 1bitaddie_4/ff_0/inverter_0/w_n8_n5# 1bitaddie_4/ff_0/inverter_0/in 0.07fF
+C1069 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/Ai 0.25fF
+C1070 1bitaddie_2/xorg_0/m1_102_n91# gnd 0.08fF
+C1071 1bitaddie_0/xorg_0/inverter_0/w_n8_n5# 1bitaddie_0/xorg_0/inverter_0/out 0.03fF
+C1072 1bitaddie_0/ff_1/m1_22_n55# gnd 0.08fF
+C1073 1bitaddie_0/xorg_0/m1_102_n17# vdd 0.12fF
+C1074 1bitaddie_0/Bi 1bitaddie_0/xorg_1/A 0.20fF
+C1075 1bitaddie_2/ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C1076 1bitaddie_1/ff_1/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1077 1bitaddie_0/xorg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1078 1bitaddie_0/Ai 1bitaddie_0/xorg_0/m1_25_n11# 0.14fF
+C1079 1bitaddie_2/Cin 1bitaddie_1/manch_0/pmos_0/w_n8_n5# 0.03fF
+C1080 1bitaddie_2/Bi A2 0.03fF
+C1081 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/pmos_2/w_n8_n5# 0.03fF
+C1082 1bitaddie_2/ff_2/m1_100_n33# 1bitaddie_2/ff_2/inverter_0/in 0.08fF
+C1083 1bitaddie_0/xorg_1/inverter_1/w_n8_n5# 1bitaddie_0/inverter_1/out 0.07fF
+C1084 1bitaddie_4/xorg_0/inverter_1/w_n8_n5# 1bitaddie_4/Bi 0.07fF
+C1085 1bitaddie_0/xorg_1/m1_102_n91# 1bitaddie_0/xorg_1/inverter_0/out 0.05fF
+C1086 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_51_n34# 0.11fF
+C1087 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/m1_22_n55# 0.05fF
+C1088 1bitaddie_2/ff_0/m1_22_n55# 1bitaddie_4/clk 0.39fF
+C1089 1bitaddie_1/xorg_0/pmos_1/w_n8_n5# 1bitaddie_1/xorg_0/m1_25_n11# 0.08fF
+C1090 1bitaddie_4/ff_2/m1_100_n33# gnd 0.08fF
+C1091 1bitaddie_2/nandg_0/pmos_0/w_n8_n5# 1bitaddie_2/nandg_0/out 0.03fF
+C1092 1bitaddie_4/sum 1bitaddie_4/inverter_1/out 0.20fF
+C1093 inverter_1/out inverter_1/in 0.05fF
+C1094 1bitaddie_4/ff_2/inverter_0/in 1bitaddie_4/ff_2/pmos_3/w_n8_n5# 0.03fF
+C1095 Cout ff_1/inverter_0/in 0.05fF
+C1096 gnd 1bitaddie_1/nandg_0/m1_24_n51# 0.08fF
+C1097 1bitaddie_2/xorg_1/inverter_0/out 1bitaddie_2/xorg_1/pmos_0/w_n8_n5# 0.07fF
+C1098 1bitaddie_2/manch_0/clk 1bitaddie_2/Cin 0.10fF
+C1099 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/m1_100_n33# 0.08fF
+C1100 1bitaddie_0/ff_0/m1_100_n33# gnd 0.08fF
+C1101 1bitaddie_4/inverter_0/out gnd 0.08fF
+C1102 1bitaddie_3/xorg_0/pmos_1/w_n8_n5# 1bitaddie_3/xorg_0/m1_25_n11# 0.08fF
+C1103 1bitaddie_1/Bi 1bitaddie_1/Ai 0.06fF
+C1104 1bitaddie_1/xorg_0/inverter_1/out 1bitaddie_1/xorg_0/m1_102_n91# 0.05fF
+C1105 1bitaddie_1/ff_0/inverter_0/w_n8_n5# 1bitaddie_1/Bi 0.03fF
+C1106 1bitaddie_4/clk A0 0.11fF
+C1107 1bitaddie_4/ff_1/m1_18_n10# vdd 0.12fF
+C1108 1bitaddie_3/xorg_0/inverter_1/w_n8_n5# 1bitaddie_3/xorg_0/inverter_1/out 0.03fF
+C1109 1bitaddie_4/ff_0/m1_60_n19# 1bitaddie_4/ff_0/pmos_3/w_n8_n5# 0.07fF
+C1110 1bitaddie_2/xorg_0/m1_102_n17# 1bitaddie_2/xorg_1/A 0.12fF
+C1111 1bitaddie_2/manch_0/clk 1bitaddie_2/manch_0/pmos_0/w_n8_n5# 0.07fF
+C1112 ff_0/pmos_0/w_n8_n5# ff_0/m1_18_n10# 0.03fF
+C1113 1bitaddie_1/ff_2/pmos_0/w_n8_n5# 1bitaddie_1/sum 0.07fF
+C1114 1bitaddie_4/manch_0/clk 1bitaddie_4/clk 0.05fF
+C1115 1bitaddie_3/xorg_0/inverter_1/out 1bitaddie_3/xorg_0/m1_102_n91# 0.05fF
+C1116 1bitaddie_0/ff_0/inverter_0/in 1bitaddie_0/ff_0/pmos_3/w_n8_n5# 0.03fF
+C1117 1bitaddie_4/xorg_1/inverter_0/out gnd 0.14fF
+C1118 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/inverter_0/in 0.05fF
+C1119 A3 1bitaddie_3/ff_1/m1_18_n10# 0.05fF
+C1120 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/pmos_2/w_n8_n5# 0.03fF
+C1121 1bitaddie_0/xorg_1/pmos_2/w_n8_n5# vdd 0.08fF
+C1122 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/m1_22_n55# 0.05fF
+C1123 1bitaddie_0/nandg_0/out 1bitaddie_0/inverter_0/out 0.05fF
+C1124 1bitaddie_3/inverter_0/out vdd 0.12fF
+C1125 gnd 1bitaddie_1/manch_0/m1_25_n53# 0.08fF
+C1126 1bitaddie_4/ff_0/m1_100_n33# 1bitaddie_4/ff_0/inverter_0/in 0.08fF
+C1127 1bitaddie_2/xorg_0/pmos_3/w_n8_n5# 1bitaddie_2/xorg_0/m1_102_n17# 0.08fF
+C1128 1bitaddie_0/doubleinv_0/inverter_1/out 1bitaddie_0/doubleinv_0/inverter_1/in 0.05fF
+C1129 1bitaddie_4/clk ff_1/m1_100_n33# 0.10fF
+C1130 1bitaddie_3/nandg_0/out vdd 0.25fF
+C1131 1bitaddie_2/xorg_0/m1_26_n95# 1bitaddie_2/xorg_1/A 0.08fF
+C1132 1bitaddie_4/clk 1bitaddie_1/xorg_0/inverter_0/out 1.49fF
+C1133 1bitaddie_0/xorg_1/inverter_0/out 1bitaddie_0/xorg_1/m1_25_n11# 0.05fF
+C1134 1bitaddie_3/xorg_1/A 1bitaddie_3/xorg_1/m1_25_n11# 0.14fF
+C1135 1bitaddie_3/Cin vdd 0.12fF
+C1136 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/xorg_1/A 0.06fF
+C1137 1bitaddie_2/doubleinv_0/inverter_1/in vdd 0.12fF
+C1138 1bitaddie_1/manch_0/clk 1bitaddie_1/inverter_2/w_n8_n5# 0.03fF
+C1139 1bitaddie_4/clk ff_0/pmos_1/w_n8_n5# 0.07fF
+C1140 1bitaddie_2/xorg_1/pmos_1/w_n8_n5# 1bitaddie_2/xorg_1/m1_25_n11# 0.08fF
+C1141 1bitaddie_0/xorg_0/m1_25_n11# 1bitaddie_0/xorg_1/A 0.12fF
+C1142 1bitaddie_2/ff_1/inverter_0/in vdd 0.12fF
+C1143 1bitaddie_1/ff_2/inverter_0/in 1bitaddie_4/clk 0.05fF
+C1144 vdd 1bitaddie_0/ff_2/m1_60_n19# 0.12fF
+C1145 1bitaddie_4/xorg_0/pmos_2/w_n8_n5# 1bitaddie_4/xorg_0/m1_102_n17# 0.03fF
+C1146 1bitaddie_1/ff_1/inverter_0/in 1bitaddie_1/ff_1/pmos_3/w_n8_n5# 0.03fF
+C1147 1bitaddie_2/xorg_1/inverter_1/out 1bitaddie_2/inverter_1/out 0.05fF
+C1148 1bitaddie_2/sum 1bitaddie_2/xorg_1/m1_102_n91# 0.08fF
+C1149 1bitaddie_1/nandg_0/out 1bitaddie_1/nandg_0/pmos_1/w_n8_n5# 0.03fF
+C1150 1bitaddie_4/xorg_0/inverter_0/out 1bitaddie_4/xorg_0/m1_102_n91# 0.05fF
+C1151 1bitaddie_2/xorg_1/A 1bitaddie_2/xorg_1/pmos_2/w_n8_n5# 0.07fF
+C1152 ff_0/m1_60_n19# ff_0/pmos_3/w_n8_n5# 0.07fF
+C1153 1bitaddie_0/inverter_1/out vdd 0.18fF
+C1154 1bitaddie_1/xorg_0/m1_102_n91# 1bitaddie_1/xorg_1/A 0.08fF
+C1155 1bitaddie_0/ff_0/m1_51_n34# 1bitaddie_0/ff_0/m1_60_n19# 0.08fF
+C1156 1bitaddie_0/nandg_0/m1_24_n51# 1bitaddie_0/nandg_0/out 0.08fF
+C1157 1bitaddie_3/ff_0/inverter_0/in 1bitaddie_4/clk 0.12fF
+C1158 1bitaddie_4/xorg_1/inverter_0/w_n8_n5# 1bitaddie_4/xorg_1/inverter_0/out 0.03fF
+C1159 1bitaddie_1/nandg_0/out 1bitaddie_1/inverter_0/w_n8_n5# 0.07fF
+C1160 1bitaddie_4/xorg_1/pmos_0/w_n8_n5# 1bitaddie_4/xorg_1/m1_25_n11# 0.03fF
+C1161 1bitaddie_2/ff_0/m1_18_n10# 1bitaddie_2/ff_0/m1_22_n55# 0.12fF
+C1162 1bitaddie_2/ff_0/inverter_0/in gnd 0.05fF
+C1163 1bitaddie_1/ff_0/pmos_2/w_n8_n5# vdd 0.08fF
+C1164 1bitaddie_0/Bi gnd 0.18fF
+C1165 1bitaddie_0/ff_1/m1_60_n19# gnd 0.05fF
+C1166 1bitaddie_3/sum 1bitaddie_3/ff_2/m1_22_n55# 0.05fF
+C1167 1bitaddie_3/xorg_0/m1_102_n91# 1bitaddie_3/xorg_1/A 0.08fF
+C1168 1bitaddie_1/xorg_0/m1_25_n11# 1bitaddie_1/Ai 0.14fF
+C1169 vdd 1bitaddie_1/inverter_2/w_n8_n5# 0.08fF
+C1170 A0 1bitaddie_0/ff_1/pmos_0/w_n8_n5# 0.07fF
+C1171 1bitaddie_0/inverter_1/out inverter_0/out 0.05fF
+C1172 A1 1bitaddie_1/ff_1/m1_22_n55# 0.05fF
+C1173 1bitaddie_1/xorg_1/m1_25_n11# 1bitaddie_1/xorg_1/inverter_0/out 0.05fF
+C1174 s2 1bitaddie_2/ff_2/inverter_0/in 0.05fF
+C1175 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/xorg_1/inverter_1/w_n8_n5# 0.03fF
+C1176 1bitaddie_3/ff_2/m1_100_n33# gnd 0.08fF
+C1177 1bitaddie_2/ff_2/pmos_3/w_n8_n5# vdd 0.06fF
+C1178 1bitaddie_1/ff_0/m1_22_n55# 1bitaddie_4/clk 0.39fF
+C1179 1bitaddie_0/xorg_1/A 1bitaddie_0/xorg_1/m1_102_n17# 0.20fF
+C1180 s4 gnd 0.08fF
+C1181 1bitaddie_4/inverter_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1182 1bitaddie_3/xorg_1/pmos_3/w_n8_n5# 1bitaddie_3/xorg_1/m1_102_n17# 0.08fF
+C1183 1bitaddie_4/sum 1bitaddie_4/xorg_1/inverter_1/out 0.22fF
+C1184 1bitaddie_4/xorg_0/pmos_2/w_n8_n5# vdd 0.08fF
+C1185 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_60_n19# 0.36fF
+C1186 1bitaddie_4/Bi 1bitaddie_4/ff_0/inverter_0/in 0.05fF
+C1187 1bitaddie_3/nandg_0/out 1bitaddie_3/nandg_0/m1_24_n51# 0.08fF
+C1188 1bitaddie_2/inverter_1/out 1bitaddie_2/xorg_1/A 0.06fF
+C1189 1bitaddie_2/nandg_0/pmos_1/w_n8_n5# 1bitaddie_2/Ai 0.07fF
+C1190 1bitaddie_2/nandg_0/out vdd 0.25fF
+C1191 1bitaddie_2/sum 1bitaddie_2/xorg_1/m1_25_n11# 0.12fF
+C1192 inverter_2/in inverter_2/w_n8_n5# 0.07fF
+C1193 1bitaddie_4/ff_2/m1_51_n34# gnd 0.08fF
+C1194 1bitaddie_2/ff_1/pmos_0/w_n8_n5# 1bitaddie_2/ff_1/m1_18_n10# 0.03fF
+C1195 1bitaddie_0/inverter_0/w_n8_n5# vdd 0.08fF
+C1196 vdd 1bitaddie_0/ff_2/pmos_2/w_n8_n5# 0.08fF
+C1197 1bitaddie_0/xorg_1/m1_26_n95# 1bitaddie_0/xorg_1/A 0.05fF
+C1198 1bitaddie_3/ff_2/pmos_1/w_n8_n5# 1bitaddie_3/ff_2/m1_22_n55# 0.03fF
+C1199 1bitaddie_3/ff_1/m1_18_n10# vdd 0.12fF
+C1200 1bitaddie_4/ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C1201 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/m1_51_n34# 0.08fF
+C1202 gnd 1bitaddie_1/xorg_1/inverter_0/out 0.14fF
+C1203 1bitaddie_4/xorg_0/inverter_0/w_n8_n5# 1bitaddie_4/xorg_0/inverter_0/out 0.03fF
+C1204 1bitaddie_3/manch_0/clk 1bitaddie_4/clk 0.05fF
+C1205 1bitaddie_3/xorg_1/inverter_0/out gnd 0.14fF
+C1206 1bitaddie_2/ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C1207 ff_0/m1_22_n55# gnd 0.08fF
+C1208 A4 gnd 0.05fF
+C1209 1bitaddie_2/manch_0/clk gnd 0.14fF
+C1210 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_22_n55# 0.25fF
+C1211 1bitaddie_4/sum 1bitaddie_4/clk 0.02fF
+C1212 1bitaddie_2/Bi 1bitaddie_2/xorg_0/m1_102_n17# 0.05fF
+C1213 ff_1/pmos_1/w_n8_n5# ff_1/m1_18_n10# 0.08fF
+C1214 B4 1bitaddie_4/clk 0.12fF
+C1215 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/m1_100_n33# 0.08fF
+C1216 ff_0/inverter_0/in ff_0/m1_60_n19# 0.05fF
+C1217 1bitaddie_3/inverter_1/out 1bitaddie_3/xorg_1/pmos_1/w_n8_n5# 0.07fF
+C1218 1bitaddie_2/Ai 1bitaddie_2/ff_1/inverter_0/w_n8_n5# 0.03fF
+C1219 1bitaddie_1/xorg_1/A 1bitaddie_1/xorg_0/inverter_0/out 0.06fF
+C1220 1bitaddie_1/xorg_1/m1_102_n17# 1bitaddie_1/xorg_1/A 0.20fF
+C1221 1bitaddie_0/xorg_0/inverter_0/out gnd 0.14fF
+C1222 1bitaddie_1/doubleinv_0/inverter_1/in vdd 0.12fF
+C1223 1bitaddie_2/Cin 1bitaddie_1/inverter_0/out 0.18fF
+C1224 1bitaddie_0/Ai vdd 0.21fF
+C1225 1bitaddie_4/clk ff_1/m1_51_n34# 0.16fF
+C1226 1bitaddie_0/xorg_0/inverter_0/w_n8_n5# vdd 0.08fF
+C1227 1bitaddie_4/ff_1/m1_60_n19# 1bitaddie_4/ff_1/pmos_3/w_n8_n5# 0.07fF
+C1228 1bitaddie_2/ff_1/m1_51_n34# 1bitaddie_2/ff_1/m1_22_n55# 0.08fF
+C1229 1bitaddie_2/Bi 1bitaddie_2/xorg_0/m1_26_n95# 0.05fF
+C1230 1bitaddie_1/ff_1/inverter_0/in vdd 0.12fF
+C1231 1bitaddie_0/xorg_0/inverter_1/out vdd 0.12fF
+C1232 1bitaddie_0/ff_1/m1_60_n19# 1bitaddie_0/ff_1/pmos_2/w_n8_n5# 0.03fF
+C1233 1bitaddie_0/ff_1/m1_100_n33# 1bitaddie_0/ff_1/inverter_0/in 0.08fF
+C1234 inverter_1/out gnd 0.16fF
+C1235 1bitaddie_2/ff_0/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1236 1bitaddie_1/manch_0/clk 1bitaddie_2/Cin 0.19fF
+C1237 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_100_n33# 0.05fF
+C1238 1bitaddie_4/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1239 ff_0/inverter_0/in ff_0/pmos_3/w_n8_n5# 0.03fF
+C1240 1bitaddie_0/xorg_1/inverter_1/out vdd 0.12fF
+C1241 1bitaddie_0/ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C1242 1bitaddie_4/doubleinv_0/inverter_1/in 1bitaddie_4/doubleinv_0/inverter_0/in 0.05fF
+C1243 1bitaddie_3/ff_0/m1_51_n34# 1bitaddie_3/ff_0/m1_22_n55# 0.08fF
+C1244 1bitaddie_3/ff_0/inverter_0/w_n8_n5# 1bitaddie_3/ff_0/inverter_0/in 0.07fF
+C1245 1bitaddie_4/clk 1bitaddie_0/ff_0/pmos_1/w_n8_n5# 0.26fF
+C1246 1bitaddie_3/nandg_0/pmos_1/w_n8_n5# 1bitaddie_3/Ai 0.07fF
+C1247 1bitaddie_1/ff_0/inverter_0/in gnd 0.05fF
+C1248 1bitaddie_2/ff_2/inverter_0/w_n8_n5# 1bitaddie_2/ff_2/inverter_0/in 0.07fF
+C1249 1bitaddie_1/xorg_1/pmos_3/w_n8_n5# 1bitaddie_1/sum 0.03fF
+C1250 1bitaddie_2/xorg_1/m1_25_n11# vdd 0.12fF
+C1251 1bitaddie_0/nandg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1252 1bitaddie_3/Cin 1bitaddie_3/inverter_1/out 0.05fF
+C1253 1bitaddie_1/ff_2/m1_60_n19# 1bitaddie_1/ff_2/pmos_2/w_n8_n5# 0.03fF
+C1254 1bitaddie_1/ff_2/m1_100_n33# 1bitaddie_1/ff_2/inverter_0/in 0.08fF
+C1255 1bitaddie_3/xorg_0/inverter_1/w_n8_n5# 1bitaddie_3/Bi 0.07fF
+C1256 1bitaddie_4/ff_1/m1_18_n10# 1bitaddie_4/clk 0.09fF
+C1257 vdd 1bitaddie_1/xorg_0/pmos_2/w_n8_n5# 0.08fF
+C1258 ff_1/inverter_0/w_n8_n5# vdd 0.08fF
+C1259 1bitaddie_2/sum 1bitaddie_2/ff_2/m1_18_n10# 0.05fF
+C1260 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/xorg_1/A 0.22fF
+C1261 vdd 1bitaddie_2/Cin 0.12fF
+C1262 1bitaddie_1/ff_2/pmos_3/w_n8_n5# vdd 0.06fF
+C1263 1bitaddie_3/sum 1bitaddie_3/inverter_1/out 0.20fF
+C1264 s3 gnd 0.08fF
+C1265 1bitaddie_3/xorg_0/pmos_2/w_n8_n5# vdd 0.08fF
+C1266 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/xorg_0/pmos_0/w_n8_n5# 0.07fF
+C1267 1bitaddie_0/ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C1268 1bitaddie_3/ff_2/inverter_0/in 1bitaddie_3/ff_2/pmos_3/w_n8_n5# 0.03fF
+C1269 1bitaddie_2/ff_0/m1_51_n34# 1bitaddie_4/clk 0.12fF
+C1270 ff_1/m1_60_n19# vdd 0.12fF
+C1271 1bitaddie_2/manch_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1272 1bitaddie_3/Cin 1bitaddie_3/inverter_1/w_n8_n5# 0.07fF
+C1273 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/m1_100_n33# 0.08fF
+C1274 1bitaddie_3/ff_2/m1_51_n34# gnd 0.08fF
+C1275 1bitaddie_2/xorg_0/inverter_1/out 1bitaddie_2/xorg_0/pmos_3/w_n8_n5# 0.07fF
+C1276 1bitaddie_2/xorg_0/pmos_0/w_n8_n5# 1bitaddie_2/xorg_0/m1_25_n11# 0.03fF
+C1277 gnd 1bitaddie_0/ff_2/inverter_0/in 0.05fF
+C1278 1bitaddie_0/xorg_1/m1_26_n95# gnd 0.08fF
+C1279 1bitaddie_0/xorg_1/A vdd 0.09fF
+C1280 1bitaddie_3/ff_0/pmos_3/w_n8_n5# vdd 0.06fF
+C1281 C0 1bitaddie_4/clk 0.02fF
+C1282 1bitaddie_4/ff_0/m1_60_n19# gnd 0.05fF
+C1283 1bitaddie_3/ff_0/m1_60_n19# 1bitaddie_3/ff_0/pmos_3/w_n8_n5# 0.07fF
+C1284 1bitaddie_2/xorg_0/inverter_1/w_n8_n5# vdd 0.08fF
+C1285 1bitaddie_4/ff_1/m1_18_n10# 1bitaddie_4/ff_1/m1_22_n55# 0.12fF
+C1286 1bitaddie_4/ff_2/inverter_0/w_n8_n5# s4 0.03fF
+C1287 1bitaddie_3/Cin 1bitaddie_4/clk 0.37fF
+C1288 1bitaddie_4/Ai 1bitaddie_4/xorg_0/pmos_2/w_n8_n5# 0.07fF
+C1289 1bitaddie_2/ff_2/pmos_1/w_n8_n5# 1bitaddie_2/ff_2/m1_18_n10# 0.08fF
+C1290 1bitaddie_1/ff_1/pmos_0/w_n8_n5# vdd 0.08fF
+C1291 A3 gnd 0.05fF
+C1292 ff_0/inverter_0/w_n8_n5# vdd 0.08fF
+C1293 1bitaddie_3/ff_0/m1_100_n33# 1bitaddie_3/ff_0/inverter_0/in 0.08fF
+C1294 1bitaddie_2/ff_1/inverter_0/in 1bitaddie_4/clk 0.05fF
+C1295 1bitaddie_4/clk 1bitaddie_0/ff_2/m1_60_n19# 0.31fF
+C1296 1bitaddie_0/xorg_0/inverter_0/out 1bitaddie_0/xorg_0/m1_25_n11# 0.05fF
+C1297 1bitaddie_0/xorg_1/A inverter_0/out 0.14fF
+C1298 1bitaddie_4/nandg_0/pmos_0/w_n8_n5# 1bitaddie_4/Bi 0.07fF
+C1299 1bitaddie_3/sum 1bitaddie_4/clk 0.02fF
+C1300 1bitaddie_1/manch_0/m1_25_n53# 1bitaddie_1/inverter_0/out 0.05fF
+C1301 1bitaddie_3/nandg_0/out 1bitaddie_3/nandg_0/pmos_0/w_n8_n5# 0.03fF
+C1302 B3 1bitaddie_4/clk 0.12fF
+C1303 1bitaddie_2/sum gnd 0.35fF
+C1304 ff_1/inverter_0/w_n8_n5# ff_1/inverter_0/in 0.07fF
+C1305 B2 gnd 0.05fF
+C1306 1bitaddie_1/xorg_0/pmos_2/w_n8_n5# 1bitaddie_1/xorg_0/m1_102_n17# 0.03fF
+C1307 1bitaddie_4/ff_2/m1_22_n55# gnd 0.08fF
+C1308 1bitaddie_4/clk 1bitaddie_0/inverter_1/out 0.06fF
+C1309 1bitaddie_1/manch_0/clk 1bitaddie_1/manch_0/m1_25_n53# 0.05fF
+C1310 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/m1_51_n34# 0.08fF
+C1311 1bitaddie_1/xorg_1/pmos_1/w_n8_n5# 1bitaddie_1/xorg_1/m1_25_n11# 0.08fF
+C1312 ff_1/m1_60_n19# ff_1/inverter_0/in 0.05fF
+C1313 inverter_2/out ff_1/m1_18_n10# 0.05fF
+C1314 1bitaddie_4/ff_2/pmos_0/w_n8_n5# 1bitaddie_4/ff_2/m1_18_n10# 0.03fF
+C1315 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/m1_22_n55# 0.05fF
+C1316 1bitaddie_0/ff_0/m1_22_n55# gnd 0.08fF
+C1317 1bitaddie_3/doubleinv_0/inverter_1/out gnd 0.08fF
+C1318 1bitaddie_3/xorg_0/pmos_2/w_n8_n5# 1bitaddie_3/xorg_0/m1_102_n17# 0.03fF
+C1319 1bitaddie_3/nandg_0/out 1bitaddie_3/Ai 0.13fF
+C1320 1bitaddie_1/ff_0/pmos_2/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1321 1bitaddie_1/xorg_1/inverter_0/w_n8_n5# 1bitaddie_1/xorg_1/inverter_0/out 0.03fF
+C1322 1bitaddie_0/w_n41_n285# 1bitaddie_0/doubleinv_0/inverter_1/out 0.03fF
+C1323 1bitaddie_4/inverter_0/out vdd 0.12fF
+C1324 1bitaddie_4/clk 1bitaddie_1/inverter_2/w_n8_n5# 0.07fF
+C1325 1bitaddie_3/xorg_0/inverter_0/out 1bitaddie_3/xorg_0/m1_102_n91# 0.05fF
+C1326 ff_1/pmos_2/w_n8_n5# vdd 0.08fF
+C1327 1bitaddie_3/ff_2/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.07fF
+C1328 ff_0/m1_100_n33# gnd 0.08fF
+C1329 1bitaddie_4/ff_0/pmos_1/w_n8_n5# 1bitaddie_4/ff_0/m1_18_n10# 0.08fF
+C1330 1bitaddie_2/xorg_0/pmos_3/w_n8_n5# 1bitaddie_2/xorg_1/A 0.03fF
+C1331 gnd 1bitaddie_1/inverter_0/out 0.08fF
+C1332 1bitaddie_2/inverter_2/w_n8_n5# 1bitaddie_2/manch_0/clk 0.03fF
+C1333 vdd 1bitaddie_1/xorg_0/inverter_1/w_n8_n5# 0.08fF
+C1334 1bitaddie_2/inverter_0/out 1bitaddie_3/Cin 0.18fF
+C1335 1bitaddie_3/xorg_1/inverter_0/w_n8_n5# 1bitaddie_3/xorg_1/inverter_0/out 0.03fF
+C1336 1bitaddie_2/ff_2/m1_18_n10# vdd 0.12fF
+C1337 1bitaddie_2/w_n41_n285# vdd 0.16fF
+C1338 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_51_n34# 0.12fF
+C1339 1bitaddie_4/nandg_0/m1_24_n51# 1bitaddie_4/nandg_0/out 0.08fF
+C1340 1bitaddie_0/ff_0/pmos_0/w_n8_n5# 1bitaddie_0/ff_0/m1_18_n10# 0.03fF
+C1341 1bitaddie_4/ff_1/m1_100_n33# gnd 0.08fF
+C1342 1bitaddie_4/xorg_1/inverter_0/out vdd 0.12fF
+C1343 1bitaddie_3/xorg_1/pmos_0/w_n8_n5# 1bitaddie_3/xorg_1/m1_25_n11# 0.03fF
+C1344 1bitaddie_1/ff_0/m1_18_n10# 1bitaddie_1/ff_0/m1_22_n55# 0.12fF
+C1345 1bitaddie_4/clk ff_1/m1_22_n55# 0.44fF
+C1346 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/m1_100_n33# 0.08fF
+C1347 gnd 1bitaddie_1/manch_0/clk 0.14fF
+C1348 1bitaddie_2/xorg_0/inverter_0/w_n8_n5# vdd 0.08fF
+C1349 1bitaddie_1/xorg_1/m1_25_n11# vdd 0.12fF
+C1350 1bitaddie_1/Bi 1bitaddie_1/nandg_0/out 0.11fF
+C1351 1bitaddie_4/xorg_0/m1_26_n95# gnd 0.08fF
+C1352 1bitaddie_4/ff_2/m1_51_n34# 1bitaddie_4/ff_2/m1_22_n55# 0.08fF
+C1353 1bitaddie_4/ff_0/m1_18_n10# vdd 0.12fF
+C1354 1bitaddie_3/ff_1/m1_18_n10# 1bitaddie_4/clk 0.09fF
+C1355 1bitaddie_4/clk 1bitaddie_0/ff_2/pmos_2/w_n8_n5# 0.28fF
+C1356 s1 1bitaddie_1/ff_2/inverter_0/in 0.05fF
+C1357 1bitaddie_2/xorg_1/pmos_2/w_n8_n5# 1bitaddie_2/xorg_1/m1_102_n17# 0.03fF
+C1358 1bitaddie_3/sum 1bitaddie_3/xorg_1/inverter_1/out 0.22fF
+C1359 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/xorg_1/pmos_3/w_n8_n5# 0.07fF
+C1360 1bitaddie_0/xorg_0/pmos_1/w_n8_n5# 1bitaddie_0/xorg_1/A 0.03fF
+C1361 ff_0/m1_60_n19# ff_0/m1_51_n34# 0.08fF
+C1362 1bitaddie_3/Bi 1bitaddie_3/ff_0/inverter_0/in 0.05fF
+C1363 1bitaddie_2/Ai 1bitaddie_2/Bi 0.06fF
+C1364 1bitaddie_4/manch_0/m1_25_n53# inverter_2/in 0.08fF
+C1365 1bitaddie_1/ff_1/pmos_0/w_n8_n5# 1bitaddie_1/ff_1/m1_18_n10# 0.03fF
+C1366 1bitaddie_0/ff_2/m1_60_n19# 1bitaddie_0/ff_2/pmos_3/w_n8_n5# 0.07fF
+C1367 inverter_2/w_n8_n5# inverter_2/out 0.03fF
+C1368 1bitaddie_2/Bi 1bitaddie_2/xorg_0/inverter_1/out 0.05fF
+C1369 1bitaddie_2/inverter_0/w_n8_n5# vdd 0.08fF
+C1370 1bitaddie_2/inverter_1/w_n8_n5# vdd 0.08fF
+C1371 1bitaddie_4/Cin inverter_2/in 0.14fF
+C1372 1bitaddie_3/ff_0/m1_60_n19# gnd 0.05fF
+C1373 1bitaddie_1/Ai 1bitaddie_1/xorg_0/inverter_0/w_n8_n5# 0.07fF
+C1374 1bitaddie_0/Ai 1bitaddie_0/ff_1/inverter_0/in 0.05fF
+C1375 1bitaddie_1/manch_0/clk 1bitaddie_1/manch_0/pmos_0/w_n8_n5# 0.07fF
+C1376 1bitaddie_0/inverter_2/w_n8_n5# vdd 0.08fF
+C1377 1bitaddie_3/inverter_0/out 1bitaddie_3/xorg_1/A 0.06fF
+C1378 1bitaddie_2/ff_0/pmos_1/w_n8_n5# 1bitaddie_2/ff_0/m1_22_n55# 0.03fF
+C1379 1bitaddie_1/ff_1/inverter_0/in 1bitaddie_4/clk 0.05fF
+C1380 1bitaddie_0/nandg_0/pmos_1/w_n8_n5# 1bitaddie_0/nandg_0/out 0.03fF
+C1381 1bitaddie_2/ff_0/inverter_0/in vdd 0.12fF
+C1382 B2 1bitaddie_2/ff_0/pmos_0/w_n8_n5# 0.07fF
+C1383 1bitaddie_1/xorg_0/m1_25_n11# 1bitaddie_1/xorg_0/inverter_0/out 0.05fF
+C1384 1bitaddie_0/ff_1/m1_60_n19# vdd 0.12fF
+C1385 1bitaddie_0/Bi vdd 0.24fF
+C1386 gnd inverter_0/out 0.14fF
+C1387 1bitaddie_3/Cin 1bitaddie_3/xorg_1/A 0.14fF
+C1388 1bitaddie_2/inverter_0/out 1bitaddie_2/nandg_0/out 0.05fF
+C1389 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/m1_100_n33# 0.08fF
+C1390 1bitaddie_2/ff_2/m1_60_n19# 1bitaddie_2/ff_2/inverter_0/in 0.05fF
+C1391 B1 gnd 0.05fF
+C1392 1bitaddie_3/ff_2/m1_22_n55# gnd 0.08fF
+C1393 1bitaddie_0/ff_2/m1_18_n10# 1bitaddie_0/ff_2/m1_22_n55# 0.12fF
+C1394 1bitaddie_3/ff_1/m1_60_n19# 1bitaddie_3/ff_1/pmos_3/w_n8_n5# 0.07fF
+C1395 1bitaddie_1/ff_1/m1_51_n34# 1bitaddie_1/ff_1/m1_22_n55# 0.08fF
+C1396 1bitaddie_0/ff_1/inverter_0/w_n8_n5# 1bitaddie_0/ff_1/inverter_0/in 0.07fF
+C1397 1bitaddie_4/ff_2/m1_60_n19# gnd 0.05fF
+C1398 1bitaddie_1/xorg_1/pmos_3/w_n8_n5# 1bitaddie_1/xorg_1/inverter_1/out 0.07fF
+C1399 s4 vdd 0.12fF
+C1400 1bitaddie_2/inverter_1/out 1bitaddie_2/xorg_1/m1_26_n95# 0.05fF
+C1401 vdd 1bitaddie_1/manch_0/pmos_0/w_n8_n5# 0.08fF
+C1402 1bitaddie_2/Bi 1bitaddie_2/ff_0/inverter_0/w_n8_n5# 0.03fF
+C1403 1bitaddie_2/sum 1bitaddie_2/xorg_1/pmos_1/w_n8_n5# 0.03fF
+C1404 1bitaddie_2/inverter_0/out 1bitaddie_2/manch_0/m1_25_n53# 0.05fF
+C1405 1bitaddie_1/xorg_1/m1_25_n11# 1bitaddie_1/sum 0.12fF
+C1406 inverter_0/in ff_0/inverter_0/w_n8_n5# 0.03fF
+C1407 1bitaddie_4/inverter_1/out gnd 0.14fF
+C1408 1bitaddie_1/Cin 1bitaddie_2/Cin 0.14fF
+C1409 B0 1bitaddie_0/ff_0/m1_18_n10# 0.05fF
+C1410 ff_1/inverter_0/in gnd 0.05fF
+C1411 1bitaddie_4/xorg_1/inverter_0/w_n8_n5# vdd 0.08fF
+C1412 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/Ai 0.25fF
+C1413 vdd 1bitaddie_1/inverter_1/w_n8_n5# 0.08fF
+C1414 vdd 1bitaddie_1/xorg_1/inverter_0/out 0.12fF
+C1415 1bitaddie_3/doubleinv_0/inverter_1/in 1bitaddie_3/doubleinv_0/inverter_0/in 0.05fF
+C1416 1bitaddie_2/Bi 1bitaddie_2/xorg_1/A 0.20fF
+C1417 1bitaddie_1/ff_2/m1_18_n10# vdd 0.12fF
+C1418 1bitaddie_1/w_n41_n285# vdd 0.16fF
+C1419 1bitaddie_4/clk 1bitaddie_2/Cin 0.37fF
+C1420 1bitaddie_3/ff_1/m1_100_n33# gnd 0.08fF
+C1421 1bitaddie_2/ff_1/pmos_3/w_n8_n5# vdd 0.06fF
+C1422 1bitaddie_2/Ai 1bitaddie_2/xorg_0/m1_25_n11# 0.14fF
+C1423 1bitaddie_3/xorg_1/inverter_0/out vdd 0.12fF
+C1424 1bitaddie_0/ff_0/m1_60_n19# 1bitaddie_0/ff_0/inverter_0/in 0.05fF
+C1425 inverter_2/in 1bitaddie_4/manch_0/pmos_0/w_n8_n5# 0.03fF
+C1426 1bitaddie_2/manch_0/clk vdd 0.12fF
+C1427 1bitaddie_1/ff_2/inverter_0/w_n8_n5# 1bitaddie_1/ff_2/inverter_0/in 0.07fF
+C1428 gnd 1bitaddie_1/xorg_0/m1_26_n95# 0.08fF
+C1429 1bitaddie_1/Cin 1bitaddie_0/xorg_1/A 0.05fF
+C1430 1bitaddie_4/sum 1bitaddie_4/xorg_1/m1_102_n17# 0.12fF
+C1431 1bitaddie_4/clk ff_1/m1_60_n19# 0.41fF
+C1432 1bitaddie_2/xorg_1/inverter_1/w_n8_n5# 1bitaddie_2/inverter_1/out 0.07fF
+C1433 1bitaddie_2/ff_1/m1_60_n19# 1bitaddie_2/ff_1/m1_22_n55# 0.05fF
+C1434 1bitaddie_2/xorg_1/m1_102_n91# 1bitaddie_2/xorg_1/inverter_0/out 0.05fF
+C1435 1bitaddie_3/nandg_0/m1_24_n51# gnd 0.08fF
+C1436 1bitaddie_4/ff_1/m1_51_n34# gnd 0.08fF
+C1437 1bitaddie_3/xorg_0/m1_26_n95# gnd 0.08fF
+C1438 gnd 1bitaddie_1/sum 0.35fF
+C1439 vdd 1bitaddie_0/ff_1/pmos_2/w_n8_n5# 0.08fF
+C1440 1bitaddie_0/ff_1/pmos_1/w_n8_n5# 1bitaddie_0/ff_1/m1_18_n10# 0.08fF
+C1441 1bitaddie_3/ff_0/m1_18_n10# vdd 0.12fF
+C1442 1bitaddie_1/ff_1/inverter_0/w_n8_n5# 1bitaddie_1/Ai 0.03fF
+C1443 1bitaddie_4/clk 1bitaddie_0/xorg_1/A 0.14fF
+C1444 1bitaddie_4/ff_2/m1_60_n19# 1bitaddie_4/ff_2/m1_51_n34# 0.08fF
+C1445 1bitaddie_0/xorg_0/inverter_0/out vdd 0.12fF
+C1446 1bitaddie_4/sum 1bitaddie_4/xorg_1/m1_26_n95# 0.08fF
+C1447 inverter_1/w_n8_n5# 1bitaddie_4/doubleinv_0/inverter_0/in 0.07fF
+C1448 inverter_0/w_n8_n5# vdd 0.08fF
+C1449 1bitaddie_4/Cin 1bitaddie_4/manch_0/m1_25_n53# 0.07fF
+C1450 1bitaddie_0/xorg_0/m1_25_n11# vdd 0.12fF
+C1451 1bitaddie_2/ff_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1452 1bitaddie_4/clk 1bitaddie_0/ff_1/m1_22_n55# 0.40fF
+C1453 inverter_1/out vdd 0.25fF
+C1454 1bitaddie_2/ff_0/inverter_0/in 1bitaddie_2/ff_0/pmos_3/w_n8_n5# 0.03fF
+C1455 inverter_2/in inverter_2/out 0.05fF
+C1456 1bitaddie_2/ff_0/m1_60_n19# 1bitaddie_2/ff_0/pmos_2/w_n8_n5# 0.03fF
+C1457 1bitaddie_0/Bi 1bitaddie_0/xorg_0/pmos_1/w_n8_n5# 0.07fF
+C1458 1bitaddie_3/ff_1/m1_18_n10# 1bitaddie_3/ff_1/m1_22_n55# 0.12fF
+C1459 inverter_0/w_n8_n5# inverter_0/out 0.03fF
+C1460 1bitaddie_3/ff_2/inverter_0/w_n8_n5# s3 0.03fF
+C1461 1bitaddie_3/Ai 1bitaddie_3/xorg_0/pmos_2/w_n8_n5# 0.07fF
+C1462 1bitaddie_2/inverter_0/out 1bitaddie_2/Cin 0.02fF
+C1463 1bitaddie_2/doubleinv_0/inverter_1/out 1bitaddie_2/doubleinv_0/inverter_1/in 0.05fF
+C1464 1bitaddie_1/ff_2/pmos_1/w_n8_n5# 1bitaddie_1/ff_2/m1_18_n10# 0.08fF
+C1465 1bitaddie_4/ff_2/m1_100_n33# 1bitaddie_4/clk 0.05fF
+C1466 1bitaddie_2/xorg_1/inverter_0/out 1bitaddie_2/xorg_1/m1_25_n11# 0.05fF
+C1467 1bitaddie_1/ff_0/inverter_0/in vdd 0.12fF
+C1468 1bitaddie_0/doubleinv_0/inverter_0/in gnd 0.05fF
+C1469 1bitaddie_0/xorg_1/inverter_1/out 1bitaddie_0/xorg_1/m1_102_n91# 0.05fF
+C1470 1bitaddie_2/xorg_0/inverter_0/out 1bitaddie_2/xorg_1/A 0.06fF
+C1471 1bitaddie_4/clk 1bitaddie_0/ff_0/m1_100_n33# 0.05fF
+C1472 1bitaddie_0/inverter_1/w_n8_n5# vdd 0.08fF
+C1473 C0 ff_0/pmos_0/w_n8_n5# 0.07fF
+C1474 1bitaddie_4/ff_2/inverter_0/w_n8_n5# vdd 0.08fF
+C1475 1bitaddie_4/Ai gnd 0.27fF
+C1476 1bitaddie_4/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/clk 0.26fF
+C1477 1bitaddie_3/nandg_0/out 1bitaddie_3/Bi 0.11fF
+C1478 1bitaddie_4/clk ff_1/pmos_2/w_n8_n5# 0.17fF
+C1479 B4 1bitaddie_4/ff_0/m1_22_n55# 0.05fF
+C1480 1bitaddie_2/xorg_0/m1_25_n11# 1bitaddie_2/xorg_1/A 0.12fF
+C1481 inverter_0/in gnd 0.14fF
+C1482 1bitaddie_1/ff_2/m1_18_n10# 1bitaddie_1/sum 0.05fF
+C1483 1bitaddie_3/ff_2/m1_60_n19# gnd 0.05fF
+C1484 1bitaddie_1/Cin 1bitaddie_1/manch_0/m1_25_n53# 0.07fF
+C1485 inverter_1/w_n8_n5# 1bitaddie_4/doubleinv_0/inverter_1/in 0.11fF
+C1486 1bitaddie_1/ff_1/m1_60_n19# 1bitaddie_1/ff_1/m1_51_n34# 0.08fF
+C1487 1bitaddie_0/xorg_1/m1_102_n17# vdd 0.12fF
+C1488 1bitaddie_4/xorg_0/inverter_1/out gnd 0.08fF
+C1489 1bitaddie_3/ff_2/pmos_0/w_n8_n5# 1bitaddie_3/ff_2/m1_18_n10# 0.03fF
+C1490 s3 vdd 0.12fF
+C1491 1bitaddie_0/xorg_1/pmos_0/w_n8_n5# vdd 0.08fF
+C1492 1bitaddie_4/inverter_0/out 1bitaddie_4/xorg_1/A 0.06fF
+C1493 gnd 1bitaddie_1/inverter_1/out 0.14fF
+C1494 1bitaddie_1/ff_0/m1_60_n19# 1bitaddie_1/ff_0/m1_22_n55# 0.05fF
+C1495 1bitaddie_0/inverter_1/w_n8_n5# inverter_0/out 0.07fF
+C1496 vdd 1bitaddie_1/xorg_1/inverter_0/w_n8_n5# 0.08fF
+C1497 1bitaddie_2/inverter_2/w_n8_n5# vdd 0.08fF
+C1498 1bitaddie_2/nandg_0/pmos_0/w_n8_n5# vdd 0.08fF
+C1499 1bitaddie_3/inverter_1/out gnd 0.14fF
+C1500 1bitaddie_0/ff_0/m1_51_n34# gnd 0.08fF
+C1501 1bitaddie_3/xorg_1/inverter_0/w_n8_n5# vdd 0.08fF
+C1502 1bitaddie_2/ff_0/m1_51_n34# 1bitaddie_2/ff_0/m1_60_n19# 0.08fF
+C1503 vdd 1bitaddie_0/ff_2/inverter_0/in 0.12fF
+C1504 1bitaddie_4/xorg_1/inverter_1/out gnd 0.08fF
+C1505 1bitaddie_3/ff_0/pmos_1/w_n8_n5# 1bitaddie_3/ff_0/m1_18_n10# 0.08fF
+C1506 1bitaddie_4/sum 1bitaddie_4/ff_2/pmos_0/w_n8_n5# 0.07fF
+C1507 1bitaddie_4/ff_0/m1_60_n19# vdd 0.12fF
+C1508 1bitaddie_4/xorg_1/inverter_0/out 1bitaddie_4/xorg_1/A 0.25fF
+C1509 1bitaddie_4/ff_1/pmos_1/w_n8_n5# 1bitaddie_4/ff_1/m1_22_n55# 0.03fF
+C1510 1bitaddie_1/ff_1/pmos_3/w_n8_n5# vdd 0.06fF
+C1511 A2 1bitaddie_2/ff_1/pmos_0/w_n8_n5# 0.07fF
+C1512 1bitaddie_3/ff_2/m1_60_n19# 1bitaddie_3/ff_2/m1_100_n33# 0.08fF
+C1513 1bitaddie_1/xorg_1/A 1bitaddie_2/Cin 0.05fF
+C1514 1bitaddie_1/manch_0/clk 1bitaddie_1/inverter_0/out 0.03fF
+C1515 1bitaddie_1/Cin gnd 0.10fF
+C1516 inverter_0/out gnd 0.40fF
+C1517 1bitaddie_0/ff_2/pmos_3/w_n8_n5# gnd 0.58fF
+C1518 1bitaddie_0/ff_2/pmos_2/w_n8_n5# gnd 0.58fF
+C1519 1bitaddie_0/ff_2/m1_22_n55# gnd 0.43fF
+C1520 1bitaddie_0/ff_2/m1_18_n10# gnd 0.16fF
+C1521 1bitaddie_0/ff_2/pmos_1/w_n8_n5# gnd 0.58fF
+C1522 1bitaddie_0/ff_2/pmos_0/w_n8_n5# gnd 0.58fF
+C1523 1bitaddie_0/ff_2/inverter_0/in gnd 0.40fF
+C1524 1bitaddie_0/ff_2/m1_100_n33# gnd 0.27fF
+C1525 1bitaddie_0/ff_2/m1_60_n19# gnd 0.71fF
+C1526 1bitaddie_0/ff_2/m1_51_n34# gnd 0.27fF
+C1527 gnd gnd 22.05fF
+C1528 s0 gnd 0.09fF
+C1529 1bitaddie_0/ff_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1530 1bitaddie_0/ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1531 1bitaddie_0/ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1532 1bitaddie_0/ff_1/m1_22_n55# gnd 0.43fF
+C1533 1bitaddie_0/ff_1/m1_18_n10# gnd 0.16fF
+C1534 1bitaddie_0/ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1535 vdd gnd 8.36fF
+C1536 1bitaddie_0/ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1537 1bitaddie_0/ff_1/inverter_0/in gnd 0.40fF
+C1538 1bitaddie_0/ff_1/m1_100_n33# gnd 0.27fF
+C1539 1bitaddie_0/ff_1/m1_60_n19# gnd 0.71fF
+C1540 1bitaddie_0/ff_1/m1_51_n34# gnd 0.27fF
+C1541 A0 gnd 0.58fF
+C1542 1bitaddie_0/ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1543 1bitaddie_0/ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1544 1bitaddie_0/ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1545 1bitaddie_0/ff_0/m1_22_n55# gnd 0.43fF
+C1546 1bitaddie_0/ff_0/m1_18_n10# gnd 0.16fF
+C1547 1bitaddie_0/ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1548 1bitaddie_0/ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1549 1bitaddie_0/ff_0/inverter_0/in gnd 0.40fF
+C1550 1bitaddie_0/ff_0/m1_100_n33# gnd 0.27fF
+C1551 1bitaddie_0/ff_0/m1_60_n19# gnd 0.71fF
+C1552 1bitaddie_0/ff_0/m1_51_n34# gnd 0.27fF
+C1553 B0 gnd 0.62fF
+C1554 1bitaddie_0/ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1555 1bitaddie_0/doubleinv_0/inverter_1/out gnd 0.06fF
+C1556 1bitaddie_0/doubleinv_0/inverter_1/in gnd 0.20fF
+C1557 1bitaddie_0/w_n41_n285# gnd 1.19fF
+C1558 1bitaddie_0/doubleinv_0/inverter_0/in gnd 0.14fF
+C1559 1bitaddie_0/xorg_1/m1_102_n17# gnd 0.04fF
+C1560 1bitaddie_0/xorg_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1561 1bitaddie_0/xorg_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1562 1bitaddie_0/xorg_1/m1_25_n11# gnd 0.13fF
+C1563 1bitaddie_0/xorg_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1564 1bitaddie_0/xorg_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1565 1bitaddie_0/xorg_1/m1_102_n91# gnd 0.22fF
+C1566 1bitaddie_0/xorg_1/inverter_1/out gnd 0.45fF
+C1567 1bitaddie_0/xorg_1/m1_26_n95# gnd 0.22fF
+C1568 1bitaddie_0/sum gnd 1.51fF
+C1569 1bitaddie_0/inverter_1/out gnd 0.42fF
+C1570 1bitaddie_0/xorg_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1571 1bitaddie_0/xorg_1/inverter_0/out gnd 1.68fF
+C1572 1bitaddie_0/xorg_1/A gnd 3.77fF
+C1573 1bitaddie_0/xorg_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1574 1bitaddie_0/xorg_0/m1_102_n17# gnd 0.04fF
+C1575 1bitaddie_0/xorg_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1576 1bitaddie_0/xorg_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1577 1bitaddie_0/xorg_0/m1_25_n11# gnd 0.13fF
+C1578 1bitaddie_0/xorg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1579 1bitaddie_0/xorg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1580 1bitaddie_0/xorg_0/m1_102_n91# gnd 0.22fF
+C1581 1bitaddie_0/xorg_0/inverter_1/out gnd 0.45fF
+C1582 1bitaddie_0/xorg_0/m1_26_n95# gnd 0.22fF
+C1583 1bitaddie_0/Bi gnd 1.47fF
+C1584 1bitaddie_0/xorg_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1585 1bitaddie_0/xorg_0/inverter_0/out gnd 1.68fF
+C1586 1bitaddie_0/Ai gnd 2.99fF
+C1587 1bitaddie_0/xorg_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1588 1bitaddie_0/manch_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1589 1bitaddie_1/Cin gnd 3.19fF
+C1590 1bitaddie_0/manch_0/m1_25_n53# gnd 0.23fF
+C1591 1bitaddie_0/manch_0/clk gnd 1.36fF
+C1592 1bitaddie_0/inverter_0/out gnd 0.57fF
+C1593 1bitaddie_0/inverter_2/w_n8_n5# gnd 0.53fF
+C1594 1bitaddie_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1595 1bitaddie_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1596 1bitaddie_0/nandg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1597 1bitaddie_0/nandg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1598 1bitaddie_0/nandg_0/m1_24_n51# gnd 0.23fF
+C1599 1bitaddie_0/nandg_0/out gnd 0.83fF
+C1600 ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1601 ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1602 ff_1/m1_22_n55# gnd 0.43fF
+C1603 ff_1/m1_18_n10# gnd 0.16fF
+C1604 ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1605 ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1606 ff_1/inverter_0/in gnd 0.40fF
+C1607 ff_1/m1_100_n33# gnd 0.27fF
+C1608 ff_1/m1_60_n19# gnd 0.71fF
+C1609 ff_1/m1_51_n34# gnd 0.27fF
+C1610 inverter_2/out gnd 0.83fF
+C1611 Cout gnd 0.11fF
+C1612 ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1613 ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1614 ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1615 ff_0/m1_22_n55# gnd 0.43fF
+C1616 ff_0/m1_18_n10# gnd 0.16fF
+C1617 ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1618 ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1619 ff_0/inverter_0/in gnd 0.40fF
+C1620 ff_0/m1_100_n33# gnd 0.27fF
+C1621 ff_0/m1_60_n19# gnd 0.71fF
+C1622 ff_0/m1_51_n34# gnd 0.27fF
+C1623 C0 gnd 0.57fF
+C1624 ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1625 inverter_2/w_n8_n5# gnd 0.53fF
+C1626 inverter_1/in gnd 0.14fF
+C1627 1bitaddie_4/ff_2/pmos_3/w_n8_n5# gnd 0.58fF
+C1628 1bitaddie_4/ff_2/pmos_2/w_n8_n5# gnd 0.58fF
+C1629 1bitaddie_4/ff_2/m1_22_n55# gnd 0.43fF
+C1630 1bitaddie_4/ff_2/m1_18_n10# gnd 0.16fF
+C1631 1bitaddie_4/clk gnd 16.15fF
+C1632 1bitaddie_4/ff_2/pmos_1/w_n8_n5# gnd 0.58fF
+C1633 1bitaddie_4/ff_2/pmos_0/w_n8_n5# gnd 0.58fF
+C1634 1bitaddie_4/ff_2/inverter_0/in gnd 0.40fF
+C1635 1bitaddie_4/ff_2/m1_100_n33# gnd 0.27fF
+C1636 1bitaddie_4/ff_2/m1_60_n19# gnd 0.71fF
+C1637 1bitaddie_4/ff_2/m1_51_n34# gnd 0.27fF
+C1638 s4 gnd 0.10fF
+C1639 1bitaddie_4/ff_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1640 1bitaddie_4/ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1641 1bitaddie_4/ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1642 1bitaddie_4/ff_1/m1_22_n55# gnd 0.43fF
+C1643 1bitaddie_4/ff_1/m1_18_n10# gnd 0.16fF
+C1644 1bitaddie_4/ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1645 1bitaddie_4/ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1646 1bitaddie_4/ff_1/inverter_0/in gnd 0.40fF
+C1647 1bitaddie_4/ff_1/m1_100_n33# gnd 0.27fF
+C1648 1bitaddie_4/ff_1/m1_60_n19# gnd 0.71fF
+C1649 1bitaddie_4/ff_1/m1_51_n34# gnd 0.27fF
+C1650 A4 gnd 0.58fF
+C1651 1bitaddie_4/ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1652 1bitaddie_4/ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1653 1bitaddie_4/ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1654 1bitaddie_4/ff_0/m1_22_n55# gnd 0.43fF
+C1655 1bitaddie_4/ff_0/m1_18_n10# gnd 0.16fF
+C1656 1bitaddie_4/ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1657 1bitaddie_4/ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1658 1bitaddie_4/ff_0/inverter_0/in gnd 0.40fF
+C1659 1bitaddie_4/ff_0/m1_100_n33# gnd 0.27fF
+C1660 1bitaddie_4/ff_0/m1_60_n19# gnd 0.71fF
+C1661 1bitaddie_4/ff_0/m1_51_n34# gnd 0.27fF
+C1662 B4 gnd 0.64fF
+C1663 1bitaddie_4/ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1664 inverter_1/out gnd 0.12fF
+C1665 1bitaddie_4/doubleinv_0/inverter_1/in gnd 0.20fF
+C1666 inverter_1/w_n8_n5# gnd 1.72fF
+C1667 1bitaddie_4/doubleinv_0/inverter_0/in gnd 0.14fF
+C1668 1bitaddie_4/xorg_1/m1_102_n17# gnd 0.04fF
+C1669 1bitaddie_4/xorg_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1670 1bitaddie_4/xorg_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1671 1bitaddie_4/xorg_1/m1_25_n11# gnd 0.13fF
+C1672 1bitaddie_4/xorg_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1673 1bitaddie_4/xorg_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1674 1bitaddie_4/xorg_1/m1_102_n91# gnd 0.22fF
+C1675 1bitaddie_4/xorg_1/inverter_1/out gnd 0.45fF
+C1676 1bitaddie_4/xorg_1/m1_26_n95# gnd 0.22fF
+C1677 1bitaddie_4/sum gnd 1.51fF
+C1678 1bitaddie_4/inverter_1/out gnd 0.42fF
+C1679 1bitaddie_4/xorg_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1680 1bitaddie_4/xorg_1/inverter_0/out gnd 1.68fF
+C1681 1bitaddie_4/xorg_1/A gnd 3.77fF
+C1682 1bitaddie_4/xorg_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1683 1bitaddie_4/xorg_0/m1_102_n17# gnd 0.04fF
+C1684 1bitaddie_4/xorg_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1685 1bitaddie_4/xorg_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1686 1bitaddie_4/xorg_0/m1_25_n11# gnd 0.13fF
+C1687 1bitaddie_4/xorg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1688 1bitaddie_4/xorg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1689 1bitaddie_4/xorg_0/m1_102_n91# gnd 0.22fF
+C1690 1bitaddie_4/xorg_0/inverter_1/out gnd 0.45fF
+C1691 1bitaddie_4/xorg_0/m1_26_n95# gnd 0.22fF
+C1692 1bitaddie_4/Bi gnd 1.47fF
+C1693 1bitaddie_4/xorg_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1694 1bitaddie_4/xorg_0/inverter_0/out gnd 1.68fF
+C1695 1bitaddie_4/Ai gnd 2.99fF
+C1696 1bitaddie_4/xorg_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1697 1bitaddie_4/manch_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1698 inverter_2/in gnd 3.46fF
+C1699 1bitaddie_4/manch_0/m1_25_n53# gnd 0.23fF
+C1700 1bitaddie_4/manch_0/clk gnd 1.36fF
+C1701 1bitaddie_4/inverter_0/out gnd 0.57fF
+C1702 1bitaddie_4/inverter_2/w_n8_n5# gnd 0.53fF
+C1703 1bitaddie_4/inverter_1/w_n8_n5# gnd 0.53fF
+C1704 1bitaddie_4/inverter_0/w_n8_n5# gnd 0.53fF
+C1705 1bitaddie_4/nandg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1706 1bitaddie_4/nandg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1707 1bitaddie_4/nandg_0/m1_24_n51# gnd 0.23fF
+C1708 1bitaddie_4/nandg_0/out gnd 0.81fF
+C1709 1bitaddie_3/ff_2/pmos_3/w_n8_n5# gnd 0.58fF
+C1710 1bitaddie_3/ff_2/pmos_2/w_n8_n5# gnd 0.58fF
+C1711 1bitaddie_3/ff_2/m1_22_n55# gnd 0.43fF
+C1712 1bitaddie_3/ff_2/m1_18_n10# gnd 0.16fF
+C1713 1bitaddie_3/ff_2/pmos_1/w_n8_n5# gnd 0.58fF
+C1714 1bitaddie_3/ff_2/pmos_0/w_n8_n5# gnd 0.58fF
+C1715 1bitaddie_3/ff_2/inverter_0/in gnd 0.40fF
+C1716 1bitaddie_3/ff_2/m1_100_n33# gnd 0.27fF
+C1717 1bitaddie_3/ff_2/m1_60_n19# gnd 0.71fF
+C1718 1bitaddie_3/ff_2/m1_51_n34# gnd 0.27fF
+C1719 s3 gnd 0.05fF
+C1720 1bitaddie_3/ff_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1721 1bitaddie_3/ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1722 1bitaddie_3/ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1723 1bitaddie_3/ff_1/m1_22_n55# gnd 0.43fF
+C1724 1bitaddie_3/ff_1/m1_18_n10# gnd 0.16fF
+C1725 1bitaddie_3/ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1726 1bitaddie_3/ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1727 1bitaddie_3/ff_1/inverter_0/in gnd 0.40fF
+C1728 1bitaddie_3/ff_1/m1_100_n33# gnd 0.27fF
+C1729 1bitaddie_3/ff_1/m1_60_n19# gnd 0.71fF
+C1730 1bitaddie_3/ff_1/m1_51_n34# gnd 0.27fF
+C1731 A3 gnd 0.58fF
+C1732 1bitaddie_3/ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1733 1bitaddie_3/ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1734 1bitaddie_3/ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1735 1bitaddie_3/ff_0/m1_22_n55# gnd 0.43fF
+C1736 1bitaddie_3/ff_0/m1_18_n10# gnd 0.16fF
+C1737 1bitaddie_3/ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1738 1bitaddie_3/ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1739 1bitaddie_3/ff_0/inverter_0/in gnd 0.40fF
+C1740 1bitaddie_3/ff_0/m1_100_n33# gnd 0.27fF
+C1741 1bitaddie_3/ff_0/m1_60_n19# gnd 0.71fF
+C1742 1bitaddie_3/ff_0/m1_51_n34# gnd 0.27fF
+C1743 B3 gnd 0.64fF
+C1744 1bitaddie_3/ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1745 1bitaddie_3/doubleinv_0/inverter_1/out gnd 0.06fF
+C1746 1bitaddie_3/doubleinv_0/inverter_1/in gnd 0.20fF
+C1747 1bitaddie_3/w_n41_n285# gnd 1.19fF
+C1748 1bitaddie_3/doubleinv_0/inverter_0/in gnd 0.14fF
+C1749 1bitaddie_3/xorg_1/m1_102_n17# gnd 0.04fF
+C1750 1bitaddie_3/xorg_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1751 1bitaddie_3/xorg_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1752 1bitaddie_3/xorg_1/m1_25_n11# gnd 0.13fF
+C1753 1bitaddie_3/xorg_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1754 1bitaddie_3/xorg_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1755 1bitaddie_3/xorg_1/m1_102_n91# gnd 0.22fF
+C1756 1bitaddie_3/xorg_1/inverter_1/out gnd 0.45fF
+C1757 1bitaddie_3/xorg_1/m1_26_n95# gnd 0.22fF
+C1758 1bitaddie_3/sum gnd 1.51fF
+C1759 1bitaddie_3/inverter_1/out gnd 0.42fF
+C1760 1bitaddie_3/xorg_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1761 1bitaddie_3/xorg_1/inverter_0/out gnd 1.68fF
+C1762 1bitaddie_3/xorg_1/A gnd 3.77fF
+C1763 1bitaddie_3/xorg_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1764 1bitaddie_3/xorg_0/m1_102_n17# gnd 0.04fF
+C1765 1bitaddie_3/xorg_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1766 1bitaddie_3/xorg_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1767 1bitaddie_3/xorg_0/m1_25_n11# gnd 0.13fF
+C1768 1bitaddie_3/xorg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1769 1bitaddie_3/xorg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1770 1bitaddie_3/xorg_0/m1_102_n91# gnd 0.22fF
+C1771 1bitaddie_3/xorg_0/inverter_1/out gnd 0.45fF
+C1772 1bitaddie_3/xorg_0/m1_26_n95# gnd 0.22fF
+C1773 1bitaddie_3/Bi gnd 1.47fF
+C1774 1bitaddie_3/xorg_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1775 1bitaddie_3/xorg_0/inverter_0/out gnd 1.68fF
+C1776 1bitaddie_3/Ai gnd 2.99fF
+C1777 1bitaddie_3/xorg_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1778 1bitaddie_3/manch_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1779 1bitaddie_4/Cin gnd 3.23fF
+C1780 1bitaddie_3/manch_0/m1_25_n53# gnd 0.23fF
+C1781 1bitaddie_3/manch_0/clk gnd 1.36fF
+C1782 1bitaddie_3/inverter_0/out gnd 0.57fF
+C1783 1bitaddie_3/inverter_2/w_n8_n5# gnd 0.53fF
+C1784 1bitaddie_3/inverter_1/w_n8_n5# gnd 0.53fF
+C1785 1bitaddie_3/inverter_0/w_n8_n5# gnd 0.53fF
+C1786 1bitaddie_3/nandg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1787 1bitaddie_3/nandg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1788 1bitaddie_3/nandg_0/m1_24_n51# gnd 0.23fF
+C1789 1bitaddie_3/nandg_0/out gnd 0.83fF
+C1790 inverter_0/in gnd 0.43fF
+C1791 inverter_0/w_n8_n5# gnd 0.53fF
+C1792 1bitaddie_2/ff_2/pmos_3/w_n8_n5# gnd 0.58fF
+C1793 1bitaddie_2/ff_2/pmos_2/w_n8_n5# gnd 0.58fF
+C1794 1bitaddie_2/ff_2/m1_22_n55# gnd 0.43fF
+C1795 1bitaddie_2/ff_2/m1_18_n10# gnd 0.16fF
+C1796 1bitaddie_2/ff_2/pmos_1/w_n8_n5# gnd 0.58fF
+C1797 1bitaddie_2/ff_2/pmos_0/w_n8_n5# gnd 0.58fF
+C1798 1bitaddie_2/ff_2/inverter_0/in gnd 0.40fF
+C1799 1bitaddie_2/ff_2/m1_100_n33# gnd 0.27fF
+C1800 1bitaddie_2/ff_2/m1_60_n19# gnd 0.71fF
+C1801 1bitaddie_2/ff_2/m1_51_n34# gnd 0.27fF
+C1802 s2 gnd 0.09fF
+C1803 1bitaddie_2/ff_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1804 1bitaddie_2/ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1805 1bitaddie_2/ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1806 1bitaddie_2/ff_1/m1_22_n55# gnd 0.43fF
+C1807 1bitaddie_2/ff_1/m1_18_n10# gnd 0.16fF
+C1808 1bitaddie_2/ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1809 1bitaddie_2/ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1810 1bitaddie_2/ff_1/inverter_0/in gnd 0.40fF
+C1811 1bitaddie_2/ff_1/m1_100_n33# gnd 0.27fF
+C1812 1bitaddie_2/ff_1/m1_60_n19# gnd 0.71fF
+C1813 1bitaddie_2/ff_1/m1_51_n34# gnd 0.27fF
+C1814 A2 gnd 0.58fF
+C1815 1bitaddie_2/ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1816 1bitaddie_2/ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1817 1bitaddie_2/ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1818 1bitaddie_2/ff_0/m1_22_n55# gnd 0.43fF
+C1819 1bitaddie_2/ff_0/m1_18_n10# gnd 0.16fF
+C1820 1bitaddie_2/ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1821 1bitaddie_2/ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1822 1bitaddie_2/ff_0/inverter_0/in gnd 0.40fF
+C1823 1bitaddie_2/ff_0/m1_100_n33# gnd 0.27fF
+C1824 1bitaddie_2/ff_0/m1_60_n19# gnd 0.71fF
+C1825 1bitaddie_2/ff_0/m1_51_n34# gnd 0.27fF
+C1826 B2 gnd 0.64fF
+C1827 1bitaddie_2/ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1828 1bitaddie_2/doubleinv_0/inverter_1/out gnd 0.06fF
+C1829 1bitaddie_2/doubleinv_0/inverter_1/in gnd 0.20fF
+C1830 1bitaddie_2/w_n41_n285# gnd 1.19fF
+C1831 1bitaddie_2/doubleinv_0/inverter_0/in gnd 0.14fF
+C1832 1bitaddie_2/xorg_1/m1_102_n17# gnd 0.04fF
+C1833 1bitaddie_2/xorg_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1834 1bitaddie_2/xorg_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1835 1bitaddie_2/xorg_1/m1_25_n11# gnd 0.13fF
+C1836 1bitaddie_2/xorg_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1837 1bitaddie_2/xorg_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1838 1bitaddie_2/xorg_1/m1_102_n91# gnd 0.22fF
+C1839 1bitaddie_2/xorg_1/inverter_1/out gnd 0.45fF
+C1840 1bitaddie_2/xorg_1/m1_26_n95# gnd 0.22fF
+C1841 1bitaddie_2/sum gnd 1.51fF
+C1842 1bitaddie_2/inverter_1/out gnd 0.42fF
+C1843 1bitaddie_2/xorg_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1844 1bitaddie_2/xorg_1/inverter_0/out gnd 1.68fF
+C1845 1bitaddie_2/xorg_1/A gnd 3.77fF
+C1846 1bitaddie_2/xorg_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1847 1bitaddie_2/xorg_0/m1_102_n17# gnd 0.04fF
+C1848 1bitaddie_2/xorg_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1849 1bitaddie_2/xorg_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1850 1bitaddie_2/xorg_0/m1_25_n11# gnd 0.13fF
+C1851 1bitaddie_2/xorg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1852 1bitaddie_2/xorg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1853 1bitaddie_2/xorg_0/m1_102_n91# gnd 0.22fF
+C1854 1bitaddie_2/xorg_0/inverter_1/out gnd 0.45fF
+C1855 1bitaddie_2/xorg_0/m1_26_n95# gnd 0.22fF
+C1856 1bitaddie_2/Bi gnd 1.47fF
+C1857 1bitaddie_2/xorg_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1858 1bitaddie_2/xorg_0/inverter_0/out gnd 1.68fF
+C1859 1bitaddie_2/Ai gnd 2.99fF
+C1860 1bitaddie_2/xorg_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1861 1bitaddie_2/manch_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1862 1bitaddie_3/Cin gnd 2.61fF
+C1863 1bitaddie_2/manch_0/m1_25_n53# gnd 0.23fF
+C1864 1bitaddie_2/manch_0/clk gnd 1.36fF
+C1865 1bitaddie_2/inverter_0/out gnd 0.57fF
+C1866 1bitaddie_2/inverter_2/w_n8_n5# gnd 0.53fF
+C1867 1bitaddie_2/inverter_1/w_n8_n5# gnd 0.53fF
+C1868 1bitaddie_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1869 1bitaddie_2/nandg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1870 1bitaddie_2/nandg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1871 1bitaddie_2/nandg_0/m1_24_n51# gnd 0.23fF
+C1872 1bitaddie_2/nandg_0/out gnd 0.83fF
+C1873 1bitaddie_1/ff_2/pmos_3/w_n8_n5# gnd 0.58fF
+C1874 1bitaddie_1/ff_2/pmos_2/w_n8_n5# gnd 0.58fF
+C1875 1bitaddie_1/ff_2/m1_22_n55# gnd 0.43fF
+C1876 1bitaddie_1/ff_2/m1_18_n10# gnd 0.16fF
+C1877 1bitaddie_1/ff_2/pmos_1/w_n8_n5# gnd 0.58fF
+C1878 1bitaddie_1/ff_2/pmos_0/w_n8_n5# gnd 0.58fF
+C1879 1bitaddie_1/ff_2/inverter_0/in gnd 0.40fF
+C1880 1bitaddie_1/ff_2/m1_100_n33# gnd 0.27fF
+C1881 1bitaddie_1/ff_2/m1_60_n19# gnd 0.71fF
+C1882 1bitaddie_1/ff_2/m1_51_n34# gnd 0.27fF
+C1883 s1 gnd 0.10fF
+C1884 1bitaddie_1/ff_2/inverter_0/w_n8_n5# gnd 0.53fF
+C1885 1bitaddie_1/ff_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1886 1bitaddie_1/ff_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1887 1bitaddie_1/ff_1/m1_22_n55# gnd 0.43fF
+C1888 1bitaddie_1/ff_1/m1_18_n10# gnd 0.16fF
+C1889 1bitaddie_1/ff_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1890 1bitaddie_1/ff_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1891 1bitaddie_1/ff_1/inverter_0/in gnd 0.40fF
+C1892 1bitaddie_1/ff_1/m1_100_n33# gnd 0.27fF
+C1893 1bitaddie_1/ff_1/m1_60_n19# gnd 0.71fF
+C1894 1bitaddie_1/ff_1/m1_51_n34# gnd 0.27fF
+C1895 A1 gnd 0.56fF
+C1896 1bitaddie_1/ff_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1897 1bitaddie_1/ff_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1898 1bitaddie_1/ff_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1899 1bitaddie_1/ff_0/m1_22_n55# gnd 0.43fF
+C1900 1bitaddie_1/ff_0/m1_18_n10# gnd 0.16fF
+C1901 1bitaddie_1/ff_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1902 1bitaddie_1/ff_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1903 1bitaddie_1/ff_0/inverter_0/in gnd 0.40fF
+C1904 1bitaddie_1/ff_0/m1_100_n33# gnd 0.27fF
+C1905 1bitaddie_1/ff_0/m1_60_n19# gnd 0.71fF
+C1906 1bitaddie_1/ff_0/m1_51_n34# gnd 0.27fF
+C1907 B1 gnd 0.53fF
+C1908 1bitaddie_1/ff_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1909 1bitaddie_1/doubleinv_0/inverter_1/out gnd 0.06fF
+C1910 1bitaddie_1/doubleinv_0/inverter_1/in gnd 0.20fF
+C1911 1bitaddie_1/w_n41_n285# gnd 1.19fF
+C1912 1bitaddie_1/doubleinv_0/inverter_0/in gnd 0.14fF
+C1913 1bitaddie_1/xorg_1/m1_102_n17# gnd 0.04fF
+C1914 1bitaddie_1/xorg_1/pmos_3/w_n8_n5# gnd 0.58fF
+C1915 1bitaddie_1/xorg_1/pmos_2/w_n8_n5# gnd 0.58fF
+C1916 1bitaddie_1/xorg_1/m1_25_n11# gnd 0.13fF
+C1917 1bitaddie_1/xorg_1/pmos_1/w_n8_n5# gnd 0.58fF
+C1918 1bitaddie_1/xorg_1/pmos_0/w_n8_n5# gnd 0.58fF
+C1919 1bitaddie_1/xorg_1/m1_102_n91# gnd 0.22fF
+C1920 1bitaddie_1/xorg_1/inverter_1/out gnd 0.45fF
+C1921 1bitaddie_1/xorg_1/m1_26_n95# gnd 0.22fF
+C1922 1bitaddie_1/sum gnd 1.51fF
+C1923 1bitaddie_1/inverter_1/out gnd 0.42fF
+C1924 1bitaddie_1/xorg_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1925 1bitaddie_1/xorg_1/inverter_0/out gnd 1.68fF
+C1926 1bitaddie_1/xorg_1/A gnd 3.77fF
+C1927 1bitaddie_1/xorg_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1928 1bitaddie_1/xorg_0/m1_102_n17# gnd 0.04fF
+C1929 1bitaddie_1/xorg_0/pmos_3/w_n8_n5# gnd 0.58fF
+C1930 1bitaddie_1/xorg_0/pmos_2/w_n8_n5# gnd 0.58fF
+C1931 1bitaddie_1/xorg_0/m1_25_n11# gnd 0.13fF
+C1932 1bitaddie_1/xorg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1933 1bitaddie_1/xorg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1934 1bitaddie_1/xorg_0/m1_102_n91# gnd 0.22fF
+C1935 1bitaddie_1/xorg_0/inverter_1/out gnd 0.45fF
+C1936 1bitaddie_1/xorg_0/m1_26_n95# gnd 0.22fF
+C1937 1bitaddie_1/Bi gnd 1.47fF
+C1938 1bitaddie_1/xorg_0/inverter_1/w_n8_n5# gnd 0.53fF
+C1939 1bitaddie_1/xorg_0/inverter_0/out gnd 1.68fF
+C1940 1bitaddie_1/Ai gnd 2.99fF
+C1941 1bitaddie_1/xorg_0/inverter_0/w_n8_n5# gnd 0.53fF
+C1942 1bitaddie_1/manch_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1943 1bitaddie_2/Cin gnd 3.30fF
+C1944 1bitaddie_1/manch_0/m1_25_n53# gnd 0.23fF
+C1945 1bitaddie_1/manch_0/clk gnd 1.36fF
+C1946 1bitaddie_1/inverter_0/out gnd 0.57fF
+C1947 1bitaddie_1/inverter_2/w_n8_n5# gnd 0.53fF
+C1948 1bitaddie_1/inverter_1/w_n8_n5# gnd 0.53fF
+C1949 1bitaddie_1/inverter_0/w_n8_n5# gnd 0.53fF
+C1950 1bitaddie_1/nandg_0/pmos_1/w_n8_n5# gnd 0.58fF
+C1951 1bitaddie_1/nandg_0/pmos_0/w_n8_n5# gnd 0.58fF
+C1952 1bitaddie_1/nandg_0/m1_24_n51# gnd 0.23fF
+C1953 1bitaddie_1/nandg_0/out gnd 0.83fF
+
+
+.tran 0.1n 15n
+.measure tran tpdr TRIG v(1bitaddie_4/clk) val=0.9 rise=1 TARG v(inverter_2/out) val=0.9 fall=1
+.control
+run
+plot V(1bitaddie_4/clk) V(C0)+2 V(B0)+4 V(1bitaddie_0/sum)+6 V(1bitaddie_1/sum)+8 V(1bitaddie_2/sum)+10 V(1bitaddie_3/sum)+12 V(1bitaddie_4/sum)+14 V(inverter_2/out)+16
+plot V(1bitaddie_1/xorg_1/A) V(1bitaddie_1/Cin)+2 V(1bitaddie_1/inverter_0/out)+4 V(1bitaddie_4/clk)+6 V(1bitaddie_2/Cin)+8 v(1bitaddie_1/inverter_1/out)+10 V(ff_0/inverter_0/in)+12
+.endc
+
+.end

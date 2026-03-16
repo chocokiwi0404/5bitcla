@@ -1,0 +1,24 @@
+magic
+tech scmos
+timestamp 1764668464
+<< ntransistor >>
+rect 4 -17 6 -13
+<< ndiffusion >>
+rect 3 -17 4 -13
+rect 6 -17 7 -13
+<< ndcontact >>
+rect -1 -17 3 -13
+rect 7 -17 11 -13
+<< polysilicon >>
+rect 4 -13 6 -5
+rect 4 -20 6 -17
+<< polycontact >>
+rect 0 -10 4 -6
+<< metal1 >>
+rect 7 -6 11 -5
+rect -10 -10 0 -6
+rect 7 -10 20 -6
+rect 7 -13 11 -10
+rect -1 -21 3 -17
+rect -8 -25 17 -21
+<< end >>

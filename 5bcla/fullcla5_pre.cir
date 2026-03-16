@@ -1,0 +1,94 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_N={20*LAMBDA}
+.param Wp={width_N*2}
+.global gnd vdd
+VDS vdd gnd 1.8
+Vina0 a0 gnd 1.8
+Vina1 a1 gnd 1.8
+Vina2 a2 gnd 1.8
+Vina3 a3 gnd 1.8
+Vina4 a4 gnd 1.8
+Vinb0 b0 gnd 1.8
+Vinb1 b1 gnd 0
+Vinb2 b2 gnd 0
+Vinb3 b3 gnd 0
+Vinb4 b4 gnd 0
+Vclk clk gnd PULSE(0 1.8 2n 1p 1p 2n 4n)
+
+.subckt dyno con cin pi gi clk
+M1 cin pi con con CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 con gi n1 n1 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M3 n1 clk gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M4 con clk vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+.ends dyno 
+
+.subckt ff q d clk
+M1 n1 d vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M2 dn1 clk n1 n1 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M3 dn1 d gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M7 dn clk vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M8 dn dn1 n3 n3 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M9 n3 clk gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M4 q1 dn vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M5 q1 clk n2 n2 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M6 n2 dn gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+Xnot2 q q1 notg
+.ends ff
+
+.subckt notg o f 
+M1 o f gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 o f vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+.ends notg
+
+.subckt andg o a b
+M1 on a vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M2 on b vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M3 on a n1 n1 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M4 n1 b gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+Xo o on notg
+.ends andg
+
+.subckt xor o a b
+Xa an a notg
+Xb bn b notg
+M1p p1 a vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M2p o bn p1 p1 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M3p p2 an vdd vdd CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M4p o b p2 p2 CMOSP W={Wp} L={2*LAMBDA} AS={5*Wp*LAMBDA} PS={10*LAMBDA+2*Wp} AD={5*Wp*LAMBDA} PD={10*LAMBDA+2*Wp}
+M1n o a n1 n1 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2n n1 b gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M3n o an n2 n2 CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M4n n2 bn gnd gnd CMOSN W={width_N} L={2*LAMBDA} AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+.ends xor
+
+.subckt onecla cout si ai bi cin clk
+Xaf qa ai clk ff
+Xbf qb bi clk ff
+Xp pi qa qb xor
+Xg gi qa qb andg
+Xcl clkn clk notg
+Xm cout cin pi gi clkn dyno
+Xc ci cin notg
+Xs qs pi ci xor
+Xsf si qs clk ff
+.ends onecla
+
+Xcif ci 0 clk ff
+Xcn cin ci notg
+X1 co0 s0 a0 b0 cin clk onecla
+X2 co1 s1 a1 b1 co0 clk onecla
+X3 co2 s2 a2 b2 co1 clk onecla
+X4 co3 s3 a3 b3 co2 clk onecla
+X5 co4 s4 a4 b4 co3 clk onecla
+Xcon co4n co4 notg
+Xcof cout co4n clk ff
+
+.tran 0.1n 80n
+.control
+run
+plot V(clk) V(s0)+2 V(s1)+4 V(s2)+6 V(s3)+8 V(s4)+10 V(cout)+12
+.endc

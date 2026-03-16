@@ -1,0 +1,3 @@
+Circuit: .include TSMC_180nm.txt
+
+Fatal Error: Multiple instances of "Let"

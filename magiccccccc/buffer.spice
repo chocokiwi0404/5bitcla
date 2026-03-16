@@ -1,0 +1,126 @@
+* SPICE3 file created from buffer.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 inverter_1/in inverter_0/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=600 ps=540
+M1001 inverter_1/in inverter_0/in inverter_3/vdd inverter_0/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=1200 ps=780
+M1002 inverter_2/in inverter_1/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1003 inverter_2/in inverter_1/in inverter_3/vdd inverter_1/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1004 inverter_3/in inverter_2/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1005 inverter_3/in inverter_2/in inverter_3/vdd inverter_2/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1006 inverter_3/out inverter_3/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1007 inverter_3/out inverter_3/in inverter_3/vdd inverter_3/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1008 inverter_4[1]/in inverter_3/out inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1009 inverter_4[1]/in inverter_3/out inverter_3/vdd inverter_4[0]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1010 inverter_4[2]/in inverter_4[1]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1011 inverter_4[2]/in inverter_4[1]/in inverter_3/vdd inverter_4[1]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1012 inverter_4[3]/in inverter_4[2]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1013 inverter_4[3]/in inverter_4[2]/in inverter_3/vdd inverter_4[2]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1014 inverter_4[4]/in inverter_4[3]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1015 inverter_4[4]/in inverter_4[3]/in inverter_3/vdd inverter_4[3]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1016 inverter_4[5]/in inverter_4[4]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1017 inverter_4[5]/in inverter_4[4]/in inverter_3/vdd inverter_4[4]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1018 inverter_4[6]/in inverter_4[5]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1019 inverter_4[6]/in inverter_4[5]/in inverter_3/vdd inverter_4[5]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1020 inverter_4[7]/in inverter_4[6]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1021 inverter_4[7]/in inverter_4[6]/in inverter_3/vdd inverter_4[6]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1022 inverter_4[8]/in inverter_4[7]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1023 inverter_4[8]/in inverter_4[7]/in inverter_3/vdd inverter_4[7]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1024 inverter_4[9]/in inverter_4[8]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1025 inverter_4[9]/in inverter_4[8]/in inverter_3/vdd inverter_4[8]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1026 inverter_4[9]/out inverter_4[9]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1027 inverter_4[9]/out inverter_4[9]/in inverter_3/vdd inverter_4[9]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1028 inverter_4[11]/in inverter_4[9]/out inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1029 inverter_4[11]/in inverter_4[9]/out inverter_3/vdd inverter_4[10]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1030 inverter_4[12]/in inverter_4[11]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1031 inverter_4[12]/in inverter_4[11]/in inverter_3/vdd inverter_4[11]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1032 inverter_4[13]/in inverter_4[12]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1033 inverter_4[13]/in inverter_4[12]/in inverter_3/vdd inverter_4[12]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1034 inverter_4[14]/in inverter_4[13]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1035 inverter_4[14]/in inverter_4[13]/in inverter_3/vdd inverter_4[13]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1036 inverter_4[15]/in inverter_4[14]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1037 inverter_4[15]/in inverter_4[14]/in inverter_3/vdd inverter_4[14]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1038 inverter_4[16]/in inverter_4[15]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1039 inverter_4[16]/in inverter_4[15]/in inverter_3/vdd inverter_4[15]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1040 inverter_4[17]/in inverter_4[16]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1041 inverter_4[17]/in inverter_4[16]/in inverter_3/vdd inverter_4[16]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1042 inverter_4[18]/in inverter_4[17]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1043 inverter_4[18]/in inverter_4[17]/in inverter_3/vdd inverter_4[17]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1044 inverter_4[19]/in inverter_4[18]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1045 inverter_4[19]/in inverter_4[18]/in inverter_3/vdd inverter_4[18]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1046 inverter_4[20]/in inverter_4[19]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1047 inverter_4[20]/in inverter_4[19]/in inverter_3/vdd inverter_4[19]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1048 inverter_4[21]/in inverter_4[20]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1049 inverter_4[21]/in inverter_4[20]/in inverter_3/vdd inverter_4[20]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1050 inverter_4[22]/in inverter_4[21]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1051 inverter_4[22]/in inverter_4[21]/in inverter_3/vdd inverter_4[21]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1052 inverter_4[23]/in inverter_4[22]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1053 inverter_4[23]/in inverter_4[22]/in inverter_3/vdd inverter_4[22]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1054 inverter_4[24]/in inverter_4[23]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1055 inverter_4[24]/in inverter_4[23]/in inverter_3/vdd inverter_4[23]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1056 inverter_4[25]/in inverter_4[24]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1057 inverter_4[25]/in inverter_4[24]/in inverter_3/vdd inverter_4[24]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+M1058 inverter_0/in inverter_4[25]/in inverter_3/gnd Gnd nfet w=4 l=2
++  ad=20 pd=18 as=0 ps=0
+M1059 inverter_0/in inverter_4[25]/in inverter_3/vdd inverter_4[25]/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=0 ps=0
+C0 inverter_0/in inverter_3/gnd 5.63fF
+C1 inverter_0/in Gnd 3.40fF

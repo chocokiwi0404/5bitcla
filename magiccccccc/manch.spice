@@ -1,0 +1,35 @@
+* SPICE3 file created from manch.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 out nmos_0/a_0_n10# m1_24_n50# Gnd nfet w=4 l=2
++  ad=40 pd=36 as=40 ps=36
+M1001 m1_24_n50# clk nmos_1/a_n1_n17# Gnd nfet w=4 l=2
++  ad=0 pd=0 as=20 ps=18
+M1002 out nmos_2/a_0_n10# nmos_2/a_n1_n17# Gnd nfet w=4 l=2
++  ad=0 pd=0 as=20 ps=18
+M1003 out clk pmos_0/a_n1_2# pmos_0/w_n8_n5# pfet w=8 l=2
++  ad=40 pd=26 as=40 ps=26
+C0 out clk 0.05fF
+C1 m1_24_n50# nmos_0/a_0_n10# 0.05fF
+C2 nmos_2/a_0_n10# nmos_2/a_n1_n17# 0.05fF
+C3 m1_24_n50# clk 0.05fF
+C4 pmos_0/w_n8_n5# pmos_0/a_n1_2# 0.08fF
+C5 nmos_1/a_n1_n17# m1_24_n50# 0.08fF
+C6 out nmos_2/a_0_n10# 0.05fF
+C7 pmos_0/w_n8_n5# clk 0.07fF
+C8 out m1_24_n50# 0.08fF
+C9 pmos_0/w_n8_n5# out 0.03fF
+C10 out nmos_0/a_0_n10# 0.05fF
+C11 out nmos_2/a_n1_n17# 0.08fF
+C12 out pmos_0/a_n1_2# 0.12fF
+C13 nmos_1/a_n1_n17# clk 0.05fF
+C14 pmos_0/a_n1_2# Gnd 0.03fF
+C15 pmos_0/w_n8_n5# Gnd 0.58fF
+C16 out Gnd 0.32fF
+C17 nmos_2/a_n1_n17# Gnd 0.11fF
+C18 nmos_2/a_0_n10# Gnd 0.16fF
+C19 m1_24_n50# Gnd 0.22fF
+C20 nmos_1/a_n1_n17# Gnd 0.11fF
+C21 clk Gnd 0.55fF
+C22 nmos_0/a_0_n10# Gnd 0.16fF

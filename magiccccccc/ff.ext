@@ -1,0 +1,60 @@
+timestamp 1764810640
+version 8.3
+tech scmos
+style TSMC0.18um(tsmc18)from:t11b
+scale 1000 1 9
+resistclasses 6700 7500 929000 929000 1 7700 7700 80 80 80 70 70 40
+use pmos pmos_1 1 0 5 0 1 -28
+use nmos nmos_0 1 0 5 0 1 -46
+use nmos nmos_1 1 0 43 0 1 -9
+use nmos nmos_2 1 0 41 0 1 -46
+use nmos nmos_3 1 0 91 0 1 -8
+use nmos nmos_4 1 0 90 0 1 -46
+use pmos pmos_0 1 0 4 0 1 10
+use pmos pmos_2 1 0 43 0 1 10
+use pmos pmos_3 1 0 91 0 1 10
+use inverter inverter_0 1 0 140 0 1 7
+node "gnd!" 1 204.072 22 -71 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 240 128 0 0 0 0 0 0 0 0 0 0
+node "m1_100_n33#" 1 97.5147 100 -33 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 93 68 0 0 0 0 0 0 0 0 0 0
+node "m1_51_n34#" 1 97.5147 51 -34 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 93 68 0 0 0 0 0 0 0 0 0 0
+node "m1_22_n55#" 1 151.376 22 -55 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 162 100 0 0 0 0 0 0 0 0 0 0
+node "m1_108_n19#" 1 135.986 108 -19 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 145 90 0 0 0 0 0 0 0 0 0 0
+node "m1_60_n19#" 3 321.943 60 -19 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 334 216 0 0 0 0 0 0 0 0 0 0
+node "m1_18_n10#" 0 70.8408 18 -10 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 72 48 0 0 0 0 0 0 0 0 0 0
+node "m1_n16_n56#" 2 256.354 -16 -56 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 304 160 0 0 0 0 0 0 0 0 0 0
+node "m1_21_24#" 3 344.51 21 24 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 342 236 0 0 0 0 0 0 0 0 0 0
+subcap "m1_21_24#" -198.924
+cap "pmos_1/a_6_2#" "nmos_1/a_n1_n17#" 23.5646
+cap "pmos_0/a_n1_2#" "pmos_2/w_n8_n5#" 1.42109e-14
+cap "nmos_3/a_n1_n17#" "nmos_1/a_6_n17#" 23.5646
+cap "nmos_0/a_0_n10#" "pmos_1/a_0_n10#" 23.5646
+cap "nmos_3/a_0_n10#" "nmos_1/a_6_n17#" 32.9904
+cap "nmos_2/a_0_n10#" "pmos_1/a_6_2#" 31.6158
+cap "pmos_1/w_n8_n5#" "pmos_1/a_n1_2#" 1.42109e-14
+cap "pmos_0/a_n1_2#" "pmos_0/w_n8_n5#" 1.42109e-14
+cap "pmos_3/a_n1_2#" "pmos_3/w_n8_n5#" -18.036
+merge "inverter_0/vdd!" "pmos_3/a_n1_2#" -157.921 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -151 -128 0 0 0 0 0 0 0 0 0 0
+merge "pmos_3/a_n1_2#" "pmos_2/a_n1_2#"
+merge "pmos_2/a_n1_2#" "pmos_0/a_n1_2#"
+merge "pmos_0/a_n1_2#" "m1_21_24#"
+merge "nmos_2/a_6_n17#" "nmos_1/a_n1_n17#" -47.4444 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -36 -36 0 0 0 0 0 0 0 0 0 0
+merge "nmos_1/a_n1_n17#" "m1_51_n34#"
+merge "pmos_3/a_0_n10#" "pmos_2/a_6_2#" -58.3134 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -26 -50 0 0 0 0 0 0 0 0 0 0
+merge "pmos_2/a_6_2#" "nmos_4/a_0_n10#"
+merge "nmos_4/a_0_n10#" "nmos_1/a_6_n17#"
+merge "nmos_1/a_6_n17#" "m1_60_n19#"
+merge "nmos_1/a_0_n10#" "nmos_0/a_6_n17#" -35.8548 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -12 -32 0 0 0 0 0 0 0 0 0 0
+merge "nmos_0/a_6_n17#" "pmos_1/a_6_2#"
+merge "pmos_1/a_6_2#" "m1_22_n55#"
+merge "nmos_4/a_6_n17#" "nmos_3/a_n1_n17#" -41.541 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -30 -32 0 0 0 0 0 0 0 0 0 0
+merge "nmos_3/a_n1_n17#" "m1_100_n33#"
+merge "inverter_0/in" "pmos_3/a_6_2#" -43.6536 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -24 -36 0 0 0 0 0 0 0 0 0 0
+merge "pmos_3/a_6_2#" "nmos_3/a_6_n17#"
+merge "nmos_3/a_6_n17#" "m1_108_n19#"
+merge "nmos_4/a_n1_n17#" "nmos_2/a_n1_n17#" -103.211 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -92 -74 0 0 0 0 0 0 0 0 0 0
+merge "nmos_2/a_n1_n17#" "nmos_0/a_n1_n17#"
+merge "nmos_0/a_n1_n17#" "gnd!"
+merge "pmos_0/a_0_n10#" "nmos_0/a_0_n10#" -25.8348 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -12 -22 0 0 0 0 0 0 0 0 0 0
+merge "nmos_0/a_0_n10#" "m1_n16_n56#"
+merge "pmos_0/a_6_2#" "pmos_1/a_n1_2#" -39.6456 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -24 -32 0 0 0 0 0 0 0 0 0 0
+merge "pmos_1/a_n1_2#" "m1_18_n10#"

@@ -1,0 +1,79 @@
+magic
+tech scmos
+timestamp 1764810640
+<< metal1 >>
+rect 21 25 136 27
+rect 21 24 133 25
+rect -16 0 -3 4
+rect -16 -52 -12 0
+rect 20 -6 24 4
+rect 18 -10 24 -6
+rect 60 0 82 4
+rect 108 1 111 4
+rect 20 -14 22 -10
+rect 25 -20 33 -16
+rect 60 -19 63 0
+rect 25 -25 29 -20
+rect 25 -37 28 -25
+rect 51 -34 61 -31
+rect 22 -38 28 -37
+rect -16 -56 -5 -52
+rect 22 -55 26 -38
+rect 58 -55 61 -34
+rect 73 -53 76 0
+rect 108 -3 130 1
+rect 108 -19 111 -3
+rect 100 -33 110 -30
+rect 73 -56 83 -53
+rect 107 -54 110 -33
+rect 22 -71 82 -67
+use pmos  pmos_1
+timestamp 1764668421
+transform 1 0 5 0 1 -28
+box -10 -11 20 18
+use nmos  nmos_0
+timestamp 1764668464
+transform 1 0 5 0 1 -46
+box -10 -25 20 -5
+use nmos  nmos_1
+timestamp 1764668464
+transform 1 0 43 0 1 -9
+box -10 -25 20 -5
+use nmos  nmos_2
+timestamp 1764668464
+transform 1 0 41 0 1 -46
+box -10 -25 20 -5
+use nmos  nmos_3
+timestamp 1764668464
+transform 1 0 91 0 1 -8
+box -10 -25 20 -5
+use nmos  nmos_4
+timestamp 1764668464
+transform 1 0 90 0 1 -46
+box -10 -25 20 -5
+use pmos  pmos_0
+timestamp 1764668421
+transform 1 0 4 0 1 10
+box -10 -11 20 18
+use pmos  pmos_2
+timestamp 1764668421
+transform 1 0 43 0 1 10
+box -10 -11 20 18
+use pmos  pmos_3
+timestamp 1764668421
+transform 1 0 91 0 1 10
+box -10 -11 20 18
+use inverter  inverter_0
+timestamp 1764702656
+transform 1 0 140 0 1 7
+box -10 -25 20 18
+<< labels >>
+rlabel space -2 2 -2 2 3 D
+rlabel space 13 26 13 26 5 vdd
+rlabel space 10 -70 10 -70 1 gnd
+rlabel space 31 -56 41 -52 0 clk!
+rlabel space -5 -38 5 -34 0 clk!
+rlabel space 33 0 43 4 0 clk!
+rlabel space 81 -18 91 -14 0 clk!
+rlabel metal1 29 -69 29 -69 1 gnd!
+<< end >>

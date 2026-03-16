@@ -1,0 +1,157 @@
+magic
+tech scmos
+timestamp 1764810730
+<< metal1 >>
+rect -2114 560 -2106 566
+rect -1916 561 -1911 565
+rect -1584 560 -1576 566
+rect -1385 561 -1380 565
+rect -1038 561 -1030 567
+rect -837 562 -833 566
+rect -503 560 -496 566
+rect -304 561 -299 565
+rect 32 560 37 565
+rect 231 561 234 565
+rect -1789 377 -1787 380
+rect -1258 377 -1256 380
+rect -711 378 -709 381
+rect -177 377 -175 380
+rect 358 377 360 380
+rect -1829 248 -1681 252
+rect -1299 248 -1131 252
+rect -751 249 -598 253
+rect -2395 232 -2382 236
+rect -1686 234 -1681 248
+rect -1134 235 -1131 248
+rect -2211 228 -2210 233
+rect -1686 229 -1641 234
+rect -1134 230 -1094 235
+rect -601 234 -598 249
+rect -217 248 -99 252
+rect -103 235 -99 248
+rect 314 250 333 251
+rect 314 247 406 250
+rect -1134 229 -1131 230
+rect -1686 228 -1681 229
+rect -2140 194 -2135 205
+rect -1647 203 -1641 229
+rect -1100 204 -1094 230
+rect -602 229 -560 234
+rect -103 231 -24 235
+rect -67 230 -24 231
+rect -566 203 -560 229
+rect -30 203 -24 230
+rect 402 216 405 247
+rect 438 245 486 249
+rect 438 217 442 245
+rect 656 220 667 225
+rect 347 212 363 216
+rect 391 213 405 216
+rect 432 213 442 217
+rect -2211 188 -2192 193
+rect -2196 167 -2192 188
+rect -2138 182 -2135 194
+rect 347 188 351 212
+rect 432 188 435 213
+rect 347 184 435 188
+rect -2196 163 -2169 167
+rect -2140 163 -2135 182
+rect -1621 96 -1613 101
+rect -1090 96 -1082 101
+rect -543 97 -538 102
+rect -10 96 -2 101
+rect 528 96 533 101
+<< m2contact >>
+rect -2261 230 -2256 235
+rect -2309 212 -2304 217
+rect -2223 192 -2218 197
+rect 608 244 613 249
+rect 560 235 565 240
+rect -2259 183 -2254 188
+rect 641 206 646 211
+rect 611 197 616 202
+<< metal2 >>
+rect 391 309 575 313
+rect -2257 280 -2101 281
+rect -2259 276 -2101 280
+rect -2259 235 -2256 276
+rect 571 240 575 309
+rect 613 244 615 247
+rect 611 240 615 244
+rect 565 236 615 240
+rect -2259 217 -2256 230
+rect -2304 212 -2256 217
+rect -2259 196 -2256 212
+rect 611 210 615 236
+rect 611 206 641 210
+rect 611 202 615 206
+rect -2259 193 -2223 196
+rect -2259 188 -2256 193
+rect -1766 162 -1552 166
+rect -1234 162 -1004 167
+rect -688 163 -470 167
+rect -154 162 64 166
+<< m3contact >>
+rect 62 309 68 315
+rect 385 309 391 315
+<< metal3 >>
+rect 68 309 385 313
+use ff  ff_1
+timestamp 1764810640
+transform -1 0 -2223 0 1 235
+box -16 -71 160 28
+use inverter  inverter_2
+timestamp 1764702656
+transform -1 0 -2150 0 1 173
+box -10 -25 20 18
+use inverter  inverter_1
+timestamp 1764702656
+transform 1 0 -2170 0 1 239
+box -10 -25 20 18
+use 1bitaddie  1bitaddie_4
+timestamp 1764810730
+transform 1 0 -2091 0 1 520
+box -87 -520 478 99
+use 1bitaddie  1bitaddie_3
+timestamp 1764810730
+transform 1 0 -1560 0 1 520
+box -87 -520 478 99
+use 1bitaddie  1bitaddie_2
+timestamp 1764810730
+transform 1 0 -1013 0 1 521
+box -87 -520 478 99
+use 1bitaddie  1bitaddie_1
+timestamp 1764810730
+transform 1 0 -479 0 1 520
+box -87 -520 478 99
+use inverter  inverter_0
+timestamp 1764702656
+transform 1 0 372 0 1 222
+box -10 -25 20 18
+use 1bitaddie  1bitaddie_0
+timestamp 1764810730
+transform 1 0 56 0 1 520
+box -87 -520 478 99
+use ff  ff_0
+timestamp 1764810640
+transform -1 0 646 0 1 249
+box -16 -71 160 28
+<< labels >>
+rlabel metal1 661 222 661 222 1 C0
+rlabel metal1 530 99 530 99 1 s0
+rlabel metal1 34 562 34 562 1 B0
+rlabel metal1 233 563 233 563 1 A0
+rlabel metal1 -6 99 -6 99 1 s1
+rlabel metal1 -302 563 -302 563 1 A1
+rlabel metal1 -500 563 -500 563 1 B1
+rlabel metal1 -541 99 -541 99 1 s2
+rlabel metal1 -835 564 -835 564 1 A2
+rlabel metal1 -1034 564 -1034 564 1 B2
+rlabel metal1 -1086 99 -1086 99 1 s3
+rlabel metal1 -1382 563 -1382 563 1 A3
+rlabel metal1 -1580 563 -1580 563 1 B3
+rlabel metal1 -1617 99 -1617 99 1 s4
+rlabel metal1 -1914 563 -1914 563 1 A4
+rlabel metal1 -2110 563 -2110 563 1 B4
+rlabel metal1 -2389 234 -2389 234 1 Cout
+<< end >>
