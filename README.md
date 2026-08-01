@@ -6,7 +6,7 @@ A 5-bit adder built around a **dynamic (domino) CMOS Manchester carry chain**, w
 2. **Physical layout** — drawn in `Magic`, with **post-layout** (parasitic-extracted) `ngspice` simulation
 3. **RTL** — a behavioral `Verilog` model for logical/functional cross-checking
 
-> This README is a starting template based on the schematic netlist (`.sp`) you shared. Section headers marked 🔧 reference file paths/names I inferred generically — swap in your actual folder/file names and I'll tighten this up.
+Repo: **`5bitcla`** — schematic sims live in `5bcla/`, Magic layouts + extracted cells live in `magicccccc/`, and the RTL model is `clav.v`.
 
 ---
 
@@ -52,27 +52,46 @@ a0,b0,cin ─▶ onecla ─▶ co0 ─▶ onecla ─▶ co1 ─▶ onecla ─▶
 
 ---
 
-## 2. Repository Structure 🔧
+## 2. Repository Structure
 
 ```
-.
-├── spice/
-│   ├── adder_5bit.sp            # schematic-level netlist (pre-layout)
-│   ├── TSMC_180nm.txt           # process model file
-│   └── results/                 # .raw / plots from pre-layout runs
-├── layout/
-│   ├── adder_5bit.mag           # Magic layout
-│   ├── adder_5bit.ext           # extracted netlist (parasitics)
-│   ├── adder_5bit_post.sp       # post-layout netlist (spice-extracted, back-annotated)
-│   └── results/                 # post-layout sim outputs
-├── verilog/
-│   ├── adder_5bit.v             # behavioral/RTL model
-│   ├── tb_adder_5bit.v          # testbench
-│   └── results/                 # simulation logs / waveforms (.vcd)
+5bitcla/
+├── 5bcla/                        # ngspice schematic-level sims (pre- and post-layout)
+│   ├── TSMC_180nm.txt            # process model file
+│   ├── SCN6M_DEEP.09.tech27      # Magic tech file (also copied here for convenience)
+│   ├── pggen.cir                 # propagate/generate gate (pi = a⊕b, gi = a·b)
+│   ├── xorg.cir                  # standalone XOR gate test
+│   ├── ff.cir / ff.log           # single flip-flop (ff subckt) test + log
+│   ├── ff1bit_tb.spice           # 1-bit flip-flop testbench
+│   ├── onebitcla_post.cir/.log   # single onecla (1-bit adder slice) — POST-layout, extracted
+│   ├── fullcla5_pre.cir/.log     # full 5-bit adder — PRE-layout (this is the netlist covered in §1)
+│   └── cla5_postmagic.cir/.log   # full 5-bit adder — POST-layout, extracted from Magic
+│
+├── magicccccc/                   # Magic layouts + extracted (.ext) and SPICE (.spice) netlists per cell
+│   ├── SCN6M_DEEP.09.tech27      # Magic tech file
+│   ├── nmos.mag/.ext, pmos.mag/.ext          # base devices
+│   ├── inverter.mag/.ext/.spice              # + spare copies ("inverter (Copy).mag", etc.)
+│   ├── doubleinv.mag/.ext                    # buffer / clock-buffer inverter pair
+│   ├── buffer.ext/.spice
+│   ├── nandg.mag/.ext/.spice                 # NAND (used inside andg)
+│   ├── xorg.mag/.ext/.spice                  # XOR gate layout
+│   ├── xorh.mag, "xorh (Copy).mag", xorha.mag  # XOR variants/iterations
+│   ├── ff.mag/.ext/.spice                    # flip-flop layout
+│   ├── manch.mag/.ext/.spice                 # Manchester carry (dyno) dynamic cell layout
+│   ├── fulladd.mag/.ext/.spice               # full-adder cell layout
+│   ├── 1bitaddie.mag/.ext/.spice             # 1-bit adder slice (onecla) layout
+│   ├── full.amg.mag                          # (top-level 5-bit layout — check/rename if this is meant to be full.mag)
+│   ├── all.mag                               # combined/top-level layout view
+│   └── toomanyinv.mag                        # scratch/inverter chain test cell
+│
+├── clav.v                        # Verilog behavioral model of the 5-bit adder
 └── README.md
 ```
 
-*(Replace with your actual file/folder names — happy to regenerate this section once you confirm them.)*
+**Notes on the layout:**
+- `5bcla/` is the ngspice side: `fullcla5_pre.cir` is the pre-layout schematic netlist, and `cla5_postmagic.cir` is the same circuit extracted from the Magic layout, i.e. the post-layout run with parasitics back-annotated. `onebitcla_post.cir` is a smaller, single-slice post-layout sanity check before simulating the full 5-bit chain.
+- `magicccccc/` is the Magic side: individual cells (`nmos`, `pmos`, `inverter`, `nandg`, `xorg`/`xorh`, `ff`, `manch`, `fulladd`) are laid out and extracted separately, then composed into the full adder (`1bitaddie` → the 1-bit top level, `all.mag` → the 5-bit top level).
+- `clav.v` is a single-file Verilog model — a behavioral description of the same 5-bit adder used to cross-check functionality independent of the transistor-level implementation.
 
 ---
 
@@ -81,61 +100,15 @@ a0,b0,cin ─▶ onecla ─▶ co0 ─▶ onecla ─▶ co1 ─▶ onecla ─▶
 - [`ngspice`](https://ngspice.sourceforge.io/) — for both pre- and post-layout simulation
 - [`Magic VLSI`](http://opencircuitdesign.com/magic/) — layout editing, DRC, and parasitic extraction (`ext2spice`)
 - A Verilog simulator, e.g. [`Icarus Verilog`](http://iverilog.icarus.com/) (`iverilog` + `vvp`) or `Verilator`
-- `TSMC_180nm.txt` SPICE model file (not redistributed here — obtain via your PDK access)
+- `TSMC_180nm.txt` — SPICE model file (in `5bcla/`)
+- `SCN6M_DEEP.09.tech27` — Magic technology file (in `magicccccc/`, also copied into `5bcla/`)
 
 ---
 
-## 4. Running the Simulations
-
-### 4.1 Pre-layout (schematic) — ngspice
-
-```bash
-cd spice
-ngspice adder_5bit.sp
-```
-
-The `.control` block runs the transient analysis automatically and plots `clk`, `s0..s4`, and `cout`. To dump results instead of an interactive plot, add a `write` command inside the `.control` block, e.g. `write adder_5bit.raw`.
-
-### 4.2 Post-layout — Magic + ngspice
-
-1. Open/verify the layout in Magic and run DRC:
-   ```bash
-   magic adder_5bit.mag
-   ```
-2. Extract the netlist with parasitics:
-   ```
-   extract all
-   ext2spice lvs
-   ext2spice
-   ```
-3. Simulate the extracted netlist the same way as the schematic version:
-   ```bash
-   ngspice adder_5bit_post.sp
-   ```
-4. Compare `s0..s4` / `cout` timing against the pre-layout run to see the impact of layout parasitics (wire RC, extra diffusion/junction caps) on delay through the dynamic carry chain.
-
-### 4.3 Verilog (behavioral check)
-
-```bash
-cd verilog
-iverilog -o sim adder_5bit.v tb_adder_5bit.v
-vvp sim
-```
-
-This is a functional (not timing) cross-check — useful for confirming `sum`/`carry` logic independent of the dynamic-logic/clocking implementation details in the SPICE version.
-
----
-
-## 5. Verification Notes
-
-- Because the carry chain is **dynamic**, correctness depends on the clocking discipline: nodes must be precharged (`clk = 0`) before they're evaluated/discharged (`clk = 1`), and downstream `ff` stages must sample only after their driving stage has settled. Keep this in mind if you change the clock period — too fast a clock relative to the technology's propagation delay will produce incorrect sums/carries.
-- The `ff` blocks introduce a pipeline latency between input application and the corresponding sum/carry appearing at the outputs — the Verilog testbench should account for the same latency (in clock cycles) if you're doing a cycle-accurate comparison against the SPICE runs.
-- Suggested exhaustive-ish test plan: sweep multiple `A`/`B` value pairs (not just the single `A=11111, B=00001` case in the current netlist) across pre-layout, post-layout, and Verilog to confirm functional equivalence, then compare **pre- vs post-layout delay** specifically (critical path is the carry ripple through all 5 `dyno` stages).
-
----
 
 ## 6. Author / License 🔧
 
-- Author: *your name*
+- Author: `chocokiwi0404`
+- Repo: `5bitcla`
 - Course/project context: *fill in if relevant*
 - License: *fill in (e.g. MIT)*
