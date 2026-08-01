@@ -80,7 +80,6 @@ a0,b0,cin ─▶ onecla ─▶ co0 ─▶ onecla ─▶ co1 ─▶ onecla ─▶
 │   ├── manch.mag/.ext/.spice                 # Manchester carry (dyno) dynamic cell layout
 │   ├── fulladd.mag/.ext/.spice               # full-adder cell layout
 │   ├── 1bitaddie.mag/.ext/.spice             # 1-bit adder slice (onecla) layout
-│   ├── full.amg.mag                          # (top-level 5-bit layout — check/rename if this is meant to be full.mag)
 │   ├── all.mag                               # combined/top-level layout view
 │   └── toomanyinv.mag                        # scratch/inverter chain test cell
 │
@@ -104,11 +103,3 @@ a0,b0,cin ─▶ onecla ─▶ co0 ─▶ onecla ─▶ co1 ─▶ onecla ─▶
 - `SCN6M_DEEP.09.tech27` — Magic technology file (in `magicccccc/`, also copied into `5bcla/`)
 
 ---
-
-
-## 6. Author / License 🔧
-
-- Author: `chocokiwi0404`
-- Repo: `5bitcla`
-- Course/project context: *fill in if relevant*
-- License: *fill in (e.g. MIT)*
